@@ -16,8 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('<parent>/<path:path_to_file>/<file_name>', views.displayFile, name="show-markdown")
+    path('', views.homepage),
+    path('<parent>/', views.displayFile, name="show-markdown-default"),
+    path('<parent>/<file_name>/', views.displayFile, name="show-markdown-default"),
+    path('<parent>/<path:path_to_file>/<file_name>/', views.displayFile, name="show-markdown")
 ]
+
+if settings.DEBUG:  # new
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
