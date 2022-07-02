@@ -38,8 +38,14 @@ class Folder(models.Model):
     slug = models.SlugField(auto_created=True)
     folder_type = models.ForeignKey(Type, on_delete=models.CASCADE)
     parent = models.ManyToManyField("self")
+    path = models.CharField(max_length=500)
     subfolders = [] # The name of the Folder model instance will be included in the list will be in a list
     subfiles = [] # The name of the subfiles will be in a list
+
+    def save(self, *args, **kwargs):
+        value = self.name
+        self.slug = slugify(value, allow_unicode=True)
+        super(Folder, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "folder"

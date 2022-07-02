@@ -17,7 +17,9 @@ def fs_tree_to_dict(path_):
         for f in files:
             file_exclude = [".DS_Store", "new.py", "README.md", "index.md", "citations.bib"]
             if f not in file_exclude:
-                note_type = root[2:].split("/")[0]
+                root_list = root.split("/")
+                note_index = root_list.index("all_notes") + 1
+                note_type = root_list[note_index]
                 note = frontmatter.load(os.path.join(root, f))
                 file_token = note.metadata
                 file_token.update({"type": note_type})
