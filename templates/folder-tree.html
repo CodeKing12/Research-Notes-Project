@@ -31,7 +31,7 @@
     .nav-sidebar .nav-item.subfolder {
         margin-bottom: 12.5px;
         min-width: 130px;
-        max-width: 200px;
+        max-width: 90vh;
     }
     .nav-sidebar .nav-item.subfolder a {
         font-weight: 800 !important;
@@ -97,9 +97,18 @@
                     </li>
                 </ul>
             </li> {% endcomment %}
-            {% autoescape off %}
-                {{folder_tree }}
-            {% endautoescape %}
+            <li class='nav-item subfolder active'>
+                <a href='#' class='nav-link'>
+                    <img class="flat-icon" src="{% static 'img/side-nav/folder.png' %}" alt='folder'>
+                    {{ folder_name }}
+                </a>
+                <span class='icon'><i class='arrow_carrot-down'></i></span>
+                <ul class='list-unstyled dropdown_nav'>
+                    {% autoescape off %}
+                        {{folder_tree }}
+                    {% endautoescape %}
+                </ul>
+            </li>
 
         </ul>
     </div>

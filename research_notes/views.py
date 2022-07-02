@@ -48,7 +48,9 @@ def displayFile(request, parent, file_name='', path_to_file=''):
     
 def displayFolder(request, file):
     file = file.strip("/")
+    folder_name = file.split("/")[-1]
+    folder_name = folder_name.replace('_', ' ').title()
     tree_dict = fs_tree_to_dict(BASE_DIR / file)
     generated_html = iterdict(d=tree_dict, level=-1, parent=os.path.abspath(file))
     # print("Generated This: ", generated_html)
-    return render(request, "folder-tree.html", {"folder_tree":  generated_html})
+    return render(request, "folder-tree.html", {"folder_name": folder_name, "folder_tree":  generated_html})
