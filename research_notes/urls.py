@@ -22,8 +22,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage),
-    path('<parent>/', views.displayFile, name="show-markdown-default"),
-    path('<parent>/<file_name>/', views.displayFile, name="show-markdown-default"),
+    path('<parent>/', views.displayFile, name="show-markdown-folder"),
+    path('<parent>/<file_name>/', views.displayFile, name="show-markdown-nosub"),
     path('<parent>/<path:path_to_file>/<file_name>/', views.displayFile, name="show-markdown")
 ]
 

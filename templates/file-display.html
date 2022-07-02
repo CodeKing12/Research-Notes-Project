@@ -1,0 +1,13 @@
+{% extends 'doc-base.html' %}
+{% load static %}
+
+{% block folder-tree %}
+
+
+<div id="post" class="documentation_info">
+    <article class="documentation_body" id="documentation">
+            {{ file_contents | safe }}
+        </article>
+    </div>
+
+{% endblock folder-tree %}
