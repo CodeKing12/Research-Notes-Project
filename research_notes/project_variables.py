@@ -1,7 +1,7 @@
 from logging import root
 import os, frontmatter
-import re, pathlib
-from settings import STATIC_URL
+import re
+from research_notes import settings
 
 root_path = os.path.abspath(".")
 
@@ -107,7 +107,7 @@ def iterdict(d, level, parent, html=""):
             html += f"""
             {indent}<li class='nav-item subfolder'>
                 <a href='#' class='nav-link'>
-                    <img class=\"flat-icon\" src=\"{STATIC_URL}img/side-nav/folder.png\" alt='folder'>
+                    <img class=\"flat-icon\" src=\"{settings.STATIC_URL}img/side-nav/folder.png\" alt='folder'>
                     {k.replace('_', ' ').title()}
                 </a>
                 <span class='icon'><i class='arrow_carrot-down'></i></span>
@@ -121,7 +121,7 @@ def iterdict(d, level, parent, html=""):
             html += f"""
                 {indent}<li class=\"file-link\">
                         <a href='tab.html'>
-                            <img class=\"file-icon\" src=\"{STATIC_URL}img/side-nav/file.png\" alt='folder'>
+                            <img class=\"file-icon\" src=\"{settings.STATIC_URL}img/side-nav/file.png\" alt='folder'>
                             {v['title']}
                         </a>
                     </li>"""
