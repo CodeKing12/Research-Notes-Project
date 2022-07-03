@@ -5,22 +5,14 @@ import project_variables
 import re
 import django 
 
-myDir = os.getcwd()
-sys.path.insert(0, f'{myDir}/notes')
-
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
-print(sys.path)
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "research_notes.settings")
 django.setup()
 
-sys.path.append(myDir)
-# from pathlib import Path
-# path = Path(myDir)
-# a=str(path.parent.absolute())
-
-# sys.path.append(a)
-
 from notes.models import normalNotes as notes_models
+
+print("Here's all: ", notes_models.objects.all())
 
 notes_path = settings.BASE_DIR / 'templates/all_notes'
 entire_tree = project_variables.fs_tree_to_dict(settings.BASE_DIR / "templates/all_notes")
