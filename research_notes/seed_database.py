@@ -67,7 +67,7 @@ def create_notes_models(dict, parent="", parent_model=""):
                 """
             )
             parent_list = parent.split('/')
-            print(parent_list)
+            # print(parent_list)
 
             # Create Root 'All Notes' folder
             if len(parent_list) == 1 and parent_list[0] == "":
@@ -96,15 +96,15 @@ def create_notes_models(dict, parent="", parent_model=""):
             else:
                 model_type = Type.objects.get(name=type)
                 parent_list = path.split('/')
-                print(len(parent_list))
-                print(Type.objects.get(name=parent_list[1]))
+                # print(len(parent_list))
+                # print(Type.objects.get(name=parent_list[1]))
                 len(parent_list) <= 3
                 # if len(parent_list) <= 3 and (Type.objects.get(name=parent_list[1])):
                 #     model_parent = False
                 # else:
                 model_parent = Folder.objects.get(path=parent)
                 folder = Folder.objects.get_or_create(name=name, folder_type=model_type, parent=model_parent, path=path, subfolders=subfolders, subfiles=subfiles)
-            create_notes_models(v, parent=f"{parent}/{k}")
+            create_notes_models(v, parent=f"{parent}/{k}", parent_model=model_parent)
             
             # print(f'{k} is a folder')
         else:
@@ -112,8 +112,10 @@ def create_notes_models(dict, parent="", parent_model=""):
             name = k
             tags = v['tags']
             status = v['status']
-            # type = Type.objects.get_or_create(v['type'])
-            type = v['type']
+            type_str = v['type']
+            # print(type_str)
+            model_type = Type.objects.get(name=type_str)
+            # type = v['type']
             path = f"{parent}/{name}"
             print(
                 f"""
@@ -122,13 +124,15 @@ def create_notes_models(dict, parent="", parent_model=""):
                     Name: {name}
                     Tags: {tags}
                     Status: {status}
-                    Type: {type}
+                    Type: {type_str}
                     Path: {path}
                 """
             )
-            # for tag in tags:
-            #     tag = Tags.objects.get_or_create(name=tag)
-            # note = normalNotes.objects.create(title=title, name=name, parent=parent_model, type=type, status=status, path=path)
+            note = normalNotes.objects.create(title=title, name=name, parent_folder=parent_model, note_type=model_type, status=status, path=path)
+            for tag in tags:
+                tag_model = Tags.objects.get_or_create(name=tag)
+                note.tags.add(tag_model[0])
+            note.save()
             # print(f'{k} is not a folder')
 
 create_notes_models(entire_tree, parent='')

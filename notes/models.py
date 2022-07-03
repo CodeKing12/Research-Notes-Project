@@ -62,11 +62,14 @@ class Folder(models.Model):
     def __str__(self):
         return self.name
 
+    def get_all_subdirs(self):
+        return self.subfolders + self.subfiles
+
     # Make functions for returning all files and all folders under it
 
 class normalNotes(models.Model):
     name = models.CharField(max_length=250)
-    folder_type = models.ForeignKey(Type, on_delete=models.CASCADE)
+    note_type = models.ForeignKey(Type, on_delete=models.CASCADE)
     path = models.CharField(max_length=500)
     title = models.CharField(max_length=500)
     slug = models.SlugField(default="", max_length=600)
