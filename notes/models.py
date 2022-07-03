@@ -8,10 +8,16 @@ class Tags(models.Model):
     class Meta:
         verbose_name = "tag"
 
+    def __str__(self):
+        return self.name
+
 class Type(models.Model):
     name = models.CharField(max_length=100)
-    subfolders = [] # The name of the Folder model instance will be included in the list will be in a list
-    subfiles = [] # The name of the subfiles will be in a list
+    subfolders = models.JSONField() # The name of the Folder model instance will be included in the list will be in a list
+    subfiles = models.JSONField() # The name of the subfiles will be in a list
+
+    def __str__(self):
+        return self.name
 
 class Citations(models.Model):
     title = models.CharField(max_length=350)
@@ -33,14 +39,17 @@ class Citations(models.Model):
     class Meta:
         verbose_name = "citation"
 
+    def __str__(self):
+        return self.title
+
 class Folder(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(auto_created=True)
-    folder_type = models.ForeignKey(Type, on_delete=models.CASCADE)
-    parent = models.ManyToManyField("self")
+    folder_type = models.ForeignKey(Type, on_delete=models.CASCADE, null=True, blank=True)
+    parent = models.ForeignKey("self", default="", on_delete=models.CASCADE, null=True, blank=True)
     path = models.CharField(max_length=500)
-    subfolders = [] # The name of the Folder model instance will be included in the list will be in a list
-    subfiles = [] # The name of the subfiles will be in a list
+    subfolders = models.JSONField() # The name of the Folder model instance will be included in the list will be in a list
+    subfiles = models.JSONField() # The name of the subfiles will be in a list
 
     def save(self, *args, **kwargs):
         value = self.name
@@ -49,6 +58,9 @@ class Folder(models.Model):
 
     class Meta:
         verbose_name = "folder"
+
+    def __str__(self):
+        return self.name
 
     # Make functions for returning all files and all folders under it
 
@@ -74,6 +86,9 @@ class normalNotes(models.Model):
     class Meta:
         verbose_name = "note"
 
+    def __str__(self):
+        return self.name
+
 class Papers(models.Model):
     note = models.OneToOneField(normalNotes, on_delete=models.CASCADE, primary_key=True, related_name="papers")
     year = models.DateField()
@@ -82,3 +97,6 @@ class Papers(models.Model):
 
     class Meta:
         verbose_name = "paper"
+
+    def __str__(self):
+        return self.note.name

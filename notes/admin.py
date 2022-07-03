@@ -18,10 +18,10 @@ class PapersAdmin(admin.ModelAdmin):
     pass
 
 class FolderAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name', 'folder_type', 'path']
 
 class TypeAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name', 'subfolders', 'subfiles']
 
 
 admin.site.register(notes_models.Citations, CitationsAdmin)
