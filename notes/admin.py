@@ -12,7 +12,7 @@ class TagsAdmin(admin.ModelAdmin):
     pass
 
 class normalNotesAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name', 'title', 'note_type', 'path', 'parent_folder']
 
 class PapersAdmin(admin.ModelAdmin):
     pass

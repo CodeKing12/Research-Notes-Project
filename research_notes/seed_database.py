@@ -104,7 +104,7 @@ def create_notes_models(dict, parent="", parent_model=""):
                 # else:
                 model_parent = Folder.objects.get(path=parent)
                 folder = Folder.objects.get_or_create(name=name, folder_type=model_type, parent=model_parent, path=path, subfolders=subfolders, subfiles=subfiles)
-            create_notes_models(v, parent=f"{parent}/{k}", parent_model=model_parent)
+            create_notes_models(v, parent=f"{parent}/{k}", parent_model=folder)
             
             # print(f'{k} is a folder')
         else:
@@ -128,11 +128,11 @@ def create_notes_models(dict, parent="", parent_model=""):
                     Path: {path}
                 """
             )
-            note = normalNotes.objects.create(title=title, name=name, parent_folder=parent_model, note_type=model_type, status=status, path=path)
+            note = normalNotes.objects.get_or_create(title=title, name=name, parent_folder=parent_model[0], note_type=model_type, status=status, path=path)
             for tag in tags:
                 tag_model = Tags.objects.get_or_create(name=tag)
-                note.tags.add(tag_model[0])
-            note.save()
+                note[0].tags.add(tag_model[0])
+            note[0].save()
             # print(f'{k} is not a folder')
 
 create_notes_models(entire_tree, parent='')
