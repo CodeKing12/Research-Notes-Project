@@ -80,11 +80,10 @@ i = \sqrt{-1}
 $$
 
 Here's some more math
-
-$$  
+  
 \begin{align}
 x   &= 2c + b \\
     &= 2c + 4c \\
     &= 6c
 \end{align}
-$$
+

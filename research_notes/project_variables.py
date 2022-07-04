@@ -1,12 +1,18 @@
 from logging import root
 import os, frontmatter
+from django.urls import reverse
 import re
+from notes.models import Citations
 from research_notes import settings
+from django.utils.text import slugify
 
 root_path = os.path.abspath(".")
+notes_path = settings.BASE_DIR / 'templates/all_notes'
 
-def fs_tree_to_dict(path_):
+def fs_tree_to_dict(path_, disable_citations=True):
     file_token = []
+    if not disable_citations:
+        citations = []
     for root, dirs, files in os.walk(path_):
         if "papers" in root:
             file_token = "Something Else"
@@ -24,7 +30,12 @@ def fs_tree_to_dict(path_):
                 file_token = note.metadata
                 file_token.update({"type": note_type})
                 tree.update({f: file_token})
+            elif disable_citations == False and f == "citations.bib":
+                print(root)
+    if disable_citations:
         return tree  # note we discontinue iteration trough os.walk
+    else:
+        return tree, citations
 
 # tree_dict = fs_tree_to_dict(".")
 
@@ -104,9 +115,14 @@ def iterdict(d, level, parent, html=""):
         # print(current_abspath)
         # print(f"{indent}{os.path.isdir(os.path.abspath(parent)+ '/' + k)}")
         if os.path.isdir(os.path.abspath(parent)+ '/' + k) and isinstance(v, dict):
+            path = f"{parent}/{k}"
+            path_list = path.split("/")
+            note_root = path_list.index('all_notes')
+            link = "/".join(path_list[note_root+1:])
+            url = reverse('show-content', args=[link])
             html += f"""
             {indent}<li class='nav-item subfolder'>
-                <a href='#' class='nav-link'>
+                <a href='{url}' class='nav-link'>
                     <img class=\"flat-icon\" src=\"{settings.STATIC_URL}img/side-nav/folder.png\" alt='folder'>
                     {k.replace('_', ' ').title()}
                 </a>
@@ -118,11 +134,51 @@ def iterdict(d, level, parent, html=""):
             </li>
             """
         else:
+            name = slugify(v['title'])
+            path = f"{parent}/{name}"
+            path_list = path.split("/")
+            note_root = path_list.index('all_notes')
+            link = "/".join(path_list[note_root+1:])
+            url = reverse('show-content', args=[link])
             html += f"""
                 {indent}<li class=\"file-link\">
-                        <a href='tab.html'>
+                        <a href="{url}">
                             <img class=\"file-icon\" src=\"{settings.STATIC_URL}img/side-nav/file.png\" alt='folder'>
                             {v['title']}
                         </a>
                     </li>"""
     return html
+
+# def itermodel(model, level, parent, html=""):
+#     level += 1
+#     for k in model.get_all_subdirs:
+#         # print(os.path.join(root_path, parent))
+#         indent = ' ' * 4 * (level)
+#         subindent = ' ' * 4 * (level + 1)
+#         # print(current_abspath)
+#         # print(f"{indent}{os.path.isdir(os.path.abspath(parent)+ '/' + k)}")
+#         if os.path.isdir(os.path.abspath(parent)+ '/' + k) and isinstance(v, dict):
+#             # html += f"""
+#             # {indent}<li class='nav-item subfolder'>
+#             #     <a href='#' class='nav-link'>
+#             #         <img class=\"flat-icon\" src=\"{settings.STATIC_URL}img/side-nav/folder.png\" alt='folder'>
+#             #         {k.replace('_', ' ').title()}
+#             #     </a>
+#             #     <span class='icon'><i class='arrow_carrot-down'></i></span>
+#             #     <ul class='list-unstyled dropdown_nav'>"""
+#             # html += iterdict(v, level, current_abspath)
+#             # html += """
+#             #     </ul>
+#             # </li>
+#             # """
+#             pass
+#         else:
+#             pass
+#             # html += f"""
+#             #     {indent}<li class=\"file-link\">
+#             #             <a href='tab.html'>
+#             #                 <img class=\"file-icon\" src=\"{settings.STATIC_URL}img/side-nav/file.png\" alt='folder'>
+#             #                 {v['title']}
+#             #             </a>
+#             #         </li>"""
+#     return html

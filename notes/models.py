@@ -64,6 +64,7 @@ class Folder(models.Model):
 
     def get_all_subdirs(self):
         return self.subfolders + self.subfiles
+    
 
     # Make functions for returning all files and all folders under it
 

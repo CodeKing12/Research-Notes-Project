@@ -21,10 +21,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homepage),
-    path('<parent>/', views.displayFile, name="show-markdown-folder"),
-    path('<parent>/<file_name>/', views.displayFile, name="show-markdown-nosub"),
-    path('<parent>/<path:path_to_file>/<file_name>/', views.displayFile, name="show-markdown")
+    path('', views.homepage, name='home'),
+    path('<path:path_to_file>/', views.resolveObject, name="show-content"),
+    # path('<parent>/', views.displayFile, name="show-markdown-folder"),
+    # path('<parent>/<file_name>/', views.displayFile, name="show-markdown-nosub"),
+    # path('<parent>/<path:path_to_file>/<file_name>/', views.displayFile, name="show-markdown")
 ]
 
 if settings.DEBUG:  # new

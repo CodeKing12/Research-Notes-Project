@@ -12,13 +12,13 @@ class TagsAdmin(admin.ModelAdmin):
     pass
 
 class normalNotesAdmin(admin.ModelAdmin):
-    list_display = ['name', 'title', 'note_type', 'path', 'parent_folder']
+    list_display = ['name', 'title', 'note_type', 'path', 'parent_folder', 'slug']
 
 class PapersAdmin(admin.ModelAdmin):
     pass
 
 class FolderAdmin(admin.ModelAdmin):
-    list_display = ['name', 'folder_type', 'path']
+    list_display = ['name', 'folder_type', 'path', 'slug']
 
 class TypeAdmin(admin.ModelAdmin):
     list_display = ['name', 'subfolders', 'subfiles']

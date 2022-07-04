@@ -65,6 +65,6 @@ Here's a simple footnote,[^1] and here's a longer one.[^bignote]
 
 ## Task Lists
 
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
+[x] Write the press release
+[ ] Update the website
+[ ] Contact the media

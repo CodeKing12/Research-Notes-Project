@@ -65,9 +65,9 @@ Here's a simple footnote,[^1] and here's a longer one.[^bignote]
 
 ## Task Lists
 
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
+[x] Write the press release
+[ ] Update the website
+[ ] Contact the media
 
 ## Math
 
@@ -81,10 +81,9 @@ $$
 
 Here's some more math
 
-$$  
 \begin{align}
 x   &= 2c + b \\
     &= 2c + 4c \\
     &= 6c
 \end{align}
-$$
+
