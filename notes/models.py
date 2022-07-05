@@ -20,9 +20,11 @@ class Type(models.Model):
         return self.name
 
 class Citations(models.Model):
-    title = models.CharField(max_length=350)
+    title = models.CharField(max_length=700)
+    shorttitle = models.CharField(max_length=350)
     author = models.JSONField() # List of authors
-    year = models.DateField()
+    year = models.CharField(max_length=50)
+    month = models.CharField(max_length=50)
     journal = models.CharField(max_length=250)
     volume = models.IntegerField()
     number = models.IntegerField()
@@ -75,7 +77,7 @@ class normalNotes(models.Model):
     title = models.CharField(max_length=500)
     slug = models.SlugField(default="", max_length=600)
     status = models.CharField(max_length=200)
-    tags = models.ManyToManyField(Tags)
+    tags = models.ManyToManyField(Tags, related_query_name="notes", related_name="note")
     parent_folder = models.ForeignKey(Folder, on_delete=models.CASCADE)
     main_content = models.TextField()
 

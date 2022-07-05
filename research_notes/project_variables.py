@@ -9,16 +9,17 @@ from django.utils.text import slugify
 root_path = os.path.abspath(".")
 notes_path = settings.BASE_DIR / 'templates/all_notes'
 
-def fs_tree_to_dict(path_, disable_citations=True):
+def fs_tree_to_dict(path_, citations=""):
     file_token = []
-    if not disable_citations:
-        citations = []
     for root, dirs, files in os.walk(path_):
         if "papers" in root:
             file_token = "Something Else"
         if ".git" in dirs:
             dirs.remove(".git")
-        tree = {d: fs_tree_to_dict(os.path.join(root, d)) for d in dirs}
+        if type(citations) == str:
+            tree = {d: fs_tree_to_dict(os.path.join(root, d)) for d in dirs}
+        elif type(citations) == list:
+            tree = {d: fs_tree_to_dict(os.path.join(root, d), citations) for d in dirs}
         # tree.update({f: file_token for f in files})
         for f in files:
             file_exclude = [".DS_Store", "new.py", "README.md", "index.md", "citations.bib"]
@@ -30,12 +31,12 @@ def fs_tree_to_dict(path_, disable_citations=True):
                 file_token = note.metadata
                 file_token.update({"type": note_type})
                 tree.update({f: file_token})
-            elif disable_citations == False and f == "citations.bib":
-                print(root)
-    if disable_citations:
-        return tree  # note we discontinue iteration trough os.walk
-    else:
-        return tree, citations
+            if type(citations) == list and f == "citations.bib":
+                citations.append([root, f])
+        if not type(citations) == list:
+            return tree  # note we discontinue iteration trough os.walk
+        else:
+            return tree, citations
 
 # tree_dict = fs_tree_to_dict(".")
 

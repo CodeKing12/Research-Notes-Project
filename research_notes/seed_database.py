@@ -1,7 +1,6 @@
 import sys, os
-
+import bibtexparser
 import settings
-import project_variables
 import re
 import django
 from django.core.exceptions import ObjectDoesNotExist
@@ -17,13 +16,14 @@ from mdit_py_plugins.amsmath import amsmath_plugin
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "research_notes.settings")
 django.setup()
 
-from notes.models import normalNotes, Tags, Folder, Type
+from notes.models import Citations, normalNotes, Tags, Folder, Type
+import project_variables
 
 # print("Here's all: ", notes_models.objects.all())
 
 notes_path = settings.BASE_DIR / 'templates/all_notes'
-entire_tree = project_variables.fs_tree_to_dict(settings.BASE_DIR / "templates/all_notes")
-# print(entire_tree)
+entire_tree = project_variables.fs_tree_to_dict(notes_path)
+print(entire_tree)
 
 folder_regex = re.compile(r'^\w+$')
 
@@ -161,6 +161,122 @@ def create_notes_models(dict, parent="", parent_model=""):
             # print(f'{k} is not a folder')
 
 
-create_notes_models(entire_tree, parent='')
+tree, citations_list = project_variables.fs_tree_to_dict(path_=notes_path, citations=[])
+def generate_citations_model_fields(citations_list):
+    for cite in citations_list:
+        file = f"{cite[0]}/{cite[1]}"
+        with open(file, "r") as citation_file:
+            bib_database = bibtexparser.bparser.BibTexParser(common_strings=True).parse_file(citation_file)
+        citations = bib_database.entries
+    for citation in citations:
+        try:
+            title = citation['title']
+        except KeyError:
+            title = ""
 
+        try:
+            shorttitle = citation['shorttitle']
+        except KeyError:
+            shorttitle = ""
+
+        try:
+            author = citation['author']
+        except KeyError:
+            author = ""
+
+        try:
+            year = citation['year']
+        except KeyError:
+            year = ""
+
+        try:
+            month = citation['month']
+        except KeyError:
+            month = ""
+
+        try:
+            journal = citation['journal']
+        except KeyError:
+            journal = ""
+
+        try:
+            volume = citation['volume']
+        except KeyError:
+            volume = 0
+
+        try:
+            number = citation['number']
+        except KeyError:
+            number = 0
+
+        try:
+            pages = citation['pages']
+        except KeyError:
+            pages = ""
+
+        try:
+            issn = citation['issn']
+        except KeyError:
+            issn = ""
+
+        try:
+            abstract = citation['abstract']
+        except KeyError:
+            abstract = ""
+
+        try:
+            langid = citation['langid']
+        except KeyError:
+            langid = ""
+
+        try:
+            keywords = citation['keywords']
+        except KeyError:
+            keywords = ""
+
+        try:
+            cite_file = citation['file']
+        except KeyError:
+            cite_file = ""
+
+        try:
+            doi = citation['doi']
+        except KeyError:
+            doi = ""
+
+        try:
+            annotation = citation['annotation']
+        except KeyError:
+            annotation = ""
+        
+        try:
+            publisher = citation['publisher']
+        except KeyError:
+            publisher = ""
+
+
+        citation = Citations.objects.get_or_create(
+            title = title, 
+            shorttitle = shorttitle, 
+            author = author, 
+            year = year, 
+            month = month, 
+            journal = journal, 
+            volume = volume, 
+            number = number, 
+            publisher = publisher,
+            pages = pages, 
+            issn = issn, 
+            doi = doi,
+            abstract = abstract, 
+            langid = langid, 
+            keywords = keywords, 
+            file = cite_file, 
+            annotations = annotation
+        )
+        print(citation)
+
+
+generate_citations_model_fields(citations_list)
+create_notes_models(entire_tree, parent='')
 # There's no need to define $$ when using any /begin{} attribute

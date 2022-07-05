@@ -2373,6 +2373,7 @@ ul.list-style li:last-child {
 
 .doc_tag {
   display: flex;
+  gap: 25px;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
@@ -6403,22 +6404,22 @@ button.mfp-close {
   margin-bottom: 25px;
 }
 
-.basic_table_info {
+.basic_table_info, table {
   width: 100%;
   margin-bottom: 1rem;
   background-color: transparent;
   border: 1px solid #f1f2f3;
 }
-.basic_table_info thead th {
+.basic_table_info thead th, table thead th {
   border: 0;
 }
-.basic_table_info tbody tr th, .basic_table_info tbody tr td {
+.basic_table_info tbody tr th, .basic_table_info tbody tr td, table tbody tr th, table tbody tr td {
   border-color: #eaeff4;
 }
-.basic_table_info.table-hover tbody tr {
+.basic_table_info.table-hover tbody tr, table tbody tr {
   transition: all 0.3s linear;
 }
-.basic_table_info.table-hover tbody tr:hover {
+.basic_table_info.table-hover tbody tr:hover, table tbody tr:hover {
   background: #10b3d6;
   color: #fff;
 }
@@ -9633,3 +9634,42 @@ blockquote .author {
 /*---------------------------------------------------- */
 
 /*# sourceMappingURL=style.css.map */
+
+
+
+.flat-icon {
+    width: 35px;
+    height: auto;
+}
+
+.file-icon {
+    width: 25px;
+}
+
+.nav-link ul.dropdown_nav a.nav-link {
+    font-size: 12px;
+}
+
+.file-link {
+    min-width: 250px;
+    margin-bottom: 10px;
+}
+
+.file-link a {
+    line-height: 23px !important;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+.nav-sidebar .nav-item.subfolder {
+    margin-bottom: 12.5px;
+    min-width: 130px;
+    max-width: 90vh;
+}
+.nav-sidebar .nav-item.subfolder a {
+    font-weight: 800 !important;
+}
+.nav-sidebar .nav-item.subfolder a {
+    font-weight: 500 !important;
+}

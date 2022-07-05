@@ -1,3 +1,4 @@
+from urllib import response
 from django.http import Http404, HttpResponse
 from os import path
 from django.shortcuts import render
@@ -7,7 +8,7 @@ from markdown_it import MarkdownIt
 from mdit_py_plugins.front_matter import front_matter_plugin
 from mdit_py_plugins.footnote import footnote_plugin
 from mdit_py_plugins.dollarmath.index import dollarmath_plugin
-from notes.models import Folder, normalNotes
+from notes.models import Folder, Tags, normalNotes
 from research_notes.settings import BASE_DIR
 from .project_variables import fs_tree_to_dict, iterdict
 import json, os
@@ -18,45 +19,12 @@ from django.urls import reverse
 
 
 def homepage(request):
-    return render(request, 'home.html')
-
-# def displayFile(request, parent, file_name='', path_to_file=''):
-#     # boolean = path.exists('templates/all_notes/classes/econ101/My First Note.md')
-#     file = f'templates/all_notes/{parent}/{path_to_file}/{file_name}'
-#     parent_folder = path_to_file.split("/")[-1]
-#     model_parent_fold = Folder.objects.get(name=parent_folder)
-#     try:
-#         # print(file_name, model_parent_fold.id)
-#         model_file = normalNotes.objects.get(slug=file_name, parent_folder=model_parent_fold)
-#     except ObjectDoesNotExist:
-#         try:
-#             print(file_name)
-#             print(model_parent_fold)
-#             folder = Folder.objects.get(name=file_name, parent=model_parent_fold)
-#             print(folder)
-#         except ObjectDoesNotExist:
-#             raise Http404
-#             file_exists = path.exists(file.strip("/"))
-#             if not file_exists:
-#                 raise Http404
-    
-#     # if path.isdir(file):
-#     #     response = displayFolder(request, file)
-#     #     return response
-
-#     html = model_file.main_content
-
-#     return render(request, "file-display.html", {"file_contents": html})
-    
-# def displayFolder(request, file):
-#     file = file.strip("/")
-#     folder_name = file.split("/")[-1]
-#     folder_name = folder_name.replace('_', ' ').title()
-#     tree_dict = fs_tree_to_dict(BASE_DIR / file)
-#     # generated_html = ""
-#     generated_html = iterdict(d=tree_dict, level=-1, parent=os.path.abspath(file))
-#     # print("Generated This: ", generated_html)
-#     return render(request, "folder-tree.html", {"folder_name": folder_name, "folder_tree":  generated_html})
+    all_tags = Tags.objects.all()
+    root_parent = Folder.objects.get(name="All Notes")
+    full_path = root_parent.path
+    tree_dict = fs_tree_to_dict(full_path)
+    nav_html = iterdict(d=tree_dict, level=-1, parent=full_path)
+    return render(request, 'home.html', {"nav_html": nav_html, "all_tags": all_tags})
 
 def resolveObject(request, path_to_file):
     path_to_file = path_to_file.strip("/")
@@ -105,3 +73,17 @@ def displayFolder(request, folder):
     generated_html = iterdict(d=tree_dict, level=-1, parent=full_path)
      # print("Generated This: ", generated_html)
     return render(request, "folder-tree.html", {"folder_name": folder_name, "folder_tree":  generated_html})
+
+def all_tags(request):
+    all_tags = Tags.objects.all()
+    # print(all_tags.notes)
+    return render(request, "all_tags.html", {"all_tags": all_tags})
+
+def all_categories(request):
+    all_tags = Tags.objects.all()
+    # print(all_tags.notes)
+    return render(request, "all_categories.html", {"all_tags": all_tags})
+
+def tag(request, tag_name):
+    tag = Tags.objects.get(name=tag_name)
+    return render(request, "tag.html", {"tag": tag})

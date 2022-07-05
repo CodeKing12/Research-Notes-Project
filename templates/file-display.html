@@ -33,6 +33,7 @@
 {% block folder-tree %}
 
 <div id="post" class="documentation_info">
+    {% comment %} Add a section for the page title, tags list, create_date, edit_date, status and clicking on the status or any tag should redirect to an index page for that item {% endcomment %}
     {{ file.main_content | safe }}
     {% comment %} <article class="documentation_body" id="documentation">
         </article> {% endcomment %}

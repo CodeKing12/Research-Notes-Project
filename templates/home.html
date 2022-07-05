@@ -29,67 +29,33 @@
         </section>
         <section class="doc_features_area_one">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="media doc_features_item_one wow fadeInLeft" data-wow-delay="0.2s">
-                            <img src="{% static 'img/home_one/Lamp_idea.png' %}" alt="">
-                            <div class="media-body">
-                                <a href="#">
-                                    <h3>Knowledge Base</h3>
-                                </a>
-                                <p>Oxford bonnet are you taking the piss cheeky mufty.</p>
-                                <a href="#" class="learn_btn">Learn More <i class="arrow_right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="media doc_features_item_one wow fadeInLeft" data-wow-delay="0.5s">
-                            <img src="{% static 'img/home_one/chat.png' %}" alt="">
-                            <div class="media-body">
-                                <a href="#">
-                                    <h3>Community Forums</h3>
-                                </a>
-                                <p>Oxford bonnet are you taking the piss cheeky mufty.</p>
-                                <a href="#" class="learn_btn">Learn More <i class="arrow_right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="media doc_features_item_one wow fadeInLeft" data-wow-delay="0.7s">
-                            <img src="{% static 'img/home_one/Duplicate.png' %}" alt="">
-                            <div class="media-body">
-                                <a href="#">
-                                    <h3>Documentation</h3>
-                                </a>
-                                <p>Oxford bonnet are you taking the piss cheeky mufty.</p>
-                                <a href="#" class="learn_btn">Learn More <i class="arrow_right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <ul class="list-unstyled nav-sidebar" style="overflow: auto">
+                    <li class='nav-item subfolder active mx-auto'>
+                        <a href='#' class='nav-link'>
+                            <img class="flat-icon" src="{% static 'img/side-nav/folder.png' %}" alt='folder'>
+                            All Notes
+                        </a>
+                        <span class='icon'><i class='arrow_carrot-down'></i></span>
+                        <ul class='list-unstyled dropdown_nav'>
+                            {% autoescape off %}
+                                {{ nav_html }}
+                            {% endautoescape %}
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </section>
         <section class="doc_tag_area">
             <div class="container">
                 <div class="section_title text-center">
-                    <h2 class="h_title wow fadeInUp">Popular Tags</h2>
+                    <h2 class="h_title wow fadeInUp">All Tags</h2>
                 </div>
                 <ul class="nav nav-tabs doc_tag" id="myTab" role="tablist">
-                    <li class="nav-item wow fadeInLeft">
-                        <a class="nav-link active" id="or-tab" data-toggle="tab" href="#or" role="tab" aria-controls="or" aria-selected="true">Ordering</a>
-                    </li>
-                    <li class="nav-item wow fadeInLeft" data-wow-delay="0.1s">
-                        <a class="nav-link" id="doc-tab" data-toggle="tab" href="#doc" role="tab" aria-controls="doc" aria-selected="false">Docs</a>
-                    </li>
-                    <li class="nav-item wow fadeInLeft" data-wow-delay="0.2s">
-                        <a class="nav-link" id="forum-tab" data-toggle="tab" href="#forum" role="tab" aria-controls="forum" aria-selected="false">Forum</a>
-                    </li>
-                    <li class="nav-item wow fadeInLeft" data-wow-delay="0.3s">
-                        <a class="nav-link" id="code-tab" data-toggle="tab" href="#code" role="tab" aria-controls="code" aria-selected="false">Code</a>
-                    </li>
-                    <li class="nav-item wow fadeInLeft" data-wow-delay="0.4s">
-                        <a class="nav-link" id="element-tab" data-toggle="tab" href="#element" role="tab" aria-controls="element" aria-selected="false">Elements</a>
-                    </li>
+                    {% for tag in all_tags %}
+                        <li class="nav-item wow fadeInLeft">
+                            <a class="nav-link active" href="{% url 'tag' tag.name %}" role="tab" aria-controls="or" aria-selected="true">{{ tag.name }}</a>
+                        </li>
+                    {% endfor %}
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane doc_tab_pane fade show active" id="or" role="tabpanel" aria-labelledby="or-tab">
