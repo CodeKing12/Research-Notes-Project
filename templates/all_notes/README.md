@@ -40,7 +40,7 @@ The most non-obvious entry is `bibtex_ref`. It is the the key in the .bib file w
 bibtex_ref: berryAutomobilePricesMarket1995
 ```
 
-We will use this YAML key to get relevant metadata such as title of the research paper, names of authors, year, journal etc. As discussed below, we will use these metadata to create an index file for the "papers" directory. We will also generate a bibliographic reference for the paper and show it below the paper title in the rendered html page for this markdown file. 
+We will use this YAML key to get relevant metadata such as title of the research paper, names of authors, year, journal etc. As discussed below, we will use these metadata to create an index file for the "papers" directory. We will also generate a bibliographic reference for the paper and show it below the paper title in the rendered html page for this markdown file.
 
 Finally, `link` is a link to the pdf of the research paper, saved on dropbox. We will use this to create a link so I can easily navigate to the underlying pdf from the webpage containing notes about this pdf.
      

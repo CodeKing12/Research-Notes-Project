@@ -58,7 +58,7 @@ def resolveObject(request, path_to_file):
     return response
         
 def displayFile(request, file):
-    # print(file.main_content)
+    # print(file.papers.bibtex.file)
     return render(request, "file-display.html", {"file": file})
 
 def displayFolder(request, folder):

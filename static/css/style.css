@@ -9673,3 +9673,82 @@ blockquote .author {
 .nav-sidebar .nav-item.subfolder a {
     font-weight: 500 !important;
 }
+
+.ref-link {
+  font-size: 16.2px;
+  font-weight: 500;
+  padding: 0 18px;
+  display: inline-block;
+  margin: 0 3px;
+  border-radius: 2px;
+}
+
+#a-reference {
+  margin: 12px 0 23px 0 !important;
+}
+
+#a-reference a {
+  color: #1d2746;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.54;
+  margin: 15px 0 !important
+}
+
+.body_dark #a-reference a {
+  color: #f5f5f5;
+}
+
+#a-reference a:last-of-type {
+  color:#0066fe;
+  font-weight: #800;
+}
+
+.ordered-list {
+  padding-left: unset !important;
+  margin: unset !important;
+}
+
+.ordered-list::before {
+  left: 12px !important;
+}
+
+.file-heading {
+  color: white;
+  text-align: center;
+  margin-top: -40px !important;
+  margin-bottom: 24px !important;
+}
+
+.note-details {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.note-details.highlight_text {
+  margin: unset !important;
+  padding: unset !important;
+}
+
+.note-details p {
+  font-weight: 500;
+}
+
+.note-details p span {
+  color: #212529
+}
+
+.body_dark .note-details p span {
+  color: #ffdead
+}
+
+.note-details .h_black {
+  padding: 0 12px;
+}
+
+.note-details .h_blue {
+  font-weight: 500;
+  font-size: 16px;
+  padding: 4px 12px;
+  margin-right: 10px;
+}

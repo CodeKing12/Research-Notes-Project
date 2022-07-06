@@ -11,6 +11,7 @@
     <img class="p_absolute one wow fadeInRight" src="{% static 'img/home_one/b_man_two.png' %}" alt="">
     <img class="p_absolute two wow fadeInUp" data-wow-delay="0.2s" src="{% static 'img/home_one/flower.png' %}" alt="">
     <div class="container custom_container">
+        <h1 class="file-heading">{{ file.title }}</h1>
         <form action="#" class="banner_search_form banner_search_form_two">
             <div class="input-group">
                 <input type="search" class="form-control" placeholder='Search ("/" to focus)'>
@@ -33,6 +34,77 @@
 {% block folder-tree %}
 
 <div id="post" class="documentation_info">
+    {% comment %} {% if file.not_type.name == 'papers' %} {% endcomment %}
+    <h1 class='mb-4'>{{ file.title }}</h1>
+    {% comment %} {% else %}
+        <h1>{{ file.title }}</h1>
+    {% endif %} {% endcomment %}
+    <div class='note-details highlight_text'>
+        <p class='d-flex'>
+            <span class='pr-0 mr-1'>Status:</span> <span class='h_black'>{{ file.status }}</span>
+        </p>
+        <p class='d-flex'>
+            <span class='pr-0 mr-1'>Tags:</span> &nbsp;{% for tag in file.tags.all %} &nbsp;<a class='h_blue' href="{% url 'tag' tag.name %}">{{ tag.name }}</a> {% endfor %}
+        </p>
+        {% if file.note_type.name == 'papers' %}
+            <p>
+                <span>Year:</span> &nbsp;{{ file.papers.year }}
+            </p>
+            <p class='d-flex'>
+                <span class='pr-0 mr-1'>Link:</span> <a class='ml-2' href='{{ file.papers.link }}'> &nbsp;{{ file.papers.link }}</a>
+            </p>
+            {% if file.papers.bibtex.file != '' %}
+                <p class='d-flex'>
+                    <span class='pr-0 mr-1'>Research Paper:</span> {{ file.papers.bibtex.title }}
+                </p>
+            {% endif %}
+            {% if file.papers.bibtex.author != '' %}
+                <p class='d-flex'>
+                    <span class='pr-0 mr-1'>Author(s):</span> &nbsp;{{ file.papers.bibtex.author }}
+                </p>
+            {% endif %}
+            {% if file.papers.bibtex.year != '' %}
+                <p class='d-flex'>
+                    <span class='pr-0 mr-1'>Year:</span> &nbsp;{{ file.papers.bibtex.year }}
+                </p>
+            {% endif %}
+            {% if file.papers.bibtex.month != '' %}
+                <p class='d-flex'>
+                    <span class='pr-0 mr-1'>Month:</span> &nbsp;{{ file.papers.bibtex.month }}
+                </p>
+            {% endif %}
+            {% if file.papers.bibtex.journal != '' %}
+                <p class='d-flex'>
+                    <span class='pr-0 mr-1'>Journal:</span> &nbsp;{{ file.papers.bibtex.journal }}
+                </p>
+            {% endif %}
+            {% if file.papers.bibtex.volume != '' %}
+                <p class='d-flex'>
+                    <span class='pr-0 mr-1'>Volume:</span> &nbsp;{{ file.papers.bibtex.volume }}
+                </p>
+            {% endif %}
+            {% if file.papers.bibtex.pages != '' %}
+                <p class='d-flex'>
+                    <span class='pr-0 mr-1'>Pages:</span> &nbsp;{{ file.papers.bibtex.pages }}
+                </p>
+            {% endif %}
+            {% if file.papers.bibtex.issn != '' %}
+                <p class='d-flex'>
+                    <span class='pr-0 mr-1'>ISSN:</span> &nbsp;{{ file.papers.bibtex.issn }}
+                </p>
+            {% endif %}
+            {% if file.papers.bibtex.doi != '' %}
+                <p class='d-flex'>
+                    <span class='pr-0 mr-1'>DOI:</span> &nbsp;<a href='https://doi.org/{{file.papers.bibtex.doi}}'>{{file.papers.bibtex.doi}}</a>
+                </p>
+            {% endif %}
+            {% if file.papers.bibtex.file != '' %}
+                <p class='d-flex'>
+                    <span class='pr-0 mr-1'>File:</span> &nbsp;{{ file.papers.bibtex.file }}
+                </p>
+            {% endif %}
+        {% endif %}
+    </div>
     {% comment %} Add a section for the page title, tags list, create_date, edit_date, status and clicking on the status or any tag should redirect to an index page for that item {% endcomment %}
     {{ file.main_content | safe }}
     {% comment %} <article class="documentation_body" id="documentation">
