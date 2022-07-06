@@ -9752,3 +9752,16 @@ blockquote .author {
   padding: 4px 12px;
   margin-right: 10px;
 }
+
+ul.contains-task-list {
+  list-style: none;
+  padding-left: unset;
+}
+
+ul.contains-task-list li.task-list-item input {
+  margin-right: 7px;
+}
+
+ul.contains-task-list li.task-list-item input:checked {
+  border-color: #0066fe;
+}
