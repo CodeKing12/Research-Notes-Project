@@ -6,13 +6,13 @@ class CitationsAdmin(admin.ModelAdmin):
     list_display = ['name', 'title', 'year', 'month', 'keywords']
 
 class TagsAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name']
 
 class normalNotesAdmin(admin.ModelAdmin):
     list_display = ['name', 'title', 'note_type', 'path', 'parent_folder', 'slug']
 
 class PapersAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['note', 'year', 'bibtex', 'link']
 
 class FolderAdmin(admin.ModelAdmin):
     list_display = ['name', 'folder_type', 'path', 'slug']

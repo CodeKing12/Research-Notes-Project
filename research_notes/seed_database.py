@@ -16,7 +16,7 @@ from mdit_py_plugins.amsmath import amsmath_plugin
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "research_notes.settings")
 django.setup()
 
-from notes.models import Citations, normalNotes, Tags, Folder, Type
+from notes.models import Citations, Papers, normalNotes, Tags, Folder, Type
 import project_variables
 
 # print("Here's all: ", notes_models.objects.all())
@@ -179,7 +179,8 @@ def create_notes_models(dict, parent="", parent_model=""):
                 year = v['year']
                 link = v['link']
                 bibtex_ref = v['bibtex_ref']
-                # bibtex = Citations.objects.get(reference = '')
+                bibtex = Citations.objects.get(name=bibtex_ref)
+                paper = Papers.objects.update_or_create(note=note[0], year=year, link=link, bibtex=bibtex)
             # print(f'{k} is not a folder')
 
 
