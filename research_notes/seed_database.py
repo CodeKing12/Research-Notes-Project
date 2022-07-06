@@ -23,7 +23,7 @@ import project_variables
 
 notes_path = settings.BASE_DIR / 'templates/all_notes'
 entire_tree = project_variables.fs_tree_to_dict(notes_path)
-print(entire_tree)
+# print(entire_tree)
 
 folder_regex = re.compile(r'^\w+$')
 
@@ -149,15 +149,37 @@ def create_notes_models(dict, parent="", parent_model=""):
                 .disable('image')
             )
             file_content = md.render(content)
+            bib_text = r"\\ref{\w*}"
+            bib_re = re.compile(bib_text)
+            count = 0
+            if bool(bib_re.findall(file_content)):
+                file_content += "\n<h1 id='references'>References</h1>"
+            for item in bib_re.finditer(file_content):
+                text = item.group().strip("\\ref{")
+                text = text.strip("}")
+                count += 1
+                ref_html = f"<a id='ref-{count}' href='#reference-{count}'>{text.upper()}</a>"
+                file_content = file_content.replace(item.group(), ref_html)
+                file_content += f"\n<a id='reference-{count}' href='#ref-{count}'>{text.upper()}</a>"
+                # print("{{ tito {}".strip("{"))
+
+            file_content = file_content.replace('<table>', "<table class='table basic_body_table'>")
+
             # print(file_content)
             # Create a notes object once all the values have been extracted
-            note = normalNotes.objects.get_or_create(title=title, name=name, parent_folder=parent_model[0], note_type=model_type, status=status, path=path, main_content=file_content)
+            note = normalNotes.objects.update_or_create(title=title, name=name, parent_folder=parent_model[0], note_type=model_type, status=status, path=path, main_content=file_content)
 
             # Create the tags if they are not available and add them to the note object
             for tag in tags:
                 tag_model = Tags.objects.get_or_create(name=tag)
                 note[0].tags.add(tag_model[0])
             note[0].save()
+
+            if type_str == 'papers':
+                year = v['year']
+                link = v['link']
+                bibtex_ref = v['bibtex_ref']
+                # bibtex = Citations.objects.get(reference = '')
             # print(f'{k} is not a folder')
 
 
@@ -167,8 +189,10 @@ def generate_citations_model_fields(citations_list):
         file = f"{cite[0]}/{cite[1]}"
         with open(file, "r") as citation_file:
             bib_database = bibtexparser.bparser.BibTexParser(common_strings=True).parse_file(citation_file)
-        citations = bib_database.entries
-    for citation in citations:
+        citations = bib_database.entries_dict
+    for article in citations:
+        name = article
+        citation = citations[article]
         try:
             title = citation['title']
         except KeyError:
@@ -256,6 +280,7 @@ def generate_citations_model_fields(citations_list):
 
 
         citation = Citations.objects.get_or_create(
+            name = name,
             title = title, 
             shorttitle = shorttitle, 
             author = author, 

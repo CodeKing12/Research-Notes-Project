@@ -20,6 +20,7 @@ class Type(models.Model):
         return self.name
 
 class Citations(models.Model):
+    name = models.CharField(max_length=200)
     title = models.CharField(max_length=700)
     shorttitle = models.CharField(max_length=350)
     author = models.JSONField() # List of authors
@@ -97,7 +98,7 @@ class normalNotes(models.Model):
 
 class Papers(models.Model):
     note = models.OneToOneField(normalNotes, on_delete=models.CASCADE, primary_key=True, related_name="papers")
-    year = models.DateField()
+    year = models.CharField(max_length=10)
     link = models.URLField()
     bibtex = models.ForeignKey(Citations, on_delete=models.CASCADE)
 

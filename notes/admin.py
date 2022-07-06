@@ -3,10 +3,7 @@ from . import models as notes_models
 
 # Register your models here.
 class CitationsAdmin(admin.ModelAdmin):
-    pass
-
-class CitationsAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name', 'title', 'year', 'month', 'keywords']
 
 class TagsAdmin(admin.ModelAdmin):
     pass
