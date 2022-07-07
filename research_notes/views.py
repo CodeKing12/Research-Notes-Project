@@ -68,8 +68,10 @@ def displayFile(request, file):
     # print(file.papers.bibtex.file)
     return render(request, "file-display.html", {"file": file})
 
-def displayFolder(request, folder, sort="title", group="none"):
-    
+def displayFolder(request, folder, sort="date modified", group="status"):
+    # if request.method == "GET":
+    #     if "filter-form" in request.GET:
+    #         print("Moneylapo")
     # Generated the html for the directory tree section
     folder_name = folder.presentable_name()
     root_parent = Folder.objects.get(name="All Notes")
@@ -80,8 +82,11 @@ def displayFolder(request, folder, sort="title", group="none"):
 
     # Retrieve the corresponding file_name in the subfiles list and replace it with the object to django model objects
     for file in folder.subfiles:
-        file_index = folder.subfiles.index(file)
-        folder.subfiles[file_index] = normalNotes.objects.get(name=file, parent_folder=folder)
+        if file.endswith(".md"):
+            file_index = folder.subfiles.index(file)
+            folder.subfiles[file_index] = normalNotes.objects.get(name=file, parent_folder=folder)
+        else:
+            folder.subfiles.remove(file)
 
     for sub_folder in folder.subfolders:
         # folder_name = folder.name.replace('_', ' ').title()
@@ -100,15 +105,16 @@ def displayFolder(request, folder, sort="title", group="none"):
         group_list = []
         for file in folder.subfiles:
             for tag in file.tags.all():
-                if tag not in status_list:
-                    status_list.append(tag)
+                if tag not in group_list:
+                    group_list.append(tag)
     elif group == "status":
-        status_list = []
+        group_list = []
         for file in folder.subfiles:
-            if file.status not in status_list:
-                status_list.append(file.status)
+            if file.status not in group_list:
+                group_list.append(file.status)
     else:
         group_list = []
+
     current_sorting = sort.title()
     current_grouping = group.title()
     sort_options = ["Title", "Date Modified"]

@@ -85,7 +85,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <h3 class="title">Sort by</h3>
-                            <div class="short-by">
+                            <div class="short-by sort-by">
                                 {% for sort in sort_options %}
                                     {% if sort == current_sorting %}
                                         <a class="dropdown-item active-short" href="#0">{{ sort }}</a>
@@ -104,7 +104,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <h3 class="title">Group by</h3>
-                            <div class="short-by">
+                            <div class="short-by group-by">
                                 {% for group in group_options %}
                                     {% if group == current_grouping %}
                                         <a class="dropdown-item active-short" href="#0">{{ group }}</a>
@@ -120,7 +120,7 @@
         </div>
         <!-- /.support-category-menus -->
     </div>
-    <div class="community-posts-wrapper bb-radius">
+    <div class="community-posts-wrapper {% if current_grouping == 'None' %}bb-radius{% endif %}">
         <style>
             .doc_mobile_menu {
                 padding-right: unset;
@@ -141,28 +141,89 @@
                 </div>
             </div>
         {% endfor %}
-        {% for file in folder.subfiles %}
-            <div class="community-post style-two feature kbDoc spider richard py-3 px-4">
-                <div class="post-content">
-                    <div class="entry-content">
-                        <h3 class="post-title mt-0">
-                            <a href="{% url 'show-content' file.get_url_path %}">
-                                {{ file.title }}
-                            </a>
-                        </h3>
-                        <a class="badge color-ass" href="{% url 'status' file.status %}">{{ file.status }}</a>
-                        <div class="cat-wrap d-block mb-1">
+        {% if current_grouping != 'None'  %}
+            {% for group in group_list %}
+                <div class="group bb-radius mt-5">
+                    <h4 class="py-3 mt-0 pl-4 group-heading">{{ group }}</h4>
+                    {% if current_grouping == 'Status' %}
+                        {% for file in folder.subfiles %}
+                            {% if file.status == group %}
+                                <div class="community-post style-two feature kbDoc spider richard py-3 px-4">
+                                    <div class="post-content">
+                                        <div class="entry-content">
+                                            <h3 class="post-title mt-0">
+                                                <a href="{% url 'show-content' file.get_url_path %}">
+                                                    {{ file.title }}
+                                                </a>
+                                            </h3>
+                                            <a class="badge color-ass" href="{% url 'status' file.status %}">{{ file.status }}</a>
+                                            <div class="cat-wrap d-block mb-1">
+                                                {% for tag in file.tags.all %}
+                                                    <a class="badge color-green" href="{% url 'tag' tag.name %}">{{ tag.name }}</a>
+                                                {% endfor %}
+                                            </div>
+                                            <ul class="meta">
+                                                <li><i class="icon_calendar"></i>Updated {{ file.date_modified }}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% elif current_grouping == 'Tags' %}
+                        {% for file in folder.subfiles %}
                             {% for tag in file.tags.all %}
-                                <a class="badge color-green" href="{% url 'tag' tag.name %}">{{ tag.name }}</a>
+                                {% if tag == group %}
+                                    <div class="community-post style-two feature kbDoc spider richard py-3 px-4">
+                                        <div class="post-content">
+                                            <div class="entry-content">
+                                                <h3 class="post-title mt-0">
+                                                    <a href="{% url 'show-content' file.get_url_path %}">
+                                                        {{ file.title }}
+                                                    </a>
+                                                </h3>
+                                                <a class="badge color-ass" href="{% url 'status' file.status %}">{{ file.status }}</a>
+                                                <div class="cat-wrap d-block mb-1">
+                                                    {% for tag in file.tags.all %}
+                                                        <a class="badge color-green" href="{% url 'tag' tag.name %}">{{ tag.name }}</a>
+                                                    {% endfor %}
+                                                </div>
+                                                <ul class="meta">
+                                                    <li><i class="icon_calendar"></i>Updated {{ file.date_modified }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            {% for file in folder.subfiles %}
+                <div class="community-post style-two feature kbDoc spider richard py-3 px-4">
+                    <div class="post-content">
+                        <div class="entry-content">
+                            <h3 class="post-title mt-0">
+                                <a href="{% url 'show-content' file.get_url_path %}">
+                                    {{ file.title }}
+                                </a>
+                            </h3>
+                            <a class="badge color-ass" href="{% url 'status' file.status %}">{{ file.status }}</a>
+                            <div class="cat-wrap d-block mb-1">
+                                {% for tag in file.tags.all %}
+                                    <a class="badge color-green" href="{% url 'tag' tag.name %}">{{ tag.name }}</a>
+                                {% endfor %}
+                            </div>
+                            <ul class="meta">
+                                <li><i class="icon_calendar"></i>Updated {{ file.date_modified }}</li>
+                            </ul>
                         </div>
-                        <ul class="meta">
-                            <li><i class="icon_calendar"></i>Updated {{ file.date_modified }}</li>
-                        </ul>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        {% endif %}
     </div>
     <article class="documentation_body py-0" id="documentation">
         <h3>{{ folder_name }}</h3>
@@ -245,5 +306,40 @@
         </ul>
     </div>
 </div>
+
+<form name="filter-form" id="hidden-form" style="visibility: hidden">
+    <select id="sort-select" name="sort-select">
+        <option></option>
+    </select>
+    <select id="group-select" name="group-select">
+        <option></option>
+    </select>
+</form>
+
+<script>
+    $(document).ready( function() {
+        $(".group-by a, .sort-by a").on("click", function() {
+
+            console.log("Open")
+            let sort_option = $(".sort-by .active-short").text()
+            let group_option = $(".group-by .active-short").text()
+            console.log(sort_option)
+            console.log(group_option)
+            {% comment %} /* $.ajax({
+                url: "{{ request.build_absolute_uri }}",
+                type: "get",
+                dataType: "application/json",
+                data: {"sort": sort_option, "group": group_option},
+                success: function() {
+                    console.log("Worked")
+                },
+                error: function() {
+                    console.log("Failed")
+                }
+            }) */ {% endcomment %}
+        })
+        {% comment %} $(".sort-by a").on("click", submitFilters()) {% endcomment %}
+    })
+</script>
 
 {% endblock folder-tree %}

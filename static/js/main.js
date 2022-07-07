@@ -690,7 +690,10 @@
 		});
 
 		
-		$('.short-by a').click( function() {
+		$('.sort-by a').click( function() {
+			$(this).toggleClass('active-short').siblings().removeClass('active-short');
+		});
+		$('.group-by a').click( function() {
 			$(this).toggleClass('active-short').siblings().removeClass('active-short');
 		});
 	}
@@ -817,9 +820,3 @@
 	})
 
 })(jQuery);
-
-// function submitFilter(filter) {
-// 	$.ajax({
-
-// 	})
-// }

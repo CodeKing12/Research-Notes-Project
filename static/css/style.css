@@ -9814,3 +9814,20 @@ ul.contains-task-list li.task-list-item input:checked {
   font-size: 15px !important;
   color: #1d2746;
 }
+
+/* .community-post {
+  box-shadow: 0 7px 6px 0 rgb(4 73 89 / 6%);
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  overflow: hidden;
+} */
+
+.group-heading {
+  font-size: 22px; 
+  background: #eee; 
+  text-transform: capitalize; 
+}
+
+.group {
+  box-shadow: 0 12px 15px 0 rgba(4, 73, 89, 0.06) !important;
+}
