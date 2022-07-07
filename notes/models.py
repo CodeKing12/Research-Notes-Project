@@ -67,6 +67,9 @@ class Folder(models.Model):
     def __str__(self):
         return self.name
 
+    def presentable_name(self):
+        return self.name.replace('_', ' ').title()
+
     def get_all_subdirs(self):
         return self.subfolders + self.subfiles
 
@@ -77,9 +80,14 @@ class Folder(models.Model):
         return len(self.subfolders)
 
     def get_url_path(self):
-        parent_path = self.parent.path.strip("/")
-        slug = self.slug
-        url = f"{parent_path}/{slug}"
+        if self.parent == None:
+            url = ""
+        else:
+            parent_path = self.parent.path.strip("/")
+            slug = self.slug
+            url = f"{parent_path}/{slug}"
+            if self.parent == Folder.objects.get(name="All Notes") and self.parent.folder_type == None:
+                url = slug
         return url
     
 

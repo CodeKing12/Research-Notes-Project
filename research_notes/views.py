@@ -71,7 +71,7 @@ def displayFile(request, file):
 def displayFolder(request, folder, sort="title", group="none"):
     
     # Generated the html for the directory tree section
-    folder_name = folder.name.replace('_', ' ').title()
+    folder_name = folder.presentable_name()
     root_parent = Folder.objects.get(name="All Notes")
     full_path = root_parent.path + folder.path
     tree_dict = folder.folder_dict
