@@ -52,6 +52,7 @@ class Folder(models.Model):
     folder_type = models.ForeignKey(Type, on_delete=models.CASCADE, null=True, blank=True)
     parent = models.ForeignKey("self", default="", on_delete=models.CASCADE, null=True, blank=True)
     path = models.CharField(max_length=500)
+    folder_dict = models.JSONField()
     subfolders = models.JSONField() # The name of the Folder model instance will be included in the list will be in a list
     subfiles = models.JSONField() # The name of the subfiles will be in a list
 

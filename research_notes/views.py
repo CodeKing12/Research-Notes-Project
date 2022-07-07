@@ -29,7 +29,7 @@ def homepage(request):
     all_tags = Tags.objects.all()
     root_parent = Folder.objects.get(name="All Notes")
     full_path = root_parent.path
-    tree_dict = fs_tree_to_dict(full_path)
+    tree_dict = root_parent.folder_dict
     nav_html = iterdict(d=tree_dict, level=-1, parent=full_path)
     return render(request, 'home.html', {"nav_html": nav_html, "all_tags": all_tags})
 
@@ -74,7 +74,7 @@ def displayFolder(request, folder, sort="title", group="none"):
     folder_name = folder.name.replace('_', ' ').title()
     root_parent = Folder.objects.get(name="All Notes")
     full_path = root_parent.path + folder.path
-    tree_dict = fs_tree_to_dict(full_path)
+    tree_dict = folder.folder_dict
     generated_html = ""
     generated_html = iterdict(d=tree_dict, level=-1, parent=full_path)
 
