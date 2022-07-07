@@ -8,7 +8,7 @@
         <div class="support-info">
             <ul class="support-total-info">
                 <li class="d-flex align-items-center">
-                    <i class="icon_check h-fit"></i><a href="#"><h4 class="m-0">{{ folder_name }}</h4></a>
+                    <img class='folder-index-img' src='{% static 'img/my-static/folder (4).png' %}'><a href="#"><h4 class="m-0">{{ folder_name }}</h4></a>
                 </li>
             </ul>
         </div>
@@ -74,12 +74,13 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <h3 class="title">Sort by</h3>
                             <div class="short-by">
-                                <a class="dropdown-item active-short" href="#0">{{ current_sorting }}</a>
-                                <a class="dropdown-item" href="#0">Date Modified</a>
-                                <a class="dropdown-item" href="#0">Most commented</a>
-                                <a class="dropdown-item" href="#0">Least commented</a>
-                                <a class="dropdown-item" href="#0">Recently updated</a>
-                                <a class="dropdown-item" href="#0">Least recently updated</a>
+                                {% for sort in sort_options %}
+                                    {% if sort == current_sorting %}
+                                        <a class="dropdown-item active-short" href="#0">{{ sort }}</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="#0">{{ sort }}</a>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -92,8 +93,13 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <h3 class="title">Group by</h3>
                             <div class="short-by">
-                                <a class="dropdown-item active-short" href="#0">Status</a>
-                                <a class="dropdown-item" href="#0">Tags</a>
+                                {% for group in group_options %}
+                                    {% if group == current_grouping %}
+                                        <a class="dropdown-item active-short" href="#0">{{ group }}</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="#0">{{ group }}</a>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -108,6 +114,21 @@
                 padding-right: unset;
             }
         </style>
+        {% for folder in folder.subfolders %}
+            <div class="community-post folder style-two feature kbDoc spider richard py-3 px-4">
+                <div class="post-content">
+                    <div class="entry-content">
+                        <h3 class="post-title mt-0 folder-name">
+                            <a href="{% url 'show-content' folder.get_url_path %}">
+                                {{ folder.name }}
+                            </a>
+                        </h3>
+                        <a class="badge color-ass" href="{% url 'show-content' folder.get_url_path %}">{{ folder.file_count }}{% if folder.file_count > 1 %} Files {% else %} File {% endif %}</a>
+                        <a class="badge color-ass" href="{% url 'show-content' folder.get_url_path %}">{{ folder.subfolder_count }}{% if folder.file_count > 1 %} Folders {% else %} Folder {% endif %}</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
         {% for file in folder.subfiles %}
             <div class="community-post style-two feature kbDoc spider richard py-3 px-4">
                 <div class="post-content">

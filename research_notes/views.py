@@ -68,7 +68,7 @@ def displayFile(request, file):
     # print(file.papers.bibtex.file)
     return render(request, "file-display.html", {"file": file})
 
-def displayFolder(request, folder, sort="title", group=""):
+def displayFolder(request, folder, sort="title", group="none"):
     
     # Generated the html for the directory tree section
     folder_name = folder.name.replace('_', ' ').title()
@@ -83,6 +83,12 @@ def displayFolder(request, folder, sort="title", group=""):
         file_index = folder.subfiles.index(file)
         folder.subfiles[file_index] = normalNotes.objects.get(name=file, parent_folder=folder)
 
+    for sub_folder in folder.subfolders:
+        # folder_name = folder.name.replace('_', ' ').title()
+        folder_index = folder.subfolders.index(sub_folder)
+        subfold = Folder.objects.get(name=sub_folder, parent=folder)
+        folder.subfolders[folder_index] = subfold
+
     # Sort Items By title or date_modified if the user requests to sort them out
     if sort == "title":
         folder.subfiles.sort(key=sortTitle)
@@ -90,16 +96,24 @@ def displayFolder(request, folder, sort="title", group=""):
         folder.subfiles.sort(key=sortDate)
 
     # Create lists for grouping Items By tags or status if the user requests to group them
-    group_list = []
     if group == "tags":
-        group_list = Tags.objects.all()
+        group_list = []
+        for file in folder.subfiles:
+            for tag in file.tags.all():
+                if tag not in status_list:
+                    status_list.append(tag)
     elif group == "status":
         status_list = []
         for file in folder.subfiles:
             if file.status not in status_list:
                 status_list.append(file.status)
-    current_sorting = sort
-    return render(request, "folder-tree.html", {"folder_name": folder_name, "folder_tree":  generated_html, "folder": folder, "group_list": group_list, "current_sorting": current_sorting})
+    else:
+        group_list = []
+    current_sorting = sort.title()
+    current_grouping = group.title()
+    sort_options = ["Title", "Date Modified"]
+    group_options = ["None", "Status", "Tags"]
+    return render(request, "folder-tree.html", {"folder_name": folder_name, "folder_tree":  generated_html, "folder": folder, "group_list": group_list, "current_sorting": current_sorting, "current_grouping": current_grouping, "sort_options": sort_options, "group_options": group_options})
 
 def all_tags(request):
     all_tags = Tags.objects.all()

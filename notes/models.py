@@ -68,6 +68,18 @@ class Folder(models.Model):
 
     def get_all_subdirs(self):
         return self.subfolders + self.subfiles
+
+    def file_count(self):
+        return len(self.subfiles)
+
+    def subfolder_count(self):
+        return len(self.subfolders)
+
+    def get_url_path(self):
+        parent_path = self.parent.path.strip("/")
+        slug = self.slug
+        url = f"{parent_path}/{slug}"
+        return url
     
 
     # Make functions for returning all files and all folders under it

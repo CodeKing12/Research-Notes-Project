@@ -9796,3 +9796,16 @@ ul.contains-task-list li.task-list-item input:checked {
 .short-by {
   text-transform: capitalize;
 }
+
+.folder-name {
+  text-transform: capitalize;
+}
+
+.community-post.folder {
+  background-color: #cdf1d4 !important;
+}
+
+.folder-index-img {
+  width: 25px;
+  margin-right: 15px;
+}

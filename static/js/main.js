@@ -817,3 +817,9 @@
 	})
 
 })(jQuery);
+
+// function submitFilter(filter) {
+// 	$.ajax({
+
+// 	})
+// }
