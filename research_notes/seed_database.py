@@ -1,9 +1,5 @@
-import sys, os
-import markdown
-import bibtexparser
-import settings
-import re
-import django
+import sys, os, markdown, bibtexparser, settings, re, django
+from datetime import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from markdown_it import MarkdownIt
 from mdit_py_plugins.front_matter.index import front_matter_plugin
@@ -137,7 +133,10 @@ def create_notes_models(dict, parent="", parent_model=""):
             abs_path_to_file = f"{notes_path}/{path}"
             with open(abs_path_to_file, "r", encoding="utf-8") as f:
                 content = f.read()
-
+            date_created = os.path.getctime(abs_path_to_file)
+            date_modified = os.path.getmtime(abs_path_to_file)
+            time_created = datetime.fromtimestamp(date_created)
+            time_modified = datetime.fromtimestamp(date_modified)
             md = (
                 MarkdownIt("gfm-like")
                 .use(front_matter_plugin)
@@ -176,7 +175,7 @@ def create_notes_models(dict, parent="", parent_model=""):
             content_lines = content.split("\n")
             # print(file_content)
             # Create a notes object once all the values have been extracted
-            note = normalNotes.objects.update_or_create(title=title, name=name, parent_folder=parent_model[0], note_type=model_type, status=status, path=path, main_content=file_content)
+            note = normalNotes.objects.update_or_create(title=title, name=name, parent_folder=parent_model[0], note_type=model_type, status=status, path=path, main_content=file_content, date_created=time_created, date_modified=time_modified)
 
             # Create the tags if they are not available and add them to the note object
             for tag in tags:

@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.utils import timezone
 
 # Create your models here.
 class Tags(models.Model):
@@ -80,6 +81,8 @@ class normalNotes(models.Model):
     status = models.CharField(max_length=200)
     tags = models.ManyToManyField(Tags, related_query_name="notes", related_name="note")
     parent_folder = models.ForeignKey(Folder, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(default=timezone.now)
+    date_modified = models.DateTimeField(default=timezone.now)
     main_content = models.TextField()
 
     def generate_slug():
@@ -95,6 +98,12 @@ class normalNotes(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_url_path(self):
+        parent_path = self.parent_folder.path.strip("/")
+        slug = self.slug
+        url = f"{parent_path}/{slug}"
+        return url
 
 class Papers(models.Model):
     note = models.OneToOneField(normalNotes, on_delete=models.CASCADE, primary_key=True, related_name="papers")

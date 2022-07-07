@@ -18,6 +18,13 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 
 
+def sortDate(key):
+        return key.date_modified
+
+def sortTitle(key):
+    return key.title
+
+
 def homepage(request):
     all_tags = Tags.objects.all()
     root_parent = Folder.objects.get(name="All Notes")
@@ -61,25 +68,45 @@ def displayFile(request, file):
     # print(file.papers.bibtex.file)
     return render(request, "file-display.html", {"file": file})
 
-def displayFolder(request, folder):
+def displayFolder(request, folder, sort="title", group=""):
+    
+    # Generated the html for the directory tree section
     folder_name = folder.name.replace('_', ' ').title()
     root_parent = Folder.objects.get(name="All Notes")
     full_path = root_parent.path + folder.path
     tree_dict = fs_tree_to_dict(full_path)
-    print("Heyaa", BASE_DIR / folder.path)
     generated_html = ""
-    print()
-    print(tree_dict)
     generated_html = iterdict(d=tree_dict, level=-1, parent=full_path)
-     # print("Generated This: ", generated_html)
-    return render(request, "folder-tree.html", {"folder_name": folder_name, "folder_tree":  generated_html})
+
+    # Retrieve the corresponding file_name in the subfiles list and replace it with the object to django model objects
+    for file in folder.subfiles:
+        file_index = folder.subfiles.index(file)
+        folder.subfiles[file_index] = normalNotes.objects.get(name=file, parent_folder=folder)
+
+    # Sort Items By title or date_modified if the user requests to sort them out
+    if sort == "title":
+        folder.subfiles.sort(key=sortTitle)
+    elif sort == "modified":
+        folder.subfiles.sort(key=sortDate)
+
+    # Create lists for grouping Items By tags or status if the user requests to group them
+    group_list = []
+    if group == "tags":
+        group_list = Tags.objects.all()
+    elif group == "status":
+        status_list = []
+        for file in folder.subfiles:
+            if file.status not in status_list:
+                status_list.append(file.status)
+    current_sorting = sort
+    return render(request, "folder-tree.html", {"folder_name": folder_name, "folder_tree":  generated_html, "folder": folder, "group_list": group_list, "current_sorting": current_sorting})
 
 def all_tags(request):
     all_tags = Tags.objects.all()
     # print(all_tags.notes)
     return render(request, "all_tags.html", {"all_tags": all_tags})
 
-def all_categories(request):
+def all_statuses(request):
     all_tags = Tags.objects.all()
     # print(all_tags.notes)
     return render(request, "all_categories.html", {"all_tags": all_tags})
@@ -87,3 +114,7 @@ def all_categories(request):
 def tag(request, tag_name):
     tag = Tags.objects.get(name=tag_name)
     return render(request, "tag.html", {"tag": tag})
+
+def status(request, status_name):
+    status_list = normalNotes.objects.filter(status=status_name)
+    return render(request, "tag.html", {"status_list": status_list})

@@ -5351,7 +5351,7 @@ body:not(.onepage-doc) .body_fixed #font-switcher {
   font-size: 16px;
 }
 .community-post.style-two .post-meta-wrapper .post-meta-info li:not(:last-child) {
-  margin-right: 30px;
+  margin-right: 5px;
 }
 .community-post.style-two .post-meta-wrapper .post-meta-info li i {
   transition: all 0.3s ease-in-out;
@@ -7121,7 +7121,7 @@ ul.ordered-list li::before {
   display: flex;
   justify-content: space-between;
   background: #f7f8f9;
-  padding: 17px 30px;
+  padding: 17px 18px;
   border: 1px solid #eaeeef;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
@@ -9764,4 +9764,35 @@ ul.contains-task-list li.task-list-item input {
 
 ul.contains-task-list li.task-list-item input:checked {
   border-color: #0066fe;
+}
+
+.file-list {
+  font-size: 16px;
+  padding-left: 20px;
+  padding-top: 7px;
+}
+
+.file-list a {
+  font-weight: 500;
+  color: #333;
+}
+
+.file-list a:hover {
+  color: #22936d !important;
+}
+
+.h-fit {
+  height: fit-content
+}
+
+.badge {
+  text-transform: capitalize;
+}
+
+.meta li {
+  font-weight: 500;
+}
+
+.short-by {
+  text-transform: capitalize;
 }

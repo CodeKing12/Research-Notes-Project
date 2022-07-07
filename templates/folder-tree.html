@@ -3,10 +3,147 @@
 
 {% block folder-tree %}
 
-<div id="post" class="documentation_info">
-    <article class="documentation_body" id="documentation">
+<div id="post" class="documentation_info pr-0">
+    <div class="post-header mt-5">
+        <div class="support-info">
+            <ul class="support-total-info">
+                <li class="d-flex align-items-center">
+                    <i class="icon_check h-fit"></i><a href="#"><h4 class="m-0">{{ folder_name }}</h4></a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.support-info -->
+
+        <div class="support-category-menus">
+            <ul class="category-menu">
+                {% comment %} <li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Label
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLabel">
+                            <h3 class="title">Filter by label</h3>
+
+                            <form action="#" class="cate-search-form">
+                                <input type="text" placeholder="Filter users">
+                            </form>
+
+                            <div class="all-users">
+                                <a class="dropdown-item" data-rel="kbDoc" href="#0">
+                                    <span class="color-purple"></span>
+                                    KbDoc
+                                </a>
+                                <a class="dropdown-item" data-rel="improvement" href="#0">
+                                    <span class="color-yellow">
+                                    </span>
+                                    Improvement !
+                                </a>
+                                <a class="dropdown-item" data-rel="css" href="#0">
+                                    <span class="color-ass"></span>
+                                    CSS
+                                </a>
+                                <a class="dropdown-item" href="#0" data-rel="feature">
+                                    <span class="color-green"></span>
+                                    Feature
+                                </a>
+                                <a class="dropdown-item" data-rel="spider" href="#0">
+                                    <span class="color-orange"></span>
+                                    Spider theme
+                                </a>
+                                <a class="dropdown-item" href="#0" data-rel="open">
+                                    <span class="color-theme"></span>
+                                    Open
+                                </a>
+                                <a class="dropdown-item" data-rel="bug" href="#0">
+                                    <span class="color-pink"></span>
+                                    Bug !
+                                </a>
+                                <a class="dropdown-item" data-rel="doc" href="#0">
+                                    <span class="color-light-green"></span>
+                                    Docs
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li> {% endcomment %}
+                <li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sort By
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <h3 class="title">Sort by</h3>
+                            <div class="short-by">
+                                <a class="dropdown-item active-short" href="#0">{{ current_sorting }}</a>
+                                <a class="dropdown-item" href="#0">Date Modified</a>
+                                <a class="dropdown-item" href="#0">Most commented</a>
+                                <a class="dropdown-item" href="#0">Least commented</a>
+                                <a class="dropdown-item" href="#0">Recently updated</a>
+                                <a class="dropdown-item" href="#0">Least recently updated</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Group By
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <h3 class="title">Group by</h3>
+                            <div class="short-by">
+                                <a class="dropdown-item active-short" href="#0">Status</a>
+                                <a class="dropdown-item" href="#0">Tags</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- /.support-category-menus -->
+    </div>
+    <div class="community-posts-wrapper bb-radius">
+        <style>
+            .doc_mobile_menu {
+                padding-right: unset;
+            }
+        </style>
+        {% for file in folder.subfiles %}
+            <div class="community-post style-two feature kbDoc spider richard py-3 px-4">
+                <div class="post-content">
+                    <div class="entry-content">
+                        <h3 class="post-title mt-0">
+                            <a href="forum-single.html">
+                                {{ file.title }}
+                            </a>
+                        </h3>
+                        <a class="badge color-ass" href="{% url 'status' file.status %}">{{ file.status }}</a>
+                        <div class="cat-wrap d-block mb-1">
+                            {% for tag in file.tags.all %}
+                                <a class="badge color-green" href="{% url 'tag' tag.name %}">{{ tag.name }}</a>
+                            {% endfor %}
+                        </div>
+                        <ul class="meta">
+                            <li><i class="icon_calendar"></i>Updated {{ file.date_modified }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <article class="documentation_body py-0" id="documentation">
+        <h3>{{ folder_name }}</h3>
+        <div class='file-list'>
+            {% for file in folder.subfiles %}
+                <a href='{% url 'show-content' file.get_url_path %}'><p>{{ file.title }}</p></a>
+                <p class='pl-4'> {{ file.title }} </p>
+                <p class='pl-4'> {{ file.date_modified }} </p>
+                <p class='pl-4'> {{ file.status }} </p>
+                <p class='pl-4'> {{ file.tags.name }} </p>
+            {% endfor %}
+        </div>
     </article>
-    <div class="scroll">
+    <div class="scroll mt-5 pt-5">
         <ul class="list-unstyled nav-sidebar" style="overflow: auto">
             {% comment %} <li class="nav-item">
                 <a href="doclist.html" class="nav-link"><img src="img/side-nav/home.png" alt="">Home</a>
