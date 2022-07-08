@@ -1,10 +1,12 @@
 asgiref==3.5.2
 backports.zoneinfo==0.2.1
 bibtexparser==1.2.0
+dj-database-url==0.5.0
 Django==4.0.5
 django-environ==0.9.0
 frontmatter==3.0.7
 future==0.18.2
+gunicorn==20.1.0
 importlib-metadata==4.12.0
 linkify==1.4
 linkify-it-py==2.0.0
@@ -13,10 +15,13 @@ markdown-it-py==2.1.0
 mdit-py-plugins==0.3.0
 mdurl==0.1.1
 mistune==2.0.3
+psycopg2==2.9.3
+psycopg2-binary==2.9.3
 pymdown-extensions==9.5
 pyparsing==3.0.9
 python-frontmatter==1.0.0
 PyYAML==5.1
 sqlparse==0.4.2
 uc-micro-py==1.0.1
+whitenoise==6.2.0
 zipp==3.8.0
