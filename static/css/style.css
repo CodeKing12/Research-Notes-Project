@@ -9832,3 +9832,7 @@ ul.contains-task-list li.task-list-item input:checked {
 .group {
   box-shadow: 0 12px 15px 0 rgba(4, 73, 89, 0.06) !important;
 }
+
+.logo-img {
+  width: 100px;
+}

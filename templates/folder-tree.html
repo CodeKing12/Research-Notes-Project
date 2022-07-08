@@ -209,7 +209,13 @@
                         <div class="entry-content">
                             <h3 class="post-title mt-0">
                                 <a href="{% url 'show-content' file.get_url_path %}">
-                                    {{ file.title }}
+                                    {% if file.papers.bibtex.title == "" and file.note_type.name == 'papers' %}
+                                        {{ file.title }}
+                                    {% elif file.papers.bibtex.title != "" and file.note_type.name == 'papers' %}
+                                        {{ file.papers.bibtex.title }}
+                                    {% else %}
+                                        {{ file.title }}
+                                    {% endif %}
                                 </a>
                             </h3>
                             <a class="badge color-ass" href="{% url 'status' file.status %}">{{ file.status }}</a>
