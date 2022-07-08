@@ -167,5 +167,3 @@ function getSelectorArgs(argsString) {
 }
 
 })));
-
-//# sourceMappingURL=isInViewport.js.map
