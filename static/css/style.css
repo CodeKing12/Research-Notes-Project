@@ -2225,12 +2225,14 @@ ul.list-style li:last-child {
   padding: 0;
 }
 .breadcrumb .breadcrumb-item {
-  color: #878EA6;
+  /* color: #878EA6; */
+  color: #1d2746 !important;
   font-size: 14px;
   line-height: 21px;
 }
 .breadcrumb .breadcrumb-item a {
-  color: #878EA6;
+  /* color: #878EA6; */
+  color: #1d2746;
 }
 .breadcrumb .breadcrumb-item a:hover {
   color: #10b3d6;

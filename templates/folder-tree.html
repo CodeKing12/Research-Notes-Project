@@ -1,6 +1,23 @@
 {% extends 'doc-base.html' %}
 {% load static %}
 
+{% block breadlinks %}
+    <section class="page_breadcrumb">
+        <div class="container custom_container">
+            <div class="row">
+                <div class="col-sm-7">
+                    <nav aria-label="breadcrumb">
+                        {{ folder.get_breadcrumb_html | safe }}
+                    </nav>
+                </div>
+                <div class="col-sm-5">
+                    <a href="#" class="date"><i class="icon_clock_alt"></i>Updated on March 03, 2020</a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock breadlinks %}
+
 {% block folder-tree %}
 
 <div id="post" class="documentation_info pr-0">
