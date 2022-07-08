@@ -127,6 +127,7 @@ def displayFolder(request, folder, sort="title", group="none"):
     return render(request, "folder-tree.html", {"folder_name": folder_name, "folder_tree":  generated_html, "folder": folder, "group_list": group_list, "current_sorting": current_sorting, "current_grouping": current_grouping, "sort_options": sort_options, "group_options": group_options})
 
 def all_tags(request, sort="popularity", ascending=False):
+    # If the filter form is submitted, update the sorting values.
     if request.method == "GET" and "sort" in request.GET:
         sort = request.GET["sort"].lower()
         order = request.GET["order"].lower()
@@ -134,12 +135,18 @@ def all_tags(request, sort="popularity", ascending=False):
             ascending = True
         elif order == "descending":
             ascending = False
+
+    # Get all the tags
     all_tags = Tags.objects.all()
+
+    # Sort and order the tags based on default values or submitted values
     if sort == "name":
         all_tags = sorted(all_tags, key=sortTagName, reverse=not ascending)
         # all_tags.sort(key=sortTitle)
     elif sort == "popularity":
         all_tags = sorted(all_tags, key=sortPopularity, reverse=not ascending)
+
+    # Prepare the values for outputting to the template
     current_sorting = sort.title()
     if ascending == True:
         current_ordering = "Ascending"
@@ -150,20 +157,50 @@ def all_tags(request, sort="popularity", ascending=False):
     # print(all_tags.notes)
     return render(request, "all_tags.html", {"all_tags": all_tags, "current_sorting": current_sorting, "current_ordering": current_ordering, "sort_options": sort_options, "order_options": order_options})
 
-def all_statuses(request):
-    all_tags = Tags.objects.all()
-    # print(all_tags.notes)
-    return render(request, "all_categories.html", {"all_tags": all_tags})
+def all_statuses(request, sort="title", ascending=False):
+    sort_options = ["Title", "Date Modified (File)"]
+    order_options = ["Ascending", "Descending"]
+    # If the filter form is submitted, update the sorting values.
+    if request.method == "GET" and "sort" in request.GET:
+        sort = request.GET["sort"].lower()
+        if sort == sort_options[1]:
+            sort = "modified"
+            print(sort)
+        order = request.GET["order"].lower()
+        if order == "ascending":
+            ascending = True
+        elif order == "descending":
+            ascending = False
+
+    all_notes = normalNotes.objects.all()
+    if sort == "title":
+        all_notes = sorted(all_notes, key=sortTitle, reverse=not ascending)
+    elif sort == "modified":
+        all_notes = sorted(all_notes, key=sortDate, reverse=not ascending)
+
+    # Create lists for grouping Items By tags or status if the user requests to group them
+    group_list = []
+    for file in all_notes:
+        if file.status not in group_list:
+            group_list.append(file.status)
+
+
+    # Prepare the values for outputting to the template
+    current_sorting = sort.title()
+    if ascending == True:
+        current_ordering = "Ascending"
+    elif ascending == False:
+        current_ordering = "Descending"
+    return render(request, "all_statuses.html", {"group_list": group_list, "all_notes": all_notes ,"sort_options": sort_options, "order_options": order_options, "current_sorting": current_sorting , "current_ordering": current_ordering})
 
 def tag(request, tag_name):
     tag = Tags.objects.get(name=tag_name)
-    return render(request, "tag.html", {"tag": tag})
+    return render(request, "tag.html", {"object": tag})
 
 def status(request, status_name):
     status_list = normalNotes.objects.filter(status=status_name)
-    return render(request, "tag.html", {"status_list": status_list})
+    return render(request, "tag.html", {"object": status})
 
 def login_view(request):
     if request.method == 'POST':
         passkey = request.POST["pin"]
-        
