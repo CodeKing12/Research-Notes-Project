@@ -136,10 +136,10 @@ def all_tags(request, sort="popularity", ascending=False):
             ascending = False
     all_tags = Tags.objects.all()
     if sort == "name":
-        all_tags = sorted(all_tags, key=sortTagName, reverse=ascending)
+        all_tags = sorted(all_tags, key=sortTagName, reverse=not ascending)
         # all_tags.sort(key=sortTitle)
     elif sort == "popularity":
-        all_tags = sorted(all_tags, key=sortPopularity, reverse=ascending)
+        all_tags = sorted(all_tags, key=sortPopularity, reverse=not ascending)
     current_sorting = sort.title()
     if ascending == True:
         current_ordering = "Ascending"
