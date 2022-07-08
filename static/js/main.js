@@ -697,6 +697,9 @@
 		$('.group-by a').click( function() {
 			$(this).toggleClass('active-short').siblings().removeClass('active-short');
 		});
+		$('.order-by a').click( function() {
+			$(this).toggleClass('active-short').siblings().removeClass('active-short');
+		});
 	}
 
 	general()

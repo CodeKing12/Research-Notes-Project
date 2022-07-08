@@ -18,12 +18,17 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 
 
-def sortDate(key):
-        return key.date_modified
+def sortDate(item):
+    return item.date_modified
 
-def sortTitle(key):
-    return key.title
+def sortTitle(item):
+    return item.title
 
+def sortPopularity(item):
+    return item.note.count()
+
+def sortTagName(item):
+    return item.name
 
 def homepage(request):
     all_tags = Tags.objects.all()
@@ -94,7 +99,6 @@ def displayFolder(request, folder, sort="title", group="none"):
         folder_index = folder.subfolders.index(sub_folder)
         subfold = Folder.objects.get(name=sub_folder, parent=folder)
         folder.subfolders[folder_index] = subfold
-    print(sort, group)
     # Sort Items By title or date_modified if the user requests to sort them out
     if sort == "title":
         folder.subfiles.sort(key=sortTitle)
@@ -122,10 +126,29 @@ def displayFolder(request, folder, sort="title", group="none"):
     group_options = ["None", "Status", "Tags"]
     return render(request, "folder-tree.html", {"folder_name": folder_name, "folder_tree":  generated_html, "folder": folder, "group_list": group_list, "current_sorting": current_sorting, "current_grouping": current_grouping, "sort_options": sort_options, "group_options": group_options})
 
-def all_tags(request):
+def all_tags(request, sort="popularity", ascending=False):
+    if request.method == "GET" and "sort" in request.GET:
+        sort = request.GET["sort"].lower()
+        order = request.GET["order"].lower()
+        if order == "ascending":
+            ascending = True
+        elif order == "descending":
+            ascending = False
     all_tags = Tags.objects.all()
+    if sort == "name":
+        all_tags = sorted(all_tags, key=sortTagName, reverse=ascending)
+        # all_tags.sort(key=sortTitle)
+    elif sort == "popularity":
+        all_tags = sorted(all_tags, key=sortPopularity, reverse=ascending)
+    current_sorting = sort.title()
+    if ascending == True:
+        current_ordering = "Ascending"
+    elif ascending == False:
+        current_ordering = "Descending"
+    sort_options = ["Name", "Popularity"]
+    order_options = ["Ascending", "Descending"]
     # print(all_tags.notes)
-    return render(request, "all_tags.html", {"all_tags": all_tags})
+    return render(request, "all_tags.html", {"all_tags": all_tags, "current_sorting": current_sorting, "current_ordering": current_ordering, "sort_options": sort_options, "order_options": order_options})
 
 def all_statuses(request):
     all_tags = Tags.objects.all()
@@ -139,3 +162,8 @@ def tag(request, tag_name):
 def status(request, status_name):
     status_list = normalNotes.objects.filter(status=status_name)
     return render(request, "tag.html", {"status_list": status_list})
+
+def login_view(request):
+    if request.method == 'POST':
+        passkey = request.POST["pin"]
+        

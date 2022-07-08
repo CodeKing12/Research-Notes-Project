@@ -1,24 +1,176 @@
 {% extends 'doc-base.html' %}
 {% load static %}
 
+{% block breadlinks %}
+    <section class="page_breadcrumb">
+        <div class="container custom_container">
+            <div class="row">
+                <div class="col-sm-7">
+                    <nav aria-label="breadcrumb">
+                        {{ folder.get_breadcrumb_html | safe }}
+                    </nav>
+                </div>
+                <div class="col-sm-5">
+                    <a href="#" class="date"><i class="icon_clock_alt"></i>Updated on March 03, 2020</a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock breadlinks %}
+
 {% block folder-tree %}
 
-<div id="post" class="documentation_info">
-    <article class="documentation_body" id="documentation">
-    </article>
-    <div class="scroll">
-        <ul class="list-unstyled nav-sidebar" style="overflow: auto">
+<div id="post" class="documentation_info pr-0">
+    <div class="post-header mt-5">
+        <div class="support-info">
+            <ul class="support-total-info">
+                <li class="d-flex align-items-center">
+                    <img class='folder-index-img' src='{% static 'img/my-static/folder (4).png' %}'>
+                    <a class='parent-link' href="{% url 'home' %}">
+                        Home
+                    </a>
+                    &nbsp; / &nbsp;
+                    <a href="#">
+                        <h4 class="m-0">
+                            All Tags
+                        </h4>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="support-category-menus">
+            <ul class="category-menu">
+                <li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sort By
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <h3 class="title">Sort by</h3>
+                            <div class="short-by sort-by">
+                                {% for sort in sort_options %}
+                                    {% if sort == current_sorting %}
+                                        <a class="dropdown-item active-short" href="#0">{{ sort }}</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="#0">{{ sort }}</a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Order
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <h3 class="title">Order Results</h3>
+                            <div class="short-by order-by">
+                                {% for order in order_options %}
+                                    {% if order == current_ordering %}
+                                        <a class="dropdown-item active-short" href="#0">{{ order }}</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="#0">{{ order }}</a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="community-posts-wrapper bb-radius">
+        <style>
+            .doc_mobile_menu {
+                padding-right: unset;
+            }
+        </style>
             {% for tag in all_tags %}
-            <div>
-                <a>{{ tag.name }}</a><br>
-        
-                {% for note in tag.note.all %}
-                    <a>{{ note.name }}</a>
-                {% endfor %}
-            </div>
+                <div class="group bb-radius mt-5">
+                    <h4 class="py-3 mt-0 pl-4 group-heading">{{ tag.name }}</h4>
+                        {% for file in tag.note.all %}
+                            <div class="community-post style-two feature personal-notes spider richard py-3 px-4">
+                                <div class="post-content">
+                                    <div class="entry-content">
+                                        <h3 class="post-title mt-0">
+                                            <a href="{% url 'show-content' file.get_url_path %}">
+                                                {% if file.papers.bibtex.title == "" and file.note_type.name == 'papers' %}
+                                                    {{ file.title }}
+                                                {% elif file.papers.bibtex.title != "" and file.note_type.name == 'papers' %}
+                                                    {{ file.papers.bibtex.title }}
+                                                {% else %}
+                                                    {{ file.title }}
+                                                {% endif %}
+                                            </a>
+                                        </h3>
+                                        <a class="badge color-ass" href="{% url 'status' file.status %}">{{ file.status }}</a>
+                                        <div class="cat-wrap d-block mb-1">
+                                            {% for tag in file.tags.all %}
+                                                <a class="badge color-green" href="{% url 'tag' tag.name %}">{{ tag.name }}</a>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="list-unstyled ticket_categories my-2">
+                                            {% if file.note_type.name == 'papers' %}
+                                                {% comment %} <style>
+                                                    .community-post.style-two {
+                                                        margin-bottom: 20px;
+                                                    }
+                                                </style> {% endcomment %}
+                                                <li class="py-1">
+                                                    <a><strong><em>Year:</em></strong> 
+                                                        {% if file.papers.bibtex.year == "" %} 
+                                                            {{ file.date_modified }} 
+                                                        {% else %} 
+                                                            {{ file.papers.bibtex.year }} 
+                                                        {% endif %} 
+                                                    </a>
+                                                </li>
+                                                {% if file.papers.bibtex.journal != "" %}
+                                                    <li class="py-1">
+                                                        <a><strong><em>Journal:</em></strong> 
+                                                            {{ file.papers.bibtex.journal }} 
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                                {% if file.papers.bibtex.author != "" %}
+                                                    <li class="py-1">
+                                                        <a><strong><em>Authors:</em></strong> 
+                                                            {{ file.papers.bibtex.author }} 
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endif %}
+                                            </div>
+                                        <ul class="meta">
+                                            <li><i class="icon_calendar"></i>Updated {{ file.date_modified }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                </div>
             {% endfor %}
-        </ul>
     </div>
 </div>
+
+<form name="filter-form" id="filter-form" style="visibility: hidden" method="get">
+    <input id="sort-select" name="sort">
+    <input id="order-select" name="order">
+    <button id="submit-filters"></button>
+</form>
+
+<script>
+    $(document).ready( function() {
+        $(".order-by a, .sort-by a").on("click", function() {
+            let sort_option = $(".sort-by .active-short").text();
+            let order_option = $(".order-by .active-short").text();
+            $("#sort-select").attr("value", sort_option);
+            $("#order-select").attr("value", order_option);
+            $("#submit-filters").click()
+        })
+    })
+</script>
 
 {% endblock folder-tree %}
