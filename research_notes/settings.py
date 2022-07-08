@@ -26,7 +26,7 @@ sys.path.append(os.path.dirname(SCRIPT_DIR))
 SECRET_KEY = 'django-insecure-$6_f%sry)3xkoqh4-5%@8!==m5w^fe+g8d%+67!*so#a0u097w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# DEBUG = False
 DEBUG = True
 
 ALLOWED_HOSTS = ["notes-doc.herokuapp.com", "127.0.0.1", "localhost"]

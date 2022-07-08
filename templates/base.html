@@ -27,7 +27,7 @@
             <div class="round_spinner">
                 <div class="spinner"></div>
                 <div class="text">
-                    <img src="{% static 'img/spinner_logo.png' %}" alt="">
+                    <img class='loader-img' src="{% static 'img/my-static/folders.png' %}" alt="">
                     <h4><span>Personal Notes</span></h4>
                 </div>
             </div>
@@ -38,9 +38,15 @@
     <div class="body_wrapper">
         <nav class="navbar navbar-expand-lg menu_one" id="sticky">
             <div class="container">
-                <a class="navbar-brand sticky_logo" href="index.html">
-                    <img src="{% static 'img/logo-w.png' %}" srcset="{% static 'img/logo-w2x.png' %} 2x" alt="logo">
-                    <img src="{% static 'img/logo.png' %}" srcset="{% static 'img/logo-2x.png' %} 2x" alt="logo">
+                <a class="navbar-brand sticky_logo" href="{% url 'home' %}">
+                    <div class="d-flex align-items-center">
+                        <img class='logo-img mr-3' src="{% static 'img/my-static/folders.png' %}" srcset="{% static 'img/my-static/folders.png' %} 2x" alt="logo">
+                        <h5 class="m-0 text-white">Personal Notes</h5>
+                    </div>
+                    {% comment %} <div class="d-flex align-items-center">
+                        <img class='logo-img mr-3' src="{% static 'img/my-static/folders.png' %}" srcset="{% static 'img/my-static/folders.png' %} 2x" alt="logo">
+                        <h5 class="m-0">Personal Notes</h5>
+                    </div> {% endcomment %}
                 </a>
                 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="menu_toggle">
@@ -59,73 +65,22 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav menu ml-auto">
                         <li class="nav-item dropdown submenu active">
-                            <a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
+                            <a href="{% url 'home' %}" class="nav-link">Home</a>
                         </li>
-                        <li class="nav-item dropdown submenu mega_menu tab-demo">
-                            <a href="{% url 'all_statuses' %}" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="nav-item tab-demo">
+                            <a href="{% url 'all_statuses' %}" class="nav-link">
                                 Status
                             </a>
                         </li>
-                        <li class="nav-item dropdown submenu">
-                            <a class="nav-link dropdown-toggle" href="{% url 'all_tags' %}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'all_tags' %}">
                                 Tags
                             </a>
                         </li>
-                        <li class="nav-item dropdown submenu">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Products
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'show-content' 'papers' %}">
+                                Papers
                             </a>
-                            <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="false" data-toggle="dropdown"></i>
-                            <ul class="dropdown-menu dropdown_menu_two">
-                                <li class="nav-item">
-                                    <a href="doc-archive.html" class="nav-link">
-                                        <img src="{% static 'img/tick.png' %}" alt="">
-                                        <div class="text">
-                                            <h5>Docly</h5>
-                                            <p>Launch Simple Websites</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="doclist.html" class="nav-link">
-                                        <img src="{% static 'img/sheet.png' %}" alt="">
-                                        <div class="text">
-                                            <h5>docall</h5>
-                                            <p>Digital Assets Subscription</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="index.html" class="nav-link">
-                                        <img src="{% static 'img/shopping-bag.png' %}" alt="">
-                                        <div class="text">
-                                            <h5>Docenvato</h5>
-                                            <p>Tutorials & Courses</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="index.html" class="nav-link">
-                                        <img src="{% static 'img/gear.png' %}" alt="">
-                                        <div class="text">
-                                            <h5>Tools</h5>
-                                            <p>Hire a Freelancer</p>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown submenu">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Blog
-                            </a>
-                            <i class="arrow_carrot-down_alt2 mobile_dropdown_icon" aria-hidden="false" data-toggle="dropdown"></i>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a href="blog-grid.html" class="nav-link">Blog Grid</a></li>
-                                <li class="nav-item"><a href="blog-grid-two.html" class="nav-link">Blog Grid Two</a></li>
-                                <li class="nav-item"><a href="blog-list.html" class="nav-link">Blog List</a></li>
-                                <li class="nav-item"><a href="blog-single.html" class="nav-link">Blog Details</a></li>
-                            </ul>
                         </li>
                     </ul>
                     {% comment %} <a class="nav_btn" href="#">Free Trail</a> {% endcomment %}
@@ -175,5 +130,4 @@
     <script src="{% static 'js/main.js' %}"></script>
 </body>
 
-<!-- Mirrored from html.creativegigs.net/kbdoc/kbdoc-html/index-cool.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 30 Jun 2022 12:55:38 GMT -->
 </html>
