@@ -17,13 +17,18 @@
             <img class="p_absolute bl_right" src="{% static 'img/home_one/b_leaf.svg' %}" alt="">
             <div class="container">
                 <div class="doc_banner_text">
-                    <h2 class="wow fadeInUp" data-wow-delay="0.3s">Hello, what note do you need to study?</h2>
+                    <h3 class="wow fadeInUp text-white" data-wow-delay="0.3s">Search For A Note</h3>
                     {% comment %} <p class="wow fadeInUp" data-wow-delay="0.5s">we're here for you. Find articles, help and advice for getting the most our of docall theme</p> {% endcomment %}
                     <form action="#" class="banner_search_form">
                         <input type="search" class="form-control" placeholder='Search ("/" to focus)'>
                         <button type="submit"><i class="icon_search"></i></button>
                     </form>
-                    <h6><span>Available Sections:</span> <a href="#">Books</a> <a href="#">Classes</a> <a href="#">Papers</a></h6>
+                    <h6>
+                        <span>Available Sections:</span> 
+                        {% for type in all_types %}
+                            <a style="text-transform: capitalize" href="{% url 'show-content' type.name %}">{{ type.name }}</a>
+                        {% endfor %}
+                    </h6>
                 </div>
             </div>
         </section>
@@ -57,7 +62,7 @@
                         </li>
                     {% endfor %}
                 </ul>
-                <div class="tab-content" id="myTabContent">
+                {% comment %} <div class="tab-content" id="myTabContent">
                     <div class="tab-pane doc_tab_pane fade show active" id="or" role="tabpanel" aria-labelledby="or-tab">
                         <div class="row">
                             <div class="col-lg-4 col-sm-6">
@@ -558,10 +563,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> {% endcomment %}
             </div>
         </section>
-        <section class="h_doc_documentation_area bg_color sec_pad">
+        {% comment %} <section class="h_doc_documentation_area bg_color sec_pad">
             <div class="container">
                 <div class="section_title text-center">
                     <h2 class="h_title wow fadeInUp">The Best Online Documentation</h2>
@@ -968,6 +973,6 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> {% endcomment %}
 
 {% endblock content %}

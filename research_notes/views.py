@@ -8,7 +8,7 @@ from markdown_it import MarkdownIt
 from mdit_py_plugins.front_matter import front_matter_plugin
 from mdit_py_plugins.footnote import footnote_plugin
 from mdit_py_plugins.dollarmath.index import dollarmath_plugin
-from notes.models import Folder, Tags, normalNotes
+from notes.models import Folder, Tags, Type, normalNotes
 from research_notes.settings import BASE_DIR
 from .project_variables import fs_tree_to_dict, iterdict
 import json, os
@@ -31,7 +31,8 @@ def homepage(request):
     full_path = root_parent.path
     tree_dict = root_parent.folder_dict
     nav_html = iterdict(d=tree_dict, level=-1, parent=full_path)
-    return render(request, 'home.html', {"nav_html": nav_html, "all_tags": all_tags})
+    all_types = Type.objects.all()
+    return render(request, 'home.html', {"nav_html": nav_html, "all_tags": all_tags, "all_types": all_types})
 
 def resolveObject(request, path_to_file):
     path_to_file = path_to_file.strip("/")
