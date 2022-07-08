@@ -629,9 +629,9 @@
 			label: [sent.name, opened.name, response.name, secured.name],
 		});
 
-		$('#kbDoc-chart').each(function () {
+		$('#personal-notes-chart').each(function () {
 
-			var canvas = $('#kbDoc-chart');
+			var canvas = $('#personal-notes-chart');
 			canvas.attr('height', 125);
 			// chart.canvas.parentNode.style.height = '128px';
 			// chart.canvas.parentNode.style.width = '128px';	

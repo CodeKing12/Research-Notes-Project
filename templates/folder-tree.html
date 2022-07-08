@@ -60,7 +60,7 @@
                             </form>
 
                             <div class="all-users">
-                                <a class="dropdown-item" data-rel="kbDoc" href="#0">
+                                <a class="dropdown-item" data-rel="personal-notes" href="#0">
                                     <span class="color-purple"></span>
                                     KbDoc
                                 </a>
@@ -146,7 +146,7 @@
             }
         </style>
         {% for folder in folder.subfolders %}
-            <div class="community-post folder style-two feature kbDoc spider richard py-4 px-4">
+            <div class="community-post folder style-two feature personal-notes spider richard py-4 px-4">
                 <div class="post-content">
                     <div class="entry-content">
                         <h3 class="post-title mt-0 folder-name">
@@ -167,7 +167,7 @@
                     {% if current_grouping == 'Status' %}
                         {% for file in folder.subfiles %}
                             {% if file.status == group %}
-                                <div class="community-post style-two feature kbDoc spider richard py-3 px-4">
+                                <div class="community-post style-two feature personal-notes spider richard py-3 px-4">
                                     <div class="post-content">
                                         <div class="entry-content">
                                             <h3 class="post-title mt-0">
@@ -231,7 +231,7 @@
                         {% for file in folder.subfiles %}
                             {% for tag in file.tags.all %}
                                 {% if tag == group %}
-                                    <div class="community-post style-two feature kbDoc spider richard py-3 px-4">
+                                    <div class="community-post style-two feature personal-notes spider richard py-3 px-4">
                                         <div class="post-content">
                                             <div class="entry-content">
                                                 <h3 class="post-title mt-0">
@@ -297,7 +297,7 @@
             {% endfor %}
         {% else %}
             {% for file in folder.subfiles %}
-                <div class="community-post style-two feature kbDoc spider richard py-3 px-4">
+                <div class="community-post style-two feature personal-notes spider richard py-3 px-4">
                     <div class="post-content">
                         <div class="entry-content">
                             <h3 class="post-title mt-0">

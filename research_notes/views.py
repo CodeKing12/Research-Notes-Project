@@ -1,7 +1,7 @@
 from urllib import response
 from django.http import Http404, HttpResponse
 from os import path
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 import markdown
 # import mistune
 from markdown_it import MarkdownIt
@@ -27,7 +27,7 @@ def sortTitle(key):
 
 def homepage(request):
     all_tags = Tags.objects.all()
-    root_parent = Folder.objects.get(name="All Notes")
+    root_parent = get_object_or_404(Folder, name="All Notes")
     full_path = root_parent.path
     tree_dict = root_parent.folder_dict
     nav_html = iterdict(d=tree_dict, level=-1, parent=full_path)
