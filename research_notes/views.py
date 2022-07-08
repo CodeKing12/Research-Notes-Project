@@ -68,7 +68,7 @@ def displayFile(request, file):
     # print(file.papers.bibtex.file)
     return render(request, "file-display.html", {"file": file})
 
-def displayFolder(request, folder, sort="date modified", group="status"):
+def displayFolder(request, folder, sort="title", group="none"):
     if request.method == "GET" and "sort" in request.GET:
         sort = request.GET["sort"].lower()
         group = request.GET["group"].lower()
