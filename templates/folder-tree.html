@@ -127,7 +127,7 @@
             }
         </style>
         {% for folder in folder.subfolders %}
-            <div class="community-post folder style-two feature kbDoc spider richard py-3 px-4">
+            <div class="community-post folder style-two feature kbDoc spider richard py-4 px-4">
                 <div class="post-content">
                     <div class="entry-content">
                         <h3 class="post-title mt-0 folder-name">
@@ -307,38 +307,21 @@
     </div>
 </div>
 
-<form name="filter-form" id="hidden-form" style="visibility: hidden">
-    <select id="sort-select" name="sort-select">
-        <option></option>
-    </select>
-    <select id="group-select" name="group-select">
-        <option></option>
-    </select>
+<form name="filter-form" id="filter-form" style="visibility: hidden" method="get">
+    <input id="sort-select" name="sort">
+    <input id="group-select" name="group">
+    <button id="submit-filters"></button>
 </form>
 
 <script>
     $(document).ready( function() {
         $(".group-by a, .sort-by a").on("click", function() {
-
-            console.log("Open")
-            let sort_option = $(".sort-by .active-short").text()
-            let group_option = $(".group-by .active-short").text()
-            console.log(sort_option)
-            console.log(group_option)
-            {% comment %} /* $.ajax({
-                url: "{{ request.build_absolute_uri }}",
-                type: "get",
-                dataType: "application/json",
-                data: {"sort": sort_option, "group": group_option},
-                success: function() {
-                    console.log("Worked")
-                },
-                error: function() {
-                    console.log("Failed")
-                }
-            }) */ {% endcomment %}
+            let sort_option = $(".sort-by .active-short").text();
+            let group_option = $(".group-by .active-short").text();
+            $("#sort-select").attr("value", sort_option);
+            $("#group-select").attr("value", group_option);
+            $("#submit-filters").click()
         })
-        {% comment %} $(".sort-by a").on("click", submitFilters()) {% endcomment %}
     })
 </script>
 

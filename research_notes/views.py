@@ -69,9 +69,9 @@ def displayFile(request, file):
     return render(request, "file-display.html", {"file": file})
 
 def displayFolder(request, folder, sort="date modified", group="status"):
-    # if request.method == "GET":
-    #     if "filter-form" in request.GET:
-    #         print("Moneylapo")
+    if request.method == "GET" and "sort" in request.GET:
+        sort = request.GET["sort"].lower()
+        group = request.GET["group"].lower()
     # Generated the html for the directory tree section
     folder_name = folder.presentable_name()
     root_parent = Folder.objects.get(name="All Notes")
@@ -93,7 +93,7 @@ def displayFolder(request, folder, sort="date modified", group="status"):
         folder_index = folder.subfolders.index(sub_folder)
         subfold = Folder.objects.get(name=sub_folder, parent=folder)
         folder.subfolders[folder_index] = subfold
-
+    print(sort, group)
     # Sort Items By title or date_modified if the user requests to sort them out
     if sort == "title":
         folder.subfiles.sort(key=sortTitle)
