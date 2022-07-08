@@ -2272,7 +2272,7 @@ ul.list-style li:last-child {
 .doc_features_area_one {
   position: relative;
   z-index: 1;
-  padding: 100px 0 140px;
+  padding: 100px 0 80px;
 }
 .doc_features_area_one:before {
   content: "";
@@ -3620,6 +3620,7 @@ ul.list-style li:last-child {
 .nav-sidebar .nav-item:hover .icon, .nav-sidebar .nav-item.active .icon {
   color: #10b3d6;
 }
+
 /* .nav-sidebar .nav-item.active .icon {
   transform: rotate(-180deg);
 } */

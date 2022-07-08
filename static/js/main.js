@@ -244,8 +244,8 @@
 	function active_dropdown() {
 		$('.nav-sidebar > li .icon').on('click', function (e) {
 			$(this).parent().find('ul').first().toggle(300);
+			$(this).css("transform", "rotate(-180deg)");
 			$(this).parent().siblings().find('ul').hide(300);
-			$(this).css("rotate", "-180deg");
 		});
 	}
 
@@ -258,7 +258,8 @@
 			$('.nav-sidebar li').removeClass('active');
 			if (has) {
 				$this.parent().removeClass('active');
-				$(this).css("rotate", "0deg");
+				$this.toggleClass("rotation");
+				$(this).css("transform", "rotate(0deg)");
 			} else {
 				$this.parent().addClass('active');
 			}
