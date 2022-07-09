@@ -211,7 +211,10 @@ def login_view(request):
         passkey = request.POST["pin"]
         username = env("PROJECT_USERNAME")
         email = env("PROJECT_EMAIL")
-        user = User.objects.get(username=username, email=email)
-        authenticated_user = authenticate(request, user)
-        
+        user = authenticate(username=username, email=email, password=passkey)
+        if user is not None:
+            log_user = login(user)
+        else:
+            # throw error
+            pass
     return render(request, "login.html")
