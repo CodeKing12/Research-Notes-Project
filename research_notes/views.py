@@ -196,11 +196,11 @@ def all_statuses(request, sort="title", ascending=False):
 
 def tag(request, tag_name):
     tag = Tags.objects.get(name=tag_name)
-    return render(request, "tag.html", {"object": tag})
+    return render(request, "tag.html", {"tag": tag})
 
 def status(request, status_name):
     status_list = normalNotes.objects.filter(status=status_name)
-    return render(request, "tag.html", {"object": status})
+    return render(request, "status.html", {"status": status_name, "status_list": status_list})
 
 def login_view(request):
     if request.method == 'POST':

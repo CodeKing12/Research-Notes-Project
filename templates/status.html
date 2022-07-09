@@ -38,13 +38,13 @@
         <div class="group bb-radius mt-5">
             <h4 class="py-3 mt-0 pl-4 group-heading d-flex align-items-center">
                 <img class='folder-index-img' src='{% static 'img/my-static/folder (4).png' %}'>
-                <a class="parent-link" href="{% url 'all_tags' %}">
-                    All Tags
+                <a class="parent-link" href="{% url 'all_statuses' %}">
+                    All Status
                 </a>
                 &nbsp; / &nbsp;
-                <a href="{% url 'tag' tag.name %}">{{ tag.name }}</a>
+                <a href="#">{{ status }}</a>
             </h4>
-                {% for file in tag.note.all %}
+                {% for file in status_list %}
                     <div class="community-post style-two feature personal-notes spider richard py-3 px-4">
                         <div class="post-content">
                             <div class="entry-content">
