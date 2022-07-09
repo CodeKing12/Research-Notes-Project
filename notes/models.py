@@ -6,6 +6,13 @@ from django.urls import reverse
 # Create your models here.
 class Tags(models.Model):
     name = models.CharField(max_length=150)
+    slug = models.CharField(max_length=200)
+
+    def save(self, *args, **kwargs):
+        value = self.name
+        self.slug = slugify(value, allow_unicode=True)
+        self.name = self.name.title()
+        super(Folder, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "tag"
@@ -134,6 +141,7 @@ class normalNotes(models.Model):
     def save(self, *args, **kwargs):
         value = self.title
         self.slug = slugify(value, allow_unicode=True)
+        self.status = self.status.title()
         super(normalNotes, self).save(*args, **kwargs)
 
     class Meta:

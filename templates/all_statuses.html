@@ -88,10 +88,18 @@
             .doc_mobile_menu {
                 padding-right: unset;
             }
+
+            .group-heading a {
+                color: unset;
+            }
+
+            .group-heading a:hover {
+                color: #10b3d6;
+            }
         </style>
             {% for group in group_list %}
                 <div class="group bb-radius mt-5">
-                    <h4 class="py-3 mt-0 pl-4 group-heading">{{ group }}</h4>
+                    <h4 class="py-3 mt-0 pl-4 group-heading"><a href="{% url 'status' group %}">{{ group }}</a></h4>
                     {% for file in all_notes %}
                         {% if file.status == group %}
                             <div class="community-post style-two feature personal-notes spider richard py-3 px-4">

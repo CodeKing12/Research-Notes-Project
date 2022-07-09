@@ -86,10 +86,18 @@
             .doc_mobile_menu {
                 padding-right: unset;
             }
+
+            .group-heading a {
+                color: unset;
+            }
+
+            .group-heading a:hover {
+                color: #10b3d6;
+            }
         </style>
             {% for tag in all_tags %}
                 <div class="group bb-radius mt-5">
-                    <h4 class="py-3 mt-0 pl-4 group-heading">{{ tag.name }}</h4>
+                    <h4 class="py-3 mt-0 pl-4 group-heading"><a href="{% url 'tag' tag.name %}">{{ tag.name }}</a></h4>
                         {% for file in tag.note.all %}
                             <div class="community-post style-two feature personal-notes spider richard py-3 px-4">
                                 <div class="post-content">

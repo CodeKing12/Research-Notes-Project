@@ -183,7 +183,8 @@ def all_statuses(request, sort="title", ascending=False):
     for file in all_notes:
         if file.status not in group_list:
             group_list.append(file.status)
-
+        
+    # The sorting looks wonky on the frontend because some files (specifically files with type: paper) are being displayed with their bibtex title instead of their normal title
 
     # Prepare the values for outputting to the template
     current_sorting = sort.title()
