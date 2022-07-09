@@ -16,7 +16,11 @@ from django.utils.safestring import mark_safe
 from django.utils.html import escapejs
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+import environ
 
+env = environ.Env()
 
 def sortDate(item):
     return item.date_modified
@@ -205,3 +209,9 @@ def status(request, status_name):
 def login_view(request):
     if request.method == 'POST':
         passkey = request.POST["pin"]
+        username = env("PROJECT_USERNAME")
+        email = env("PROJECT_EMAIL")
+        user = User.objects.get(username=username, email=email)
+        authenticated_user = authenticate(request, user)
+        
+    return render(request, "login.html")
