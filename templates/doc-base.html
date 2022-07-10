@@ -248,35 +248,37 @@
                             </div>
                         </aside>
                     </div>
-                    <div class="col-lg-7 col-md-8" style="min-height:100vh">
+                    <div class="{% block main-width %}col-lg-7 col-md-8{% endblock main-width %} main-doc-div" style="min-height:100vh">
                         {% block folder-tree %}
                         {% endblock folder-tree %}
                     </div>
-                    <div class="col-lg-2 col-md-4 doc_right_mobile_menu">
-                        <div class="open_icon" id="right">
-                            <i class="arrow_carrot-left"></i>
-                            <i class="arrow_carrot-right"></i>
-                        </div>
-                        <div class="doc_rightsidebar scroll">
-                            <div id="font-switcher" class="d-flex justify-content-between align-items-center">
-                                <div id="rvfs-controllers" class="fontsize-controllers group"></div>
-                                <a href="javascript:window.print()" class="print"><i class="icon_printer"></i></a>
+                    {% block right-nav %}
+                        <div class="col-lg-2 col-md-4 doc_right_mobile_menu">
+                            <div class="open_icon" id="right">
+                                <i class="arrow_carrot-left"></i>
+                                <i class="arrow_carrot-right"></i>
                             </div>
-                            <div class="doc_switch">
-                                <label for="something" class="tab-btn tab-btns"><i class="icon_lightbulb_alt"></i></label>
-                                <input type="checkbox" name="something" id="something" class="tab_switcher">
-                                <label for="something" class="tab-btn"><i class="far fa-moon"></i></label>
+                            <div class="doc_rightsidebar scroll">
+                                <div id="font-switcher" class="d-flex justify-content-between align-items-center">
+                                    <div id="rvfs-controllers" class="fontsize-controllers group"></div>
+                                    <a href="javascript:window.print()" class="print"><i class="icon_printer"></i></a>
+                                </div>
+                                <div class="doc_switch">
+                                    <label for="something" class="tab-btn tab-btns"><i class="icon_lightbulb_alt"></i></label>
+                                    <input type="checkbox" name="something" id="something" class="tab_switcher">
+                                    <label for="something" class="tab-btn"><i class="far fa-moon"></i></label>
+                                </div>
+                                <h6>Table of Contents</h6>
+                                <nav class="list-unstyled doc_menu" id="navbar-example3">
+                                    <a href="#documentation" class="nav-link active">Documentation</a>
+                                    <a href="#getting" class="nav-link">Getting started</a>
+                                    <a href="#version" class="nav-link">Test KbDoc Version</a>
+                                    <a href="#developer" class="nav-link">Not a developer?</a>
+                                    <a href="#help" class="nav-link">We're here to help!</a>
+                                </nav>
                             </div>
-                            <h6>Table of Contents</h6>
-                            <nav class="list-unstyled doc_menu" id="navbar-example3">
-                                <a href="#documentation" class="nav-link active">Documentation</a>
-                                <a href="#getting" class="nav-link">Getting started</a>
-                                <a href="#version" class="nav-link">Test KbDoc Version</a>
-                                <a href="#developer" class="nav-link">Not a developer?</a>
-                                <a href="#help" class="nav-link">We're here to help!</a>
-                            </nav>
                         </div>
-                    </div>
+                    {% endblock right-nav %}
                 </div>
             </div>
         </section>
@@ -288,12 +290,7 @@
                         <p>A Personal Website to browse my notes</p>
                     </div>
                     <div class="col-sm-6 text-right">
-                        <ul class="list-unstyled f_social_icon">
-                            <li><a href="#"><i class="social_facebook"></i></a></li>
-                            <li><a href="#"><i class="social_twitter"></i></a></li>
-                            <li><a href="#"><i class="social_vimeo"></i></a></li>
-                            <li><a href="#"><i class="social_linkedin"></i></a></li>
-                        </ul>
+                        
                     </div>
                 </div>
             </div>

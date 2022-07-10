@@ -18,14 +18,32 @@
     </section>
 {% endblock breadlinks %}
 
+{% block main-width %}col-lg-8 col-md-9{% endblock main-width %}
 {% block folder-tree %}
+<style>
+    .main-doc-div {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .doc_documentation_area {
+        background: #f8f8f8;
+    }
+
+    .scroll .list-unstyled.nav-sidebar {
+        background: white;
+        padding: 40px 0 40px 40px;
+        border-radius: 15px;
+        box-shadow: 0 13px 16px 0 rgb(4 73 89 / 8%)
+    }
+</style>
 
 <div id="post" class="documentation_info pr-0">
     <div class="post-header mt-5">
         <div class="support-info">
             <ul class="support-total-info">
                 <li class="d-flex align-items-center">
-                    <img class='folder-index-img' src='{% static 'img/my-static/folder (4).png' %}'>
+                    <img class='folder-index-img' src="{% static 'img/my-static/folder (4).png' %}">
                     <a class='parent-link' href="
                     {% if folder.parent.get_url_path != '' %}
                         {% url 'show-content' folder.parent.get_url_path %}
@@ -423,7 +441,7 @@
                     </li>
                 </ul>
             </li> {% endcomment %}
-            <li class='nav-item subfolder active'>
+            <li class='nav-item subfolder active ml-4'>
                 <a href='#' class='nav-link'>
                     <img class="flat-icon" src="{% static 'img/side-nav/folder.png' %}" alt='folder'>
                     {{ folder_name }}
@@ -459,3 +477,5 @@
 </script>
 
 {% endblock folder-tree %}
+
+{% block right-nav %}{% endblock right-nav %}

@@ -9616,8 +9616,9 @@ blockquote .author {
 }
 .simple_footer p {
   margin-bottom: 0;
-  font-size: 16px;
-  color: #a4a8b4;
+  font-size: 17px;
+  color: #fff;
+  font-weight: 500;
 }
 .simple_footer p a {
   color: #10b3d6;
@@ -9852,4 +9853,8 @@ ul.contains-task-list li.task-list-item input:checked {
 .mobile_main_menu ul.menu li a {
   color: white !important;
   text-transform: unset;
+}
+
+.simple_footer {
+  background-color: #0457b1;
 }
