@@ -16,11 +16,11 @@
             <div class="input-group">
                 <input name="search_input" type="search" class="form-control" placeholder='Search ("/" to focus)'>
                 <div class="input-group-append">
-                    <select class="custom-select" id="inlineFormCustomSelect">
-                        <option selected>All Category</option>
-                        <option value="1">Doc Archive</option>
-                        <option value="2">Doc List</option>
-                        <option value="3">KbDoc</option>
+                    <select name="group" class="custom-select" id="inlineFormCustomSelect">
+                        <option selected value="folders">Folders</option>
+                        <option value="status">Status</option>
+                        <option value="tags">Tags</option>
+                        <option value="none">No Grouping</option>
                     </select>
                 </div>
                 <button type="submit"><i class="icon_search"></i></button>

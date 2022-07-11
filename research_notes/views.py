@@ -173,7 +173,6 @@ def all_statuses(request, sort="title", ascending=False):
         sort = request.GET["sort"].lower()
         if sort == sort_options[1]:
             sort = "modified"
-            print(sort)
         order = request.GET["order"].lower()
         if order == "ascending":
             ascending = True
@@ -226,10 +225,21 @@ def login_view(request):
 
 def search_results(request, sort="name", group="none", ascending=True):
     if request.method == "GET":
-        if request.method == "GET" and "sort" in request.GET:
-            sort = request.GET["sort"].lower()
+        if "group" in request.GET:
             group = request.GET["group"].lower()
-        search = request.GET["search_input"]
+        else:
+            group = "none"
+
+        if "sort" in request.GET:
+            sort = request.GET["sort"].lower()
+        else:
+            sort = "name"
+
+        if "search_input" in request.GET:
+            search = request.GET["search_input"]
+        else:
+            search = ""
+            group = "folders"
         folder_results = Folder.objects.filter(Q(name__icontains=search))
         file_results = normalNotes.objects.filter(
             Q(name__icontains=search) | Q(title__icontains=search) | Q(main_content__icontains=search) | Q(tags__name__icontains=search) | Q(status__icontains=search)

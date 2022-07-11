@@ -89,7 +89,7 @@ class Folder(models.Model):
 
     def get_url_path(self):
         if self.parent == None:
-            url = ""
+            url = "/"
         else:
             parent_path = self.parent.path.strip("/")
             slug = self.slug
