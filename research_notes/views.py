@@ -1,19 +1,10 @@
-from urllib import response
 from django.http import Http404, HttpResponse
 from os import path
 from django.shortcuts import render, get_object_or_404, redirect
-import markdown
 # import mistune
-from markdown_it import MarkdownIt
-from mdit_py_plugins.front_matter import front_matter_plugin
-from mdit_py_plugins.footnote import footnote_plugin
-from mdit_py_plugins.dollarmath.index import dollarmath_plugin
 from notes.models import Folder, Tags, Type, normalNotes
 from research_notes.settings import BASE_DIR
 from .project_variables import fs_tree_to_dict, iterdict
-import json, os
-from django.utils.safestring import mark_safe
-from django.utils.html import escapejs
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 from django.db.models import Q

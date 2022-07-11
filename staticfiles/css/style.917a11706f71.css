@@ -2288,7 +2288,7 @@ ul.list-style li:last-child {
   height: 460px;
   top: 0;
   left: 0;
-  background: url("../img/home_one/dow_bg.png") no-repeat scroll center top/cover;
+  background: url("../img/home_one/dow_bg.ce49bd484acc.png") no-repeat scroll center top/cover;
   position: absolute;
   z-index: -1;
 }
@@ -7094,7 +7094,7 @@ ul.ordered-list li::before {
 /*==============typography_area css ================*/
 /*==============action_area_three css ================*/
 .action_area_three {
-  background: url("../img/action_bg.jpg") no-repeat scroll center 0/cover;
+  background: url("../img/action_bg.78cdbd1f65c5.jpg") no-repeat scroll center 0/cover;
   padding: 110px 0;
   background-attachment: fixed;
 }
@@ -7504,7 +7504,7 @@ ul.forum-titles .forum-freshness .freshness-box .freshness-btm .bbp-author-avata
 }
 .call-to-action .overlay-bg {
   position: absolute;
-  background-image: url(../img/home_support/overlay_bg.png);
+  background-image: url("../img/home_support/overlay_bg.0efa23d05807.png");
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -7918,7 +7918,7 @@ ul.forum-titles .forum-freshness .freshness-box .freshness-btm .bbp-author-avata
   top: 0;
   right: 0;
   width: 100%;
-  background: url("../img/blog-grid/top_post.jpg");
+  background: url("../img/blog-grid/top_post.a2a69c610f2b.jpg");
   background-size: cover;
 }
 .blog_top_post .b_top_post_content {
@@ -8160,13 +8160,13 @@ blockquote:before, blockquote:after {
   z-index: -1;
 }
 blockquote:before {
-  background: url("../img/blog-classic/quote_top.png") no-repeat scroll left top;
+  background: url("../img/blog-classic/quote_top.3f8d9d3255ac.png") no-repeat scroll left top;
   width: 132px;
   height: 81px;
   top: 0;
 }
 blockquote:after {
-  background: url("../img/blog-classic/quote_bottom.png") no-repeat scroll left bottom;
+  background: url("../img/blog-classic/quote_bottom.fb18a0f5ffb1.png") no-repeat scroll left bottom;
   width: 77px;
   height: 75px;
   right: 40px;
@@ -8474,14 +8474,14 @@ blockquote .author {
   position: absolute;
 }
 .blog_link_post:before {
-  background: url("../img/blog-classic/icon_01.png") no-repeat;
+  background: url("../img/blog-classic/icon_01.8f7534e9c528.png") no-repeat;
   top: 5px;
   left: 40px;
   width: 42px;
   height: 41px;
 }
 .blog_link_post:after {
-  background: url("../img/blog-classic/icon_02.png") no-repeat;
+  background: url("../img/blog-classic/icon_02.2530ed42919b.png") no-repeat;
   bottom: -35px;
   right: 30px;
   width: 100px;

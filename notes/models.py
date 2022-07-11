@@ -12,7 +12,7 @@ class Tags(models.Model):
         value = self.name
         self.slug = slugify(value, allow_unicode=True)
         self.name = self.name.title()
-        super(Folder, self).save(*args, **kwargs)
+        super(Tags, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "tag"
@@ -56,11 +56,11 @@ class Citations(models.Model):
 
 class Folder(models.Model):
     name = models.CharField(max_length=100)
-    slug = models.SlugField(auto_created=True)
+    slug = models.SlugField(auto_created=True, blank=True)
     folder_type = models.ForeignKey(Type, on_delete=models.CASCADE, null=True, blank=True)
     parent = models.ForeignKey("self", default="", on_delete=models.CASCADE, null=True, blank=True)
     path = models.CharField(max_length=500)
-    folder_dict = models.JSONField()
+    folder_dict = models.JSONField(blank=True, null=True)
     subfolders = models.JSONField() # The name of the Folder model instance will be included in the list will be in a list
     subfiles = models.JSONField() # The name of the subfiles will be in a list
 
@@ -131,8 +131,8 @@ class normalNotes(models.Model):
     status = models.CharField(max_length=200)
     tags = models.ManyToManyField(Tags, related_query_name="notes", related_name="note")
     parent_folder = models.ForeignKey(Folder, on_delete=models.CASCADE)
-    date_created = models.DateTimeField(default=timezone.now)
-    date_modified = models.DateTimeField(default=timezone.now)
+    # date_created = models.DateTimeField(default=timezone.now)
+    date_modified = models.CharField(default=timezone.now, max_length=150)
     main_content = models.TextField()
 
     def generate_slug():
