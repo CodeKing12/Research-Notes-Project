@@ -1,1 +1,1 @@
-web: gunicorn research_notes.wsgi --log-file --preload
+web: gunicorn research_notes.wsgi --preload --log-file -
