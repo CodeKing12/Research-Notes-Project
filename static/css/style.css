@@ -9881,3 +9881,7 @@ ul.contains-task-list li.task-list-item input:checked {
 .bread-div {
   margin-top: 0.8rem;
 }
+
+.cat-wrap.d-block {
+  margin-top: 0.16rem;
+}
