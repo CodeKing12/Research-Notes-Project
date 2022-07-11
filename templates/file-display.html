@@ -12,9 +12,9 @@
     <img class="p_absolute two wow fadeInUp" data-wow-delay="0.2s" src="{% static 'img/home_one/flower.png' %}" alt="">
     <div class="container custom_container">
         <h1 class="file-heading">{{ file.title }}</h1>
-        <form action="#" class="banner_search_form banner_search_form_two">
+        <form action="{% url 'search' %}" class="banner_search_form banner_search_form_two">
             <div class="input-group">
-                <input type="search" class="form-control" placeholder='Search ("/" to focus)'>
+                <input name="search_input" type="search" class="form-control" placeholder='Search ("/" to focus)'>
                 <div class="input-group-append">
                     <select class="custom-select" id="inlineFormCustomSelect">
                         <option selected>All Category</option>

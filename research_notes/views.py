@@ -1,7 +1,7 @@
 from urllib import response
 from django.http import Http404, HttpResponse
 from os import path
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 import markdown
 # import mistune
 from markdown_it import MarkdownIt
@@ -16,10 +16,11 @@ from django.utils.safestring import mark_safe
 from django.utils.html import escapejs
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
+from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-import environ
 
+import environ
 env = environ.Env()
 
 def sortDate(item):
@@ -27,6 +28,9 @@ def sortDate(item):
 
 def sortTitle(item):
     return item.title
+
+def sortName(item):
+    return item.name
 
 def sortPopularity(item):
     return item.note.count()
@@ -213,8 +217,67 @@ def login_view(request):
         email = env("PROJECT_EMAIL")
         user = authenticate(username=username, email=email, password=passkey)
         if user is not None:
-            log_user = login(user)
+            log_user = login(request, user)
+            return redirect("home")
         else:
-            # throw error
+            print("Error")
             pass
     return render(request, "login.html")
+
+def search_results(request, sort="name", group="none", ascending=True):
+    if request.method == "GET":
+        if request.method == "GET" and "sort" in request.GET:
+            sort = request.GET["sort"].lower()
+            group = request.GET["group"].lower()
+        search = request.GET["search_input"]
+        folder_results = Folder.objects.filter(Q(name__icontains=search))
+        file_results = normalNotes.objects.filter(
+            Q(name__icontains=search) | Q(title__icontains=search) | Q(main_content__icontains=search) | Q(tags__name__icontains=search) | Q(status__icontains=search)
+        ).distinct()
+        all_folders = []
+        all_types = Type.objects.all()
+        if sort == "name":
+            if ascending == True:
+                file_results = file_results.order_by("title")
+                folder_results = folder_results.order_by("name")
+            else:
+                file_results = file_results.order_by("-title")
+                folder_results = folder_results.order_by("-name")
+        elif sort == "modified":
+            if ascending == True:
+                file_results = file_results.order_by("date_modified")
+            else:
+                file_results = file_results.order_by("-date_modified")
+
+        # Create lists for grouping Items By tags or status if the user requests to group them
+        if group == "tags":
+            group_list = []
+            for file in file_results:
+                for tag in file.tags.all():
+                    if tag not in group_list:
+                        group_list.append(tag)
+        elif group == "status":
+            group_list = []
+            for file in file_results:
+                if file.status not in group_list:
+                    group_list.append(file.status)
+        elif group == "folders":
+            group_list = []
+            for file in file_results:
+                if file.note_type not in group_list:
+                    group_list.append(file.note_type)
+        else:
+            group_list = []
+
+        current_sorting = sort.title()
+        current_grouping = group.title()
+        if ascending == True:
+            current_ordering = "Ascending"
+        elif ascending == False:
+            current_ordering = "Descending"
+        sort_options = ["Name", "Date Modified"]
+        group_options = ["None", "Status", "Tags", "Folders"]
+        order_options = ["Ascending", "Descending"]
+    else:
+        search = ""
+    return render(request, "search-results.html", {"folder_results": folder_results, "file_results": file_results, "folders": all_folders, "all_types": all_types, "search_term": search, "sort_options": sort_options, "group_options": group_options, "order_options": order_options, "current_sorting": current_sorting, "current_grouping": current_grouping, "current_ordering": current_ordering, "group_list": group_list})

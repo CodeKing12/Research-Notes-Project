@@ -156,6 +156,30 @@ class normalNotes(models.Model):
         url = f"{parent_path}/{slug}"
         return url
 
+    def get_breadcrumb_html(self):
+        html = "<ol class=\"breadcrumb\">"
+        path_list = self.get_url_path().split("/")
+        print(path_list)
+        current_item = len(path_list) - 1
+        # print(path_list)
+        for item in path_list:
+            path_index = path_list.index(item)
+            # print(item, path_index)
+            if path_index == 0:
+                path = path_list[0]
+            else:
+                path = "/".join(path_list[:path_index+1])
+            print(path)
+            # print(path)
+            url = reverse("show-content", args=[path])
+            if path_index == current_item:
+                path_html = f"<li class='breadcrumb-item active' aria-current='page'><a href='{url}'>{item.replace('_', ' ').title()}</a></li>"
+            else:
+                path_html = f"<li class='breadcrumb-item'><a href='{url}'>{item.replace('_', ' ').title()}</a></li>"
+            html += path_html
+        html += "</ol>"
+        return html
+
 class Papers(models.Model):
     note = models.OneToOneField(normalNotes, on_delete=models.CASCADE, primary_key=True, related_name="papers")
     year = models.CharField(max_length=10)

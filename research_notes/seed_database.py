@@ -10,11 +10,25 @@ from mdit_py_plugins.dollarmath.index import dollarmath_plugin
 from mdit_py_plugins.texmath.index import texmath_plugin
 from mdit_py_plugins.amsmath import amsmath_plugin
 
+import environ
+env = environ.Env()
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "research_notes.settings")
 django.setup()
 
+from django.contrib.auth.models import User
 from notes.models import Citations, Papers, normalNotes, Tags, Folder, Type
 import project_variables
+
+def create_notes_user():
+    email = env("PROJECT_EMAIL")
+    username = env("PROJECT_USERNAME")
+    pin = env("PROJECT_PASSWORD")
+
+    user = User.objects.get_or_create(email=email, username=username)
+    user[0].set_password(pin)
+    user[0].save()
+
 
 # print("Here's all: ", notes_models.objects.all())
 
@@ -327,6 +341,7 @@ def identify_headers(lines):
     return headers
 
 
-generate_citations_model_fields(citations_list)
-create_notes_models(entire_tree, parent='')
+# generate_citations_model_fields(citations_list)
+# create_notes_models(entire_tree, parent='')
+create_notes_user()
 # There's no need to define $$ when using any /begin{} attribute

@@ -19,8 +19,8 @@
                 <div class="doc_banner_text">
                     <h3 class="wow fadeInUp text-white" data-wow-delay="0.3s">Search For A Note</h3>
                     {% comment %} <p class="wow fadeInUp" data-wow-delay="0.5s">we're here for you. Find articles, help and advice for getting the most our of docall theme</p> {% endcomment %}
-                    <form action="#" class="banner_search_form">
-                        <input type="search" class="form-control" placeholder='Search ("/" to focus)'>
+                    <form action="{% url 'search' %}" class="banner_search_form">
+                        <input name="search_input" type="search" class="form-control" placeholder='Search ("/" to focus)'>
                         <button type="submit"><i class="icon_search"></i></button>
                     </form>
                     <h6>

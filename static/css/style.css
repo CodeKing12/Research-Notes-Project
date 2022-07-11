@@ -9858,3 +9858,22 @@ ul.contains-task-list li.task-list-item input:checked {
 .simple_footer {
   background-color: #0457b1;
 }
+
+.scroll.mCustomScrollbar _mCS_2 {
+  position: relative;
+  right: 20px;
+}
+
+#post .list-unstyled.nav-sidebar {
+  background: white;
+  padding: 40px 0 40px 40px;
+  border-radius: 15px;
+}
+
+#post .mCSB_container {
+  box-shadow: 0 23px 26px 0 rgb(4 73 89 / 18%)
+}
+
+.breadcrumb-item.active a {
+  font-weight: 500;
+}

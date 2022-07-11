@@ -447,6 +447,22 @@
 }
 
 @media(max-width:991px){
+    .body_wrapper {
+        height: 100%;
+    }
+
+    .signin_left {
+        display: none !important;
+    }
+
+    .signin_right {
+        margin: auto 0;
+    }
+
+    .body_wrapper .signup_area {
+        height: 100%;
+    }
+
     .full-width-doc .doc_rightsidebar .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
         width: 200px;
     }
