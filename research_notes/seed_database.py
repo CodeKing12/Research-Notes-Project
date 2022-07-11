@@ -372,23 +372,33 @@ def repo_to_dict(contents, file_dict={}):
                     content_dict[cont] = fold_cont
             file_dict[content] = content_dict
         else:
-            # if content.name.endswith(".md"):
-            #     path_list = content.path.split("/")
-            #     if len(path_list) > 1:
-            #         note_type = path_list[0]
-            #     else:
-            #         note_type="root"
-            #     cont = content.decoded_content
-            #     note = frontmatter.loads(cont)
-            #     file_token = note.metadata
-            #     file_token.update({"type": note_type})
-            #     file_dict[content.name] = file_token
-            # else:
             file_dict[content.name] = content
     return file_dict
     
+def get_folder_dict(contents, folder_dict={}):
+    for content in contents:
+        if content.type == "dir":
+            dir_contents = research_repo.get_contents(content.path)
+            parsed_contents = repo_to_dict(contents=dir_contents, folder_dict={})
+            folder_dict[content.name] = parsed_contents
+        else:
+            if content.name.endswith(".md"):
+                path_list = content.path.split("/")
+                if len(path_list) > 1:
+                    note_type = path_list[0]
+                else:
+                    note_type="root"
+                cont = content.decoded_content
+                note = frontmatter.loads(cont)
+                file_token = note.metadata
+                file_token.update({"type": note_type})
+                folder_dict[content.name] = file_token
+            else:
+                folder_dict[content.name] = "File"
+    return folder_dict
 tree = repo_to_dict(contents, file_dict={})
 print(tree)
+dict_repo = get_folder_dict(tree, folder_dict={})
 print("-------------------------------------------------------------------")
 
 
@@ -405,7 +415,8 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
                     subfiles.append(file.name)
             name = k.name
             path_list = k.path.split("/")
-
+            subobj_list = v.items()
+            # folder_dict = get_folder_dict()
             path = k.path
             parent = parent
             if parent == "":
@@ -425,7 +436,7 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
                 folder_type = path_list[0]
                 model_type = Type.objects.get(name=folder_type)
                 parent_list = path.split('/')
-                len(parent_list) <= 3
+                # len(parent_list) <= 3
                 folder = Folder.objects.get_or_create(name=name, folder_type=model_type, parent=model_parent, path=path, subfolders=subfolders, subfiles=subfiles)
             else:
                 folder_type="root"
@@ -533,8 +544,8 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
                     link = file_token['link']
                     bibtex_ref = file_token['bibtex_ref']
                     print(year, link, bibtex_ref)
-                    # bibtex = Citations.objects.get(name=bibtex_ref)
-                    # paper = Papers.objects.update_or_create(note=note[0], year=year, link=link, bibtex=bibtex)
+                    bibtex = Citations.objects.get(name=bibtex_ref)
+                    paper = Papers.objects.update_or_create(note=note[0], year=year, link=link, bibtex=bibtex)
             #     # print(f'{k} is not a folder')
             elif k.endswith(".bib") and v.name not in exclude_list:
                 bib_content = v.decoded_content
@@ -654,4 +665,4 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
             else:
                 continue
 
-create_notes_models_from_github(tree)
+# create_notes_models_from_github(tree)
