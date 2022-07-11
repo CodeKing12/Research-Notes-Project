@@ -120,6 +120,7 @@ class Folder(models.Model):
         html += "</ol>"
         return html
 
+
     # Make functions for returning all files and all folders under it
 
 class normalNotes(models.Model):

@@ -27,9 +27,12 @@ def create_notes_user():
     username = env("PROJECT_USERNAME")
     pin = env("PROJECT_PASSWORD")
 
-    user = User.objects.get_or_create(email=email, username=username)
-    user[0].set_password(pin)
-    user[0].save()
+    try:
+        user = User.objects.get(email=email, username=username)
+    except ObjectDoesNotExist:
+        user = User.objects.create(email=email, username=username)
+    user.set_password(pin)
+    user.save()
 
 
 # print("Here's all: ", notes_models.objects.all())
@@ -211,7 +214,7 @@ def create_notes_models(dict, parent="", parent_model=""):
                 continue
 
 
-tree, citations_list = project_variables.fs_tree_to_dict(path_=notes_path, citations=[])
+# tree, citations_list = project_variables.fs_tree_to_dict(path_=notes_path, citations=[])
 def generate_citations_model_fields(citations_list):
     for cite in citations_list:
         file = f"{cite[0]}/{cite[1]}"
@@ -345,14 +348,15 @@ def identify_headers(lines):
 
 # generate_citations_model_fields(citations_list)
 # create_notes_models(entire_tree, parent='')
-# create_notes_user()
+create_notes_user()
 # There's no need to define $$ when using any /begin{} attribute
 
-g = Github("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")
+github_token = env('GITHUB_ACCESS_TOKEN')
+g = Github(github_token)
 user = g.get_user()
 folder_regex = re.compile(r'^\w+$')
-research_repo = []
-research_repo = user.get_repo("Research-Notes-Test")
+repo_to_use = env("GITHUB_REPO_NAME")
+research_repo = user.get_repo(repo_to_use)
 contents = research_repo.get_contents("")
 
 
@@ -379,7 +383,7 @@ def get_folder_dict(contents, folder_dict={}):
     for content in contents:
         if content.type == "dir":
             dir_contents = research_repo.get_contents(content.path)
-            parsed_contents = repo_to_dict(contents=dir_contents, folder_dict={})
+            parsed_contents = get_folder_dict(contents=dir_contents, folder_dict={})
             folder_dict[content.name] = parsed_contents
         else:
             if content.name.endswith(".md"):
@@ -394,11 +398,12 @@ def get_folder_dict(contents, folder_dict={}):
                 file_token.update({"type": note_type})
                 folder_dict[content.name] = file_token
             else:
-                folder_dict[content.name] = "File"
+                # folder_dict[content.name] = "File"
+                continue
     return folder_dict
 tree = repo_to_dict(contents, file_dict={})
-print(tree)
-dict_repo = get_folder_dict(tree, folder_dict={})
+# print(tree)
+# dict_repo = get_folder_dict(tree, folder_dict={})
 print("-------------------------------------------------------------------")
 
 
@@ -415,21 +420,34 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
                     subfiles.append(file.name)
             name = k.name
             path_list = k.path.split("/")
-            subobj_list = v.items()
-            # folder_dict = get_folder_dict()
+            subobj_list = []
+            for t in v:
+                if type(v[t]) == dict and t.type == "dir":
+                    subobj_list.append(t)
+                else:
+                    subobj_list.append(v[t])
+            # print("Huyguewh8h98we:  ", subobj_list)
+            folder_dict_value = get_folder_dict(subobj_list, folder_dict={})
+            folder_dict = {k.name: folder_dict_value}
+            print("\n", folder_dict, "\n")
             path = k.path
             parent = parent
             if parent == "":
                 root_subfold = []
                 root_subfiles = []
                 root_path = "/"
+                root_dict_value = get_folder_dict(contents=contents, folder_dict={})
+                root_dict = {"All Notes": root_dict_value}
                 for file in contents:
                     if file.type == "dir":
                         root_subfold.append(file.name)
                     elif file.type == "file":
                         root_subfiles.append(file.name)
-                model_parent = Folder.objects.get_or_create(name="All Notes", path=root_path, subfolders=root_subfold, subfiles=root_subfiles)
-                model_parent = model_parent[0]
+                try:
+                    model_parent = Folder.objects.get(name="All Notes", path=root_path, subfolders=root_subfold, subfiles=root_subfiles)
+                except ObjectDoesNotExist:
+                    model_parent = Folder.objects.create(name="All Notes", path=root_path, subfolders=root_subfold, subfiles=root_subfiles, folder_dict=root_dict)
+
             else:
                 model_parent = Folder.objects.get(path=parent)
             if len(path_list) > 1:
@@ -437,11 +455,21 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
                 model_type = Type.objects.get(name=folder_type)
                 parent_list = path.split('/')
                 # len(parent_list) <= 3
-                folder = Folder.objects.get_or_create(name=name, folder_type=model_type, parent=model_parent, path=path, subfolders=subfolders, subfiles=subfiles)
+                try:
+                    folder = Folder.objects.get(name=name, folder_type=model_type, parent=model_parent, path=path, subfolders=subfolders, subfiles=subfiles, folder_dict=folder_dict)
+                except ObjectDoesNotExist:
+                    folder = Folder.objects.create(name=name, folder_type=model_type, parent=model_parent, path=path, subfolders=subfolders, subfiles=subfiles, folder_dict=folder_dict)
             else:
                 folder_type="root"
-                the_type = Type.objects.get_or_create(name = name, subfolders=subfolders, subfiles=subfiles)
-                folder = Folder.objects.get_or_create(name=name, folder_type=the_type[0], parent=model_parent, path=path, subfolders=subfolders, subfiles=subfiles)
+                try:
+                    the_type = Type.objects.get(name = name, subfolders=subfolders, subfiles=subfiles)
+                except ObjectDoesNotExist:
+                    the_type = Type.objects.create(name = name, subfolders=subfolders, subfiles=subfiles)
+                try:
+                    folder = Folder.objects.get(name=name, folder_type=the_type, parent=model_parent, path=path, subfolders=subfolders, subfiles=subfiles, folder_dict=folder_dict)
+                except ObjectDoesNotExist:
+                    folder = Folder.objects.create(name=name, folder_type=the_type, parent=model_parent, path=path, subfolders=subfolders, subfiles=subfiles, folder_dict=folder_dict)
+
             print(
                 f"""
                     Name: {name}
@@ -457,7 +485,7 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
             # print(f'{k} is a folder')
         else:
             print("Encountered File")
-            print(k,v)
+            # print(k,v)
             exclude_list = ["README.md", "index.md"]
             if k.endswith(".md") and v.name not in exclude_list:
                 path_list = v.path.split("/")
@@ -471,7 +499,7 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
                 note = frontmatter.loads(md_content)
                 file_token = note.metadata
             #     # Extract all the values from the dictionary
-                print(file_token)
+                # print(file_token)
                 title = file_token['title']
                 tags = file_token['tags']
                 status = file_token['status']
@@ -527,7 +555,7 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
             #     content_lines = content.split("\n")
             #     # print(file_content)
             #     # Create a notes object once all the values have been extracted
-                note = normalNotes.objects.update_or_create(title=title, name=name, parent_folder=parent_model[0], note_type=model_type, status=status, path=path, main_content=file_content, date_modified=date_modified)
+                note = normalNotes.objects.update_or_create(title=title, name=name, parent_folder=parent_model, note_type=model_type, status=status, path=path, main_content=file_content, date_modified=date_modified)
 
             # Create the tags if they are not available and add them to the note object
                 # print("Breaks Here")
@@ -543,7 +571,7 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
                     year = file_token['year']
                     link = file_token['link']
                     bibtex_ref = file_token['bibtex_ref']
-                    print(year, link, bibtex_ref)
+                    # print(year, link, bibtex_ref)
                     bibtex = Citations.objects.get(name=bibtex_ref)
                     paper = Papers.objects.update_or_create(note=note[0], year=year, link=link, bibtex=bibtex)
             #     # print(f'{k} is not a folder')
@@ -665,4 +693,4 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
             else:
                 continue
 
-# create_notes_models_from_github(tree)
+create_notes_models_from_github(tree)
