@@ -9889,3 +9889,23 @@ ul.contains-task-list li.task-list-item input:checked {
 .signup_right {
   background-color: #e8f8fb;
 }
+
+.body_dark .doc_documentation_area {
+  background-color: #1e1f26 !important;
+}
+
+.body_dark .file-link a, .body_dark .main-nav a.nav-link {
+  color: #6b707f !important;
+}
+
+.body_dark .ticket_categories li a {
+  color: #6b707f !important;
+}
+
+.body_dark blockquote {
+  color: #6b707f;
+}
+
+div.code-toolbar > .toolbar {
+  opacity: 1 !important;
+}
