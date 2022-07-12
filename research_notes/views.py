@@ -291,8 +291,8 @@ def seed_the_database(request):
         if "payload" in request.POST:
             payload = request.POST["payload"]
             output = payload
+            os.system("python research_notes/seed_database.py")
     else:
         output = "Delivered"
-    os.system("python research_notes/seed_database.py")
 
     return JsonResponse(data={"Output": output})
