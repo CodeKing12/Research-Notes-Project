@@ -9909,7 +9909,3 @@ ul.contains-task-list li.task-list-item input:checked {
 div.code-toolbar > .toolbar {
   opacity: 1 !important;
 }
-
-.table-striped tbody tr:nth-of-type(odd):hover {
-  background-color: #10b3d6 !important;
-}
