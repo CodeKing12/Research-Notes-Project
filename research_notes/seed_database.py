@@ -697,7 +697,6 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
 
 def iterdict(model, level, html=""):
     all_items = model.get_all_subdirs()
-    # return None
     level += 1
     for item in all_items:
         try:
@@ -706,21 +705,11 @@ def iterdict(model, level, html=""):
         except ObjectDoesNotExist:
             file = normalNotes.objects.get(name=item, parent_folder=model)
             isFolder = False
-        # print(os.path.join(root_path, parent))
         indent = ' ' * 4 * (level)
         subindent = ' ' * 4 * (level + 1)
-        # current_abspath = os.path.abspath(parent)+ "/" + k
-        # print(current_abspath)
-        # print(f"{indent}{os.path.isdir(os.path.abspath(parent)+ '/' + k)}")
         if isFolder == True:
             print("We have a folder")
-            # path = f"{parent}/{k}"
-            # path_list = path.split("/")
-            # note_root = path_list.index('all_notes')
-            # link = "/".join(path_list[note_root+1:])
-            link = ""
-            # url = reverse('show-content', args=[link])
-            url = folder.path
+            url = reverse('show-content', args=[folder.get_url_path()])
             html += f"""
             {indent}<li class='nav-item subfolder'>
                 <a href='{url}' class='nav-link'>
@@ -736,8 +725,7 @@ def iterdict(model, level, html=""):
             """
         else:
             print("We have a file")
-            # url = reverse('show-content', args=[link])
-            url = file.path
+            url = reverse('show-content', args=[file.get_url_path()])
             title = file.title
             html += f"""
                 {indent}<li class=\"file-link\">

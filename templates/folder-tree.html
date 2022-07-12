@@ -182,6 +182,7 @@
                                     <div class="post-content">
                                         <div class="entry-content">
                                             <h3 class="post-title mt-0">
+                                                {{file.get_url_path}}
                                                 <a href="{% url 'show-content' file.get_url_path %}">
                                                     {% if file.papers.bibtex.title == "" and file.note_type.name == 'papers' %}
                                                         {{ file.title }}

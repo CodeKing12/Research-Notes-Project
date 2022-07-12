@@ -34,7 +34,7 @@ def homepage(request):
     root_parent = get_object_or_404(Folder, name="All Notes")
     full_path = root_parent.path
     tree_dict = root_parent.folder_dict
-    nav_html = iterdict(d=tree_dict, level=-1, parent=full_path)
+    nav_html = root_parent.get_folder_tree()
     all_types = Type.objects.all()
     return render(request, 'home.html', {"nav_html": nav_html, "all_tags": all_tags, "all_types": all_types})
 
@@ -43,11 +43,10 @@ def resolveObject(request, path_to_file):
     path_list = path_to_file.split("/")
     slug = path_list[-1]
     parent_path = "/".join(path_list[:-1])
-    # path_to_file = f"/{path_to_file}"
     if parent_path == "":
         model_parent = Folder.objects.get(name="All Notes")
     else:
-        model_parent = Folder.objects.get(path=f"/{parent_path}")
+        model_parent = Folder.objects.get(path=parent_path)
     try:
         # print(file_name, model_parent_fold.id)
         model_file = normalNotes.objects.get(slug=slug, parent_folder=model_parent)
@@ -83,14 +82,17 @@ def displayFolder(request, folder, sort="title", group="none"):
     full_path = root_parent.path + folder.path
     tree_dict = folder.folder_dict
     generated_html = ""
-    generated_html = iterdict(d=tree_dict, level=-1, parent=full_path)
+    generated_html = folder.get_folder_tree()
 
     # Retrieve the corresponding file_name in the subfiles list and replace it with the object to django model objects
     for file in folder.subfiles:
         if file.endswith(".md"):
             file_index = folder.subfiles.index(file)
-            folder.subfiles[file_index] = normalNotes.objects.get(name=file, parent_folder=folder)
-        else:
+            folder.subfiles[file_index] = normalNotes.objects.get(name=file, parent_folder=folder)   
+
+    # Remove all instances of the subfiles list that arent django objects
+    for file in folder.subfiles:
+        if type(file) == str:
             folder.subfiles.remove(file)
 
     for sub_folder in folder.subfolders:
@@ -99,10 +101,11 @@ def displayFolder(request, folder, sort="title", group="none"):
         subfold = Folder.objects.get(name=sub_folder, parent=folder)
         folder.subfolders[folder_index] = subfold
     # Sort Items By title or date_modified if the user requests to sort them out
-    if sort == "title":
-        folder.subfiles.sort(key=sortTitle)
-    elif sort == "modified":
-        folder.subfiles.sort(key=sortDate)
+    if folder.folder_type.name != "papers":
+        if sort == "title":
+            sorted(folder.subfiles, key=sortTitle)
+        elif sort == "modified":
+            sorted(folder.subfiles, key=sortDate)
 
     # Create lists for grouping Items By tags or status if the user requests to group them
     if group == "tags":
