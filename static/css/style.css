@@ -7504,7 +7504,7 @@ ul.forum-titles .forum-freshness .freshness-box .freshness-btm .bbp-author-avata
 }
 .call-to-action .overlay-bg {
   position: absolute;
-  background-image: url(../img/home_support/overlay_bg.png);
+  /* background-image: url(../img/home_support/overlay_bg.png); */
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -9884,4 +9884,8 @@ ul.contains-task-list li.task-list-item input:checked {
 
 .cat-wrap.d-block {
   margin-top: 0.16rem;
+}
+
+.signup_right {
+  background-color: #e8f8fb;
 }
