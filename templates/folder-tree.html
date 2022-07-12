@@ -54,60 +54,9 @@
                 </li>
             </ul>
         </div>
-        <!-- /.support-info -->
 
         <div class="support-category-menus">
             <ul class="category-menu">
-                {% comment %} <li>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Label
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLabel">
-                            <h3 class="title">Filter by label</h3>
-
-                            <form action="#" class="cate-search-form">
-                                <input type="text" placeholder="Filter users">
-                            </form>
-
-                            <div class="all-users">
-                                <a class="dropdown-item" data-rel="personal-notes" href="#0">
-                                    <span class="color-purple"></span>
-                                    KbDoc
-                                </a>
-                                <a class="dropdown-item" data-rel="improvement" href="#0">
-                                    <span class="color-yellow">
-                                    </span>
-                                    Improvement !
-                                </a>
-                                <a class="dropdown-item" data-rel="css" href="#0">
-                                    <span class="color-ass"></span>
-                                    CSS
-                                </a>
-                                <a class="dropdown-item" href="#0" data-rel="feature">
-                                    <span class="color-green"></span>
-                                    Feature
-                                </a>
-                                <a class="dropdown-item" data-rel="spider" href="#0">
-                                    <span class="color-orange"></span>
-                                    Spider theme
-                                </a>
-                                <a class="dropdown-item" href="#0" data-rel="open">
-                                    <span class="color-theme"></span>
-                                    Open
-                                </a>
-                                <a class="dropdown-item" data-rel="bug" href="#0">
-                                    <span class="color-pink"></span>
-                                    Bug !
-                                </a>
-                                <a class="dropdown-item" data-rel="doc" href="#0">
-                                    <span class="color-light-green"></span>
-                                    Docs
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </li> {% endcomment %}
                 <li>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -148,7 +97,6 @@
                 </li>
             </ul>
         </div>
-        <!-- /.support-category-menus -->
     </div>
     <div class="community-posts-wrapper {% if current_grouping == 'None' %}bb-radius{% endif %}">
         <style>
@@ -370,71 +318,8 @@
             {% endfor %}
         {% endif %}
     </div>
-    {% comment %} <article class="documentation_body py-0" id="documentation">
-        <h3>{{ folder_name }}</h3>
-        <div class='file-list'>
-            {% for file in folder.subfiles %}
-                <a href='{% url 'show-content' file.get_url_path %}'><p>{{ file.title }}</p></a>
-                <p class='pl-4'> {{ file.title }} </p>
-                <p class='pl-4'> {{ file.date_modified }} </p>
-                <p class='pl-4'> {{ file.status }} </p>
-                <p class='pl-4'> {{ file.tags.name }} </p>
-            {% endfor %}
-        </div>
-    </article> {% endcomment %}
     <div class="scroll mt-5 pt-2">
         <ul class="list-unstyled nav-sidebar" style="overflow: auto">
-            {% comment %} <li class="nav-item">
-                <a href="doclist.html" class="nav-link"><img src="img/side-nav/home.png" alt="">Home</a>
-            </li> {% endcomment %}
-            {% comment %} <li class='nav-item subfolder'>
-                <a href='#' class='nav-link'>
-                    <img class="flat-icon" src="img/side-nav/folder.png" alt='folder'>
-                    Old Notes
-                </a>
-                <span class='icon'><i class='arrow_carrot-down'></i></span>
-                <ul class='list-unstyled dropdown_nav overflow-auto' style="overflow-y: auto">
-                    <li class='nav-item subfolder'>
-                        <a href='#' class='nav-link'>
-                            <img class="flat-icon" src="img/side-nav/folder.png" alt='folder'>
-                            Old Notes
-                        </a>
-                        <span class='icon'><i class='arrow_carrot-down'></i></span>
-                        <ul class='list-unstyled dropdown_nav'>
-                            <li class="file-link">
-                                <a href='tab.html'>
-                                    <img class="file-icon" src="img/side-nav/file.png" alt='folder'>
-                                    Introduction to Economics -- Lecture 3
-                                </a>
-                            </li>
-                            <li class="file-link">
-                                <a href='tab.html'>
-                                    <img class="file-icon" src="img/side-nav/file.png" alt='folder'>
-                                    Introduction to Economics -- Lecture 1
-                                </a>
-                            </li>
-                            <li class="file-link">
-                                <a  href='tab.html'>
-                                    <img class="file-icon" src="img/side-nav/file.png" alt='folder'>
-                                    Introduction to Economics -- Lecture 2
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="file-link">
-                        <a href='tab.html'>
-                            <img class="file-icon" src="img/side-nav/file.png" alt='folder'>
-                            Intermediate Economics -- Lecture 1-2
-                        </a>
-                    </li>
-                    <li class="file-link">
-                        <a href='tab.html'>
-                            <img class="file-icon" src="img/side-nav/file.png" alt='folder'>
-                            Intermediate Economics -- Lecture 2-2
-                        </a>
-                    </li>
-                </ul>
-            </li> {% endcomment %}
             <li class='nav-item subfolder active ml-4'>
                 <a href='#' class='nav-link'>
                     <img class="flat-icon" src="{% static 'img/side-nav/folder.png' %}" alt='folder'>

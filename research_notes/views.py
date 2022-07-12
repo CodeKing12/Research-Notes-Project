@@ -4,7 +4,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 # import mistune
 from notes.models import Folder, Tags, Type, normalNotes
 from research_notes.settings import BASE_DIR
-from .project_variables import fs_tree_to_dict, iterdict
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 from django.db.models import Q

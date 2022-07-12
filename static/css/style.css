@@ -163,9 +163,9 @@ button:focus {
 }
 
 /** === Container === **/
-.body_wrapper {
+/* .body_wrapper {
   overflow: hidden;
-}
+} */
 
 @media (min-width: 1200px) {
   .container {
