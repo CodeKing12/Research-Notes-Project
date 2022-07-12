@@ -1,4 +1,4 @@
-import sys, os, markdown, bibtexparser, settings, re, django
+import sys, os, markdown, bibtexparser, settings, re, django, frontmatter
 from datetime import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from markdown_it import MarkdownIt
@@ -10,7 +10,9 @@ from mdit_py_plugins.dollarmath.index import dollarmath_plugin
 from mdit_py_plugins.texmath.index import texmath_plugin
 from mdit_py_plugins.amsmath import amsmath_plugin
 from github import Github
-import frontmatter
+from django.urls import reverse
+from django.utils.text import slugify
+
 
 import environ
 env = environ.Env()
@@ -348,7 +350,6 @@ def identify_headers(lines):
 
 # generate_citations_model_fields(citations_list)
 # create_notes_models(entire_tree, parent='')
-create_notes_user()
 # There's no need to define $$ when using any /begin{} attribute
 
 github_token = env('GITHUB_ACCESS_TOKEN')
@@ -401,7 +402,7 @@ def get_folder_dict(contents, folder_dict={}):
                 # folder_dict[content.name] = "File"
                 continue
     return folder_dict
-tree = repo_to_dict(contents, file_dict={})
+# tree = repo_to_dict(contents, file_dict={})
 # print(tree)
 # dict_repo = get_folder_dict(tree, folder_dict={})
 print("-------------------------------------------------------------------")
@@ -693,4 +694,63 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
             else:
                 continue
 
-create_notes_models_from_github(tree)
+
+def iterdict(model, level, html=""):
+    all_items = model.get_all_subdirs()
+    # return None
+    level += 1
+    for item in all_items:
+        try:
+            folder = Folder.objects.get(name=item, parent=model)
+            isFolder = True
+        except ObjectDoesNotExist:
+            file = normalNotes.objects.get(name=item, parent_folder=model)
+            isFolder = False
+        # print(os.path.join(root_path, parent))
+        indent = ' ' * 4 * (level)
+        subindent = ' ' * 4 * (level + 1)
+        # current_abspath = os.path.abspath(parent)+ "/" + k
+        # print(current_abspath)
+        # print(f"{indent}{os.path.isdir(os.path.abspath(parent)+ '/' + k)}")
+        if isFolder == True:
+            print("We have a folder")
+            # path = f"{parent}/{k}"
+            # path_list = path.split("/")
+            # note_root = path_list.index('all_notes')
+            # link = "/".join(path_list[note_root+1:])
+            link = ""
+            # url = reverse('show-content', args=[link])
+            url = folder.path
+            html += f"""
+            {indent}<li class='nav-item subfolder'>
+                <a href='{url}' class='nav-link'>
+                    <img class=\"flat-icon\" src=\"{settings.STATIC_URL}img/side-nav/folder.png\" alt='folder'>
+                    {folder.presentable_name()}
+                </a>
+                <span class='icon'><i class='arrow_carrot-down'></i></span>
+                <ul class='list-unstyled dropdown_nav'>"""
+            html += iterdict(folder, level)
+            html += """
+                </ul>
+            </li>
+            """
+        else:
+            print("We have a file")
+            # url = reverse('show-content', args=[link])
+            url = file.path
+            title = file.title
+            html += f"""
+                {indent}<li class=\"file-link\">
+                        <a href="{url}">
+                            <img class=\"file-icon\" src=\"{settings.STATIC_URL}img/side-nav/file.png\" alt='folder'>
+                            {title}
+                        </a>
+                    </li>"""
+    return html
+
+d={"old_notes": {"My First Note.md": {"title": "Introduction to Economics -- Lecture 1", "status": "Completed", "tags": ["economics", "demand and supply"], "type": "classes"}, "My Second Note.md": {"title": "Introduction to Economics -- Lecture 2", "status": "In Progress", "tags": ["economics", "demand and supply"], "type": "classes"}, "My Third Note.md": {"title": "Introduction to Economics -- Lecture 3", "status": "Up Next", "tags": ["economics", "demand and supply"], "type": "classes"}}}
+# create_notes_models_from_github(tree)
+html = iterdict(model=Folder.objects.get(name="classes"), level=-1)
+print(html)
+# create_notes_user()
+# print(tree)
