@@ -7918,7 +7918,6 @@ ul.forum-titles .forum-freshness .freshness-box .freshness-btm .bbp-author-avata
   top: 0;
   right: 0;
   width: 100%;
-  /* background: url("../img/blog-grid/top_post.jpg"); */
   background-size: cover;
 }
 .blog_top_post .b_top_post_content {
@@ -8474,14 +8473,12 @@ blockquote .author {
   position: absolute;
 }
 .blog_link_post:before {
-  background: url("../img/blog-classic/icon_01.png") no-repeat;
   top: 5px;
   left: 40px;
   width: 42px;
   height: 41px;
 }
 .blog_link_post:after {
-  background: url("../img/blog-classic/icon_02.png") no-repeat;
   bottom: -35px;
   right: 30px;
   width: 100px;
@@ -9908,4 +9905,8 @@ ul.contains-task-list li.task-list-item input:checked {
 
 div.code-toolbar > .toolbar {
   opacity: 1 !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd):hover {
+  background-color: #10b3d6 !important;
 }
