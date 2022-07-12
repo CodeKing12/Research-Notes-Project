@@ -28,6 +28,7 @@ urlpatterns = [
     path('tags/<tag_name>', views.tag, name='tag'),
     path('status', views.all_statuses, name='all_statuses'),
     path('status/<status_name>', views.status, name='status'),
+    path('run-external/seed-the-database', views.seed_the_database, name='database-seed'),
     path('<path:path_to_file>', views.resolveObject, name="show-content"),
 ]
 

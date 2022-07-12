@@ -21,6 +21,12 @@ django.setup()
 
 from django.contrib.auth.models import User
 from notes.models import Citations, Papers, normalNotes, Tags, Folder, Type
+Type.objects.all().delete()
+Folder.objects.all().delete()
+Tags.objects.all().delete()
+normalNotes.objects.all().delete()
+Papers.objects.all().delete()
+Citations.objects.all().delete()
 
 def create_notes_user():
     email = env("PROJECT_EMAIL")
@@ -63,8 +69,6 @@ contents = research_repo.get_contents("")
 
 
 def repo_to_dict(contents, file_dict={}):
-    # repo_tree = research_repo.get_git_tree("d0cb2aa1f16cd244488033d561ecef5e5b6c69eb", recursive=True).raw_data["tree"]
-    # print(repo_tree)
     for content in contents:
         if content.type == "dir":
             dir_contents = research_repo.get_contents(content.path)
@@ -103,9 +107,9 @@ def get_folder_dict(contents, folder_dict={}):
                 # folder_dict[content.name] = "File"
                 continue
     return folder_dict
+
 tree = repo_to_dict(contents, file_dict={})
 # print(tree)
-print("-------------------------------------------------------------------")
 
 
 def create_notes_models_from_github(the_dict, parent="", parent_model=""):
@@ -393,3 +397,9 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
 create_notes_models_from_github(tree)
 create_notes_user()
 # print(tree)
+
+print("--------------------------------------------------------------------")
+print("|                                                                  |")
+print("|            Database Successfully Seeded, Site Rebuilt            |")
+print("|                                                                  |")
+print("--------------------------------------------------------------------")
