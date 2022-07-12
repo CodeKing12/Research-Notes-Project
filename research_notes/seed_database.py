@@ -402,7 +402,7 @@ def get_folder_dict(contents, folder_dict={}):
                 # folder_dict[content.name] = "File"
                 continue
     return folder_dict
-# tree = repo_to_dict(contents, file_dict={})
+tree = repo_to_dict(contents, file_dict={})
 # print(tree)
 # dict_repo = get_folder_dict(tree, folder_dict={})
 print("-------------------------------------------------------------------")
@@ -447,7 +447,7 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
                 try:
                     model_parent = Folder.objects.get(name="All Notes", path=root_path, subfolders=root_subfold, subfiles=root_subfiles)
                 except ObjectDoesNotExist:
-                    model_parent = Folder.objects.create(name="All Notes", path=root_path, subfolders=root_subfold, subfiles=root_subfiles, folder_dict=root_dict)
+                    model_parent = Folder.objects.create(name="All Notes", path=root_path, subfolders=root_subfold, subfiles=root_subfiles, folder_dict=root_dict, parent=None)
 
             else:
                 model_parent = Folder.objects.get(path=parent)
@@ -736,9 +736,6 @@ def iterdict(model, level, html=""):
                     </li>"""
     return html
 
-d={"old_notes": {"My First Note.md": {"title": "Introduction to Economics -- Lecture 1", "status": "Completed", "tags": ["economics", "demand and supply"], "type": "classes"}, "My Second Note.md": {"title": "Introduction to Economics -- Lecture 2", "status": "In Progress", "tags": ["economics", "demand and supply"], "type": "classes"}, "My Third Note.md": {"title": "Introduction to Economics -- Lecture 3", "status": "Up Next", "tags": ["economics", "demand and supply"], "type": "classes"}}}
-# create_notes_models_from_github(tree)
-html = iterdict(model=Folder.objects.get(name="classes"), level=-1)
-print(html)
-# create_notes_user()
+create_notes_models_from_github(tree)
+create_notes_user()
 # print(tree)
