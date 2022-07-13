@@ -7,7 +7,7 @@
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
 :root {
-  --primary: #10b3d6;
+  --primary: #7253ed;
   --secondary: #1d2746;
 }
 
@@ -7349,8 +7349,9 @@ ul.ordered-list li::before {
 .post-header .category-menu .short-by a {
   padding: 7px 0 7px 20px;
   position: relative;
-  color: #838793;
+  color: var(--secondary);
   font-size: 14px;
+  font-weight: 600;
 }
 .post-header .category-menu .short-by a.active-short {
   color: var(--secondary);
@@ -9806,7 +9807,9 @@ ul.contains-task-list li.task-list-item input:checked {
 
 .group-heading {
   font-size: 22px; 
-  background: #eee; 
+  /* background: #eee;  */
+  background: var(--primary);
+  color: white; 
   text-transform: capitalize; 
 }
 
@@ -9884,4 +9887,17 @@ div.code-toolbar > .toolbar {
 
 .table-striped tbody tr:nth-of-type(odd):hover {
   background-color: var(--primary) !important;
+}
+
+.color-primary {
+  color: var(--primary) !important;
+}
+
+.documentation_info .post-header {
+  background: var(--primary);
+  color: white;
+}
+
+.documentation_info .post-header a.parent-link, .documentation_info .post-header a h4, .documentation_info .post-header button#dropdownMenuButton {
+  color: white !important;
 }

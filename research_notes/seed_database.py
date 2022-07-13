@@ -262,6 +262,7 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
 
             # Create the tags if they are not available and add them to the note object
                 for tag in tags:
+                    tag = tag.title()
                     try:
                         tag_model = Tags.objects.get(name=tag)
                     except ObjectDoesNotExist:
