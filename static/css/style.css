@@ -31,7 +31,8 @@ Table of Content:
 /*----------------------------------------------------*/
 /*font Variables*/
 /*=================== fonts ====================*/
-@import url("https://fonts.googleapis.com/css?family=Great+Vibes|Roboto:300,400,500,700&amp;display=swap");
+@import url("https://fonts.googleapis.com/css?family=Great+Vibes|Manjari:300,400,500,700&amp;display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Manjari:wght@100;400;700&family=Odibee+Sans&display=swap');
 .col-md-offset-right-1, .col-lg-offset-right-1 {
   margin-right: 8.33333333%;
 }
@@ -61,7 +62,7 @@ body {
   line-height: 26px;
   font-size: 16px;
   height: 100%;
-  font-family: "Roboto", sans-serif;
+  font-family: "Manjari", sans-serif;
   font-weight: 400;
   color: #6b707f;
 }
@@ -73,7 +74,7 @@ body {
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-weight: 700;
   margin: 55px 0 8px 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Manjari", sans-serif;
   color: #1d2746;
 }
 
@@ -228,7 +229,7 @@ ul.list-style li:last-child {
   margin: 2px;
   font-weight: 400;
   font-size: 0.85rem;
-  font-family: "Roboto", sans-serif;
+  font-family: "Manjari", sans-serif;
   text-align: center;
   text-decoration: none;
   line-height: 0.6rem;
@@ -696,7 +697,7 @@ ul.list-style li:last-child {
 .menu > .nav-item.submenu .dropdown-menu .nav-item .nav-link {
   padding: 0;
   white-space: nowrap;
-  font: 400 14px/16px "Roboto", sans-serif;
+  font: 400 14px/16px "Manjari", sans-serif;
   color: #6b707f;
   transition: color 0.2s linear;
   position: relative;
@@ -829,7 +830,7 @@ ul.list-style li:last-child {
   font-weight: 400;
   color: #fff;
   position: relative;
-  font-family: "Roboto", sans-serif;
+  font-family: "Manjari", sans-serif;
 }
 .menu > .nav-item.submenu.mega_menu .dropdown-menu .tabContent .tab-pane .tab_list li a:before {
   content: "";
@@ -3477,7 +3478,7 @@ ul.list-style li:last-child {
   letter-spacing: 5.2px;
   text-transform: uppercase;
   text-align: center;
-  font-family: "Roboto", sans-serif;
+  font-family: "Manjari", sans-serif;
   margin: 5% 0 1% 0;
   padding: 0;
 }
@@ -5911,7 +5912,7 @@ body:not(.onepage-doc) .body_fixed #font-switcher {
   pointer-events: none;
 }
 .explanation::after {
-  font-family: "Roboto", sans-serif;
+  font-family: "Manjari", sans-serif;
   content: "Hey!";
   text-transform: uppercase;
   font-weight: 700;
@@ -6249,7 +6250,7 @@ button.mfp-close {
 .img_pointing_content p {
   font-size: 14px;
   line-height: 22px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Manjari", sans-serif;
   color: #6b707f;
   margin-bottom: 0;
 }
@@ -6890,7 +6891,7 @@ ul.ordered-list li::before {
   color: #fc5bc1;
   font-weight: 700;
   line-height: 55px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Manjari", sans-serif;
 }
 .dropcap_content p .r_dropcap {
   background: #13c5bf;
@@ -8877,7 +8878,7 @@ blockquote .author {
   font-size: 14px;
   color: #1d2746;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
+  font-family: "Manjari", sans-serif;
   height: 60px;
   line-height: 60px;
   padding: 2px 30px 0;
@@ -8885,19 +8886,19 @@ blockquote .author {
 }
 .login_form .form-group .form-control.placeholder {
   color: #878b99;
-  font-family: "Roboto", sans-serif;
+  font-family: "Manjari", sans-serif;
 }
 .login_form .form-group .form-control:-moz-placeholder {
   color: #878b99;
-  font-family: "Roboto", sans-serif;
+  font-family: "Manjari", sans-serif;
 }
 .login_form .form-group .form-control::-moz-placeholder {
   color: #878b99;
-  font-family: "Roboto", sans-serif;
+  font-family: "Manjari", sans-serif;
 }
 .login_form .form-group .form-control::-webkit-input-placeholder {
   color: #878b99;
-  font-family: "Roboto", sans-serif;
+  font-family: "Manjari", sans-serif;
 }
 .login_form .form-group .form-control:focus {
   box-shadow: 0 20px 30px 0 rgba(4, 73, 89, 0.1);

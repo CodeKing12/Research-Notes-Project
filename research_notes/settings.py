@@ -29,8 +29,8 @@ sys.path.append(os.path.dirname(SCRIPT_DIR))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-# DEBUG = True
+# DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["notes-doc.herokuapp.com", "127.0.0.1", "localhost"]
 
@@ -142,6 +142,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 APPEND_SLASH = True
 # SESSION_COOKIE_AGE = 43200
 SESSION_COOKIE_AGE = int(env("SESSION_COOKIE_AGE"))
+CSRF_COOKIE_SECURE = True
 
 import dj_database_url
 prod_db  =  dj_database_url.config(conn_max_age=500)
