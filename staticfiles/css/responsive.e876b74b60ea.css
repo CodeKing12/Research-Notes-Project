@@ -706,7 +706,7 @@
         max-width: 780px;
     }
     .sticky_menu .menu_one .hamburger span,.sticky_menu .menu_one .menu_toggle .hamburger-cross span{
-        background: #1d2746;
+        background: var(--secondary);
     }
     .menu_social{
         margin-left: 15px;
@@ -720,7 +720,7 @@
         top: 84px;
     }
     .menu_logo_change .hamburger span,.menu_logo_change .hamburger-cross span{
-        background: #1d2746;
+        background: var(--secondary);
     }
     .b_plus, .b_round, .p_absolute{
         z-index: -1;
