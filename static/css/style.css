@@ -9628,7 +9628,7 @@ blockquote .author {
 }
 
 .file-icon {
-    width: 25px;
+    width: 22px;
 }
 
 .nav-link ul.dropdown_nav a.nav-link {
@@ -9644,7 +9644,7 @@ blockquote .author {
     line-height: 23px !important;
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 13px;
     width: 100%;
 }
 .nav-sidebar .nav-item.subfolder {
