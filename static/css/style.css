@@ -7108,7 +7108,7 @@ ul.ordered-list li::before {
   justify-content: space-between;
   background: #f7f8f9;
   padding: 17px 18px;
-  border: 1px solid #eaeeef;
+  /* border: 1px solid #eaeeef; */
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
 }
@@ -9907,6 +9907,11 @@ div.code-toolbar > .toolbar {
 
 .documentation_info .post-header a.parent-link, .documentation_info .post-header a h4, .documentation_info .post-header button#dropdownMenuButton {
   color: white !important;
+  transition: all 0.4s ease;
+}
+
+.documentation_info .post-header a.parent-link:hover, .documentation_info .post-header a h4:hover, .documentation_info .post-header button#dropdownMenuButton:hover {
+  color: var(--secondary) !important;
 }
 
 .doc_rightsidebar.not-sidebar {
@@ -9916,6 +9921,8 @@ div.code-toolbar > .toolbar {
   height: unset !important;
   border: unset !important;
   gap: 50px;
+  position: unset !important;
+  margin-top: 30px !important;
 }
 
 .doc_rightsidebar.not-sidebar > div {
