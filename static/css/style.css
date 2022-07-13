@@ -9635,9 +9635,14 @@ blockquote .author {
     font-size: 12px;
 }
 
-.file-link {
+.doc_left_sidebarlist .file-link {
     min-width: 250px;
     margin-bottom: 10px;
+}
+
+.file-link {
+  min-width: max-content;
+  margin-bottom: 10px;
 }
 
 .file-link a {
@@ -9902,4 +9907,24 @@ div.code-toolbar > .toolbar {
 
 .documentation_info .post-header a.parent-link, .documentation_info .post-header a h4, .documentation_info .post-header button#dropdownMenuButton {
   color: white !important;
+}
+
+.doc_rightsidebar.not-sidebar {
+  padding: unset !important;
+  max-height: 150px !important;
+  margin: unset !important;
+  height: unset !important;
+  border: unset !important;
+  gap: 50px;
+}
+
+.doc_rightsidebar.not-sidebar > div {
+  padding: unset !important;
+  max-height: 150px !important;
+  margin: unset !important;
+  height: unset !important;
+}
+
+#font-switcher {
+  gap: 15px;
 }

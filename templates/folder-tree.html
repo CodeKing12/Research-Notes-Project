@@ -32,6 +32,17 @@
 </style>
 
 <div id="post" class="documentation_info pr-0">
+    <div class="d-flex doc_rightsidebar not-sidebar">
+        <div id="font-switcher" class="d-flex justify-content-between align-items-center mr-5">
+            <div id="rvfs-controllers" class="fontsize-controllers group"></div>
+            <a href="javascript:window.print()" class="print d-flex"><i class="icon_printer"></i></a>
+        </div>
+        <div class="doc_switch">
+            <label for="something" class="tab-btn tab-btns"><i class="icon_lightbulb_alt"></i></label>
+            <input type="checkbox" name="something" id="something" class="tab_switcher">
+            <label for="something" class="tab-btn"><i class="icon_star_alt"></i></label>
+        </div>
+    </div>
     <div class="post-header mt-5">
         <div class="support-info">
             <ul class="support-total-info">
@@ -130,7 +141,6 @@
                                     <div class="post-content">
                                         <div class="entry-content">
                                             <h3 class="post-title mt-0">
-                                                {{file.get_url_path}}
                                                 <a href="{% url 'show-content' file.get_url_path %}">
                                                     {% if file.papers.bibtex.title == "" and file.note_type.name == 'papers' %}
                                                         {{ file.title }}
