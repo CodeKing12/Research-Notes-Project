@@ -9928,3 +9928,20 @@ div.code-toolbar > .toolbar {
 #font-switcher {
   gap: 15px;
 }
+
+#tocList {
+  padding-left: unset !important;
+}
+
+#tocList a {
+  color: var(--primary);
+  transition: 0.35s ease-in-out all;
+}
+
+#tocList li {
+  transition: 0.35s ease-in-out all;
+}
+
+#tocList li:hover {
+  background-color: #eee;
+}

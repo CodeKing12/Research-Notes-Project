@@ -52,7 +52,7 @@
 
 <div id="post" class="documentation_info">
     {% comment %} {% if file.not_type.name == 'papers' %} {% endcomment %}
-    <h1 class='mb-4'>{{ file.title }}</h1>
+    <h1 class='mb-4' id="title-of-file">{{ file.title }}</h1>
     {% comment %} {% else %}
         <h1>{{ file.title }}</h1>
     {% endif %} {% endcomment %}
@@ -142,14 +142,16 @@
     window.addEventListener('DOMContentLoaded', function (event) { // Let the DOM content load before running the script.
         //Get all headings only from the actual contents.
         var contentContainer = document.getElementById('post'); // Add this div to the html
-        var headings = contentContainer.querySelectorAll('h1,h2,h3,h4'); // You can do as many or as few headings as you need.
+        var headings = contentContainer.querySelectorAll('h1,h2,h3,h4,h5,h6'); // You can do as many or as few headings as you need.
         
         var tocContainer = document.getElementById('toc'); // Add this div to the HTML
         // create ul element and set the attributes.
         var ul = document.createElement('ul');
         
         ul.setAttribute('id', 'tocList');
-        ul.setAttribute('class', 'sidenav')
+        ul.setAttribute('class', 'sidenav');
+        ul.setAttribute('class', 'list-unstyled');
+        var file_title = document.getElementById("title-of-file").innerHTML
         
         // Loop through the headings NodeList
         for (i = 0; i <= headings.length - 1; i++) {
@@ -157,6 +159,9 @@
             var id = headings[i].innerHTML.toLowerCase().replace(/ /g, "-"); // Set the ID to the header text, all lower case with hyphens instead of spaces.
             var level = headings[i].localName.replace("h", ""); // Getting the header a level for hierarchy
             var title = headings[i].innerHTML; // Set the title to the text of the header
+            if (title == file_title) {
+                continue
+            }
         
             headings[i].setAttribute("id", id)  // Set header ID to its text in lower case text with hyphens instead of spaces.
         
