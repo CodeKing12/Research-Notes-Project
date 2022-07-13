@@ -49,7 +49,9 @@
                 <li class="d-flex align-items-center">
                     <img class='folder-index-img' src="{% static 'img/my-static/folder (4).png' %}">
                     <a class='parent-link' href="
-                    {% if folder.parent.get_url_path != '' %}
+                    {% if folder.parent.get_url_path == '/' %}
+                        {% url 'home' %}
+                    {% elif folder.parent.get_url_path != '' %}
                         {% url 'show-content' folder.parent.get_url_path %}
                     {% else %}
                         {% url 'home' %}

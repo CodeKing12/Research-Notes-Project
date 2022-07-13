@@ -143,6 +143,7 @@ APPEND_SLASH = True
 # SESSION_COOKIE_AGE = 43200
 SESSION_COOKIE_AGE = int(env("SESSION_COOKIE_AGE"))
 CSRF_COOKIE_SECURE = True
+LOGIN_URL = "login"
 
 import dj_database_url
 prod_db  =  dj_database_url.config(conn_max_age=500)

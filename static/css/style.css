@@ -9956,3 +9956,11 @@ div.code-toolbar > .toolbar {
 #tocList li:hover {
   background-color: #eee;
 }
+
+.navbar_fixed .sticky_logo img {
+  display: unset !important;
+}
+
+.navbar_fixed .sticky_logo h5 {
+  color: var(--secondary) !important;
+}
