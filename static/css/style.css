@@ -3421,8 +3421,8 @@ ul.list-style li:last-child {
   border-radius: 50%;
   background-color: #fdfdfd;
   box-shadow: 0 0 100px 0 rgba(4, 46, 56, 0.14);
-  width: 300px;
-  height: 300px;
+  width: 180px;
+  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9912,6 +9912,10 @@ div.code-toolbar > .toolbar {
 
 .documentation_info .post-header a.parent-link:hover, .documentation_info .post-header a h4:hover, .documentation_info .post-header button#dropdownMenuButton:hover {
   color: var(--secondary) !important;
+}
+
+.doc_rightsidebar {
+  overflow-y: scroll;
 }
 
 .doc_rightsidebar.not-sidebar {
