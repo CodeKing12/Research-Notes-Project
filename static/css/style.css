@@ -147,7 +147,7 @@ table tr td p:last-child {
 }
 
 .medium {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .regular {
@@ -269,7 +269,7 @@ ul.list-style li:last-child {
   padding: 9px 34px;
   box-shadow: none;
   border: 2px solid #10b3d6;
-  font-weight: 500;
+  font-weight: 600;
 }
 .section_title.title-img .action_btn:hover {
   background: transparent;
@@ -406,7 +406,7 @@ ul.list-style li:last-child {
   border-radius: 4px;
   color: #10b3d6;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   background: #f8fdfe;
   display: inline-block;
   padding: 6px 34px;
@@ -631,7 +631,7 @@ ul.list-style li:last-child {
 }
 .menu > .nav-item > .nav-link {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   color: #fff;
   padding: 0;
 }
@@ -721,7 +721,7 @@ ul.list-style li:last-child {
   margin-bottom: 0;
   font-size: 16px;
   text-transform: capitalize;
-  font-weight: 500;
+  font-weight: 600;
   transition: all 0.2s linear;
 }
 .menu > .nav-item.submenu .dropdown-menu .nav-item .nav-link p {
@@ -893,7 +893,7 @@ ul.list-style li:last-child {
 
 .nav_btn {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   padding: 8px 25px;
   text-align: center;
   border-radius: 4px;
@@ -1675,7 +1675,7 @@ ul.list-style li:last-child {
 }
 .personal-notes-banner-support .banner-content-wrapper .banner-title {
   font-size: 44px;
-  font-weight: 500;
+  font-weight: 600;
   color: #1d2746;
   margin-bottom: 12px;
 }
@@ -2096,7 +2096,7 @@ ul.list-style li:last-child {
 .custom-select ul li:hover, .custom-select ul li.selected {
   background: #f4f9fa;
   color: #10b3d6;
-  font-weight: 500;
+  font-weight: 600;
 }
 .custom-select ul li:hover:before, .custom-select ul li.selected:before {
   height: 100%;
@@ -2115,7 +2115,7 @@ ul.list-style li:last-child {
 .breadcrumb_content h2 {
   font-size: 36px;
   line-height: 1.4;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 0;
 }
 .breadcrumb_content .single_post_author {
@@ -2230,6 +2230,8 @@ ul.list-style li:last-child {
   color: #1d2746 !important;
   font-size: 14px;
   line-height: 21px;
+  display: flex;
+  align-items: center;
 }
 .breadcrumb .breadcrumb-item a {
   /* color: #878EA6; */
@@ -2330,7 +2332,7 @@ ul.list-style li:last-child {
 
 .learn_btn {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   color: #1d2746;
   padding-top: 5px;
   display: inline-block;
@@ -2467,7 +2469,7 @@ ul.list-style li:last-child {
   border: 0;
   color: #6b707f;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   padding: 0 20px 10px;
   position: relative;
   transition: color 0.2s linear;
@@ -2513,7 +2515,7 @@ ul.list-style li:last-child {
 }
 .documentation_text h4 {
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 18px;
 }
 .documentation_text p {
@@ -2538,7 +2540,7 @@ ul.list-style li:last-child {
   margin-right: 30px;
 }
 .documentation_item .media-body h5 {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 18px;
   margin-bottom: 12px;
   transition: color 0.2s linear;
@@ -2577,7 +2579,7 @@ ul.list-style li:last-child {
   width: 100%;
   font-size: 18px;
   line-height: 30px;
-  font-weight: 500;
+  font-weight: 600;
   color: #10b3d6;
   text-decoration: none;
   padding: 19px 40px 19px 30px;
@@ -2798,7 +2800,7 @@ ul.list-style li:last-child {
 }
 .funfact-boxes .funfact-box .counter {
   font-size: 34px;
-  font-weight: 500;
+  font-weight: 600;
   color: #10b3d6;
   margin-bottom: 10px;
 }
@@ -3030,7 +3032,7 @@ ul.list-style li:last-child {
   position: relative;
   font-size: 15px;
   color: #aeb5ca;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /*============== End doc_action_area_two css =============*/
@@ -3056,7 +3058,7 @@ ul.list-style li:last-child {
   display: block;
   padding: 0;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   color: rgba(16, 179, 214, 0.5);
   position: relative;
   padding-left: 28px;
@@ -3198,7 +3200,7 @@ ul.list-style li:last-child {
 }
 .doc_feedback_slider .item h5 {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
   color: #fff;
 }
 .doc_feedback_slider .item h6 {
@@ -3230,7 +3232,7 @@ ul.list-style li:last-child {
 .action_text h2 {
   color: #fff;
   font-size: 40px;
-  font-weight: 500;
+  font-weight: 600;
 }
 .action_text p {
   font-size: 18px;
@@ -3607,7 +3609,7 @@ ul.list-style li:last-child {
   align-items: center;
   font-size: 14px;
   line-height: 20px;
-  font-weight: 500;
+  font-weight: 600;
   color: #1d2746;
   position: relative;
 }
@@ -3680,7 +3682,7 @@ ul.list-style li:last-child {
   position: relative;
 }
 .documentation_info .c_head {
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 12px;
 }
 .documentation_info .c_head .anchorjs-link {
@@ -3721,14 +3723,14 @@ ul.list-style li:last-child {
 }
 .doc_documentation_area .shortcode_title h1 {
   font-size: 30px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 12px;
 }
 .doc_documentation_area .shortcode_title h4 {
   margin-bottom: 15px;
 }
 .doc_documentation_area .shortcode_title p span {
-  font-weight: 500;
+  font-weight: 600;
 }
 .doc_documentation_area .shortcode_title .s_title {
   margin-bottom: 10px;
@@ -3952,7 +3954,7 @@ ul.list-style li:last-child {
 }
 .question_box .question_text h4 {
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 18px;
 }
 .question_box .question_text p a {
@@ -3996,7 +3998,7 @@ ul.list-style li:last-child {
   background: transparent;
   border: 0;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   color: #10b3d6;
   padding: 0 20px;
   position: relative;
@@ -4016,7 +4018,7 @@ ul.list-style li:last-child {
   padding-top: 30px;
 }
 .feedback_link h6 {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16px;
   color: #6b707f;
   margin-bottom: 0;
@@ -4034,7 +4036,7 @@ ul.list-style li:last-child {
 .feedback_link .h_btn {
   border-radius: 4px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   color: #6b707f;
   display: inline-block;
   padding: 1px 14px 0;
@@ -4097,7 +4099,7 @@ ul.list-style li:last-child {
   border: 0;
   padding: 15px 40px;
   box-shadow: none;
-  font-weight: 500;
+  font-weight: 600;
 }
 .contact_form .form-group .action_btn:hover {
   box-shadow: 0 20px 30px 0 rgba(12, 118, 142, 0.24);
@@ -4163,7 +4165,7 @@ ul.list-style li:last-child {
 }
 .doc_rightsidebar h6 {
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
 }
 .doc_rightsidebar .doc_right_link li {
   margin-bottom: 10px;
@@ -4172,7 +4174,7 @@ ul.list-style li:last-child {
 }
 .doc_rightsidebar .doc_right_link li a {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   color: #6b707f;
 }
 .doc_rightsidebar .doc_right_link li a i {
@@ -4250,7 +4252,7 @@ ul.list-style li:last-child {
   color: #1d2746;
 }
 .doc_menu .nav-link.active {
-  font-weight: 500;
+  font-weight: 600;
 }
 .doc_menu .nav {
   padding-left: 20px;
@@ -4318,7 +4320,7 @@ ul.list-style li:last-child {
 }
 .resource .tag_list li a {
   display: inline-block;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /*========== typography_content css ========*/
@@ -4726,7 +4728,7 @@ body:not(.onepage-doc) .body_fixed #font-switcher {
 }
 .chart-info li .counterup {
   font-size: 34px;
-  font-weight: 500;
+  font-weight: 600;
   color: #42dabf;
   margin-bottom: 5px;
 }
@@ -4986,7 +4988,7 @@ body:not(.onepage-doc) .body_fixed #font-switcher {
 .communities-boxes .personal-notes-com-box .personal-notes-com-box-content .title {
   font-size: 20px;
   line-height: 26px;
-  font-weight: 500;
+  font-weight: 600;
   color: #1d2746;
   margin-bottom: 5px;
   transition: all 0.3s ease-in-out;
@@ -5013,7 +5015,7 @@ body:not(.onepage-doc) .body_fixed #font-switcher {
   text-align: center;
   display: block;
   color: #10b3d6;
-  font-weight: 500;
+  font-weight: 600;
 }
 .more-communities .collapse-btn i {
   vertical-align: -1px;
@@ -5200,7 +5202,7 @@ body:not(.onepage-doc) .body_fixed #font-switcher {
 .community-box .community-content .details-link {
   color: #9296a3;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
 }
 .community-box .community-content .details-link i {
   display: inline-block;
@@ -5302,7 +5304,7 @@ body:not(.onepage-doc) .body_fixed #font-switcher {
 }
 .community-post .post-content .entry-content .post-title {
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
   color: #1d2746;
   margin-bottom: 0;
   line-height: 1.7;
@@ -5453,7 +5455,7 @@ body:not(.onepage-doc) .body_fixed #font-switcher {
   line-height: 1.45;
   border-bottom: 1px solid #6030c0;
   vertical-align: middle;
-  font-weight: 500;
+  font-weight: 600;
   height: 22px;
 }
 .badge:hover {
@@ -5614,7 +5616,7 @@ body:not(.onepage-doc) .body_fixed #font-switcher {
 }
 .shortcode_info h4 {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 25px;
   padding-top: 26px;
 }
@@ -5623,7 +5625,7 @@ body:not(.onepage-doc) .body_fixed #font-switcher {
 }
 .shortcode_info h6 {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 16px;
 }
 .shortcode_info p {
@@ -5688,7 +5690,7 @@ body:not(.onepage-doc) .body_fixed #font-switcher {
 .toggle_btn {
   display: block;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   color: #1d2746;
   background: #f0f2f5;
   text-align: left;
@@ -5740,7 +5742,7 @@ body:not(.onepage-doc) .body_fixed #font-switcher {
   width: 100%;
   font-size: 16px;
   color: #1d2746;
-  font-weight: 500;
+  font-weight: 600;
   background: #f0f2f5;
   text-decoration: none;
   position: relative;
@@ -5783,7 +5785,7 @@ body:not(.onepage-doc) .body_fixed #font-switcher {
 .message_alert h5 {
   font-size: 16px;
   color: #1d2746;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 12px;
 }
 .message_alert p {
@@ -5853,7 +5855,7 @@ body:not(.onepage-doc) .body_fixed #font-switcher {
 }
 .notice h5 {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 16px;
 }
 .notice p {
@@ -6107,7 +6109,7 @@ button.mfp-close {
 .tip_content h6 {
   font-size: 14px;
   color: #1d2746;
-  font-weight: 500;
+  font-weight: 600;
   padding-top: 10px;
   margin-bottom: 0;
 }
@@ -6331,7 +6333,7 @@ button.mfp-close {
 }
 .caniuse_section_legend .caniuse_legend_list a {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   padding: 0 18px;
   display: inline-block;
   margin: 0 3px;
@@ -6386,7 +6388,7 @@ button.mfp-close {
   vertical-align: middle;
 }
 .table_shortcode th {
-  font-weight: 500;
+  font-weight: 600;
 }
 .table_shortcode tbody tr {
   background: #f0f2f5;
@@ -6486,7 +6488,7 @@ button.mfp-close {
 }
 .single_list li {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 22px;
   position: relative;
   padding-left: 20px;
@@ -6551,7 +6553,7 @@ ul.ordered-list li::before {
   height: 32px;
   width: 32px;
   border-radius: 50%;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 12px;
   background-color: #10b3d6;
   text-align: center;
@@ -6664,7 +6666,7 @@ ul.ordered-list li::before {
 .changelog_content .changelog_btn {
   font-size: 14px;
   color: #6b707f;
-  font-weight: 500;
+  font-weight: 600;
   margin-top: 12px;
   display: inline-block;
   opacity: 0.5;
@@ -6758,7 +6760,7 @@ ul.ordered-list li::before {
 .cheatsheet_accordian .card .card-header button {
   padding: 0;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 30px;
   background: transparent;
   color: #1d2746;
@@ -7168,14 +7170,14 @@ ul.ordered-list li::before {
 }
 .post-header .support-total-info li.open-ticket {
   color: #1d2746;
-  font-weight: 500;
+  font-weight: 600;
 }
 .post-header .support-total-info li.close-ticket a {
   color: #6b707f;
 }
 .post-header .support-total-info li a {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
 }
 .post-header .support-total-info li a:hover {
   color: #10b3d6;
@@ -7272,7 +7274,7 @@ ul.ordered-list li::before {
 }
 .post-header .category-menu .title {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   margin: 0;
   background: #f7f8f9;
   border-bottom: 1px solid #e6eeef;
@@ -7323,7 +7325,7 @@ ul.ordered-list li::before {
   font-size: 14px;
   padding: 12px 22px;
   border-bottom: 1px solid #e6eeef;
-  font-weight: 500;
+  font-weight: 600;
   color: #6b707f;
 }
 .post-header .category-menu .all-users a {
@@ -7470,7 +7472,7 @@ ul.forum-titles .forum-freshness .freshness-box .freshness-btm .bbp-author-avata
 .answer-action .action-content .ans-title {
   font-size: 20px;
   color: #1d2746;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 0;
 }
 .answer-action .action-content p {
@@ -7478,7 +7480,7 @@ ul.forum-titles .forum-freshness .freshness-box .freshness-btm .bbp-author-avata
 }
 .answer-action .btn-ans {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   padding: 10px 25px;
   box-shadow: none;
   border: 1px solid #10b3d6;
@@ -7538,7 +7540,7 @@ ul.forum-titles .forum-freshness .freshness-box .freshness-btm .bbp-author-avata
   color: #fff;
   font-size: 44px;
   line-height: 1.2;
-  font-weight: 500;
+  font-weight: 600;
 }
 @media (max-width: 991px) {
   .call-to-action .action-content-wrapper .action-title-wrap .action-title {
@@ -7549,7 +7551,7 @@ ul.forum-titles .forum-freshness .freshness-box .freshness-btm .bbp-author-avata
   border: 1px solid #10b3d6;
   font-size: 16px;
   padding: 9px 25px;
-  font-weight: 500;
+  font-weight: 600;
 }
 .call-to-action .action-content-wrapper .action_btn:hover {
   background: transparent;
@@ -7571,7 +7573,7 @@ ul.forum-titles .forum-freshness .freshness-box .freshness-btm .bbp-author-avata
 .status_widget .title-sm {
   font-size: 16px;
   color: #1d2746;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 10px;
 }
 .status_widget .open-hours {
@@ -7674,7 +7676,7 @@ ul.forum-titles .forum-freshness .freshness-box .freshness-btm .bbp-author-avata
 }
 .forum-post-top .forum-post-author .author-name {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   color: #1d2746;
 }
 .forum-post-top .forum-post-author .author-name:hover {
@@ -7720,7 +7722,7 @@ ul.forum-titles .forum-freshness .freshness-box .freshness-btm .bbp-author-avata
 .action-button-container .ask-btn {
   box-shadow: none;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   padding: 8px 28px;
   margin-top: 2px;
 }
@@ -7824,7 +7826,7 @@ ul.forum-titles .forum-freshness .freshness-box .freshness-btm .bbp-author-avata
 }
 .all-answers .title {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 20px;
 }
 .all-answers .filter-bar {
@@ -7929,7 +7931,7 @@ ul.forum-titles .forum-freshness .freshness-box .freshness-btm .bbp-author-avata
 }
 .blog_top_post .b_top_post_content h3 {
   font-size: 26px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 36px;
   margin-bottom: 17px;
   transition: color 0.2s linear;
@@ -7996,7 +7998,7 @@ ul.forum-titles .forum-freshness .freshness-box .freshness-btm .bbp-author-avata
 }
 .post_author .author_text h4 {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 0;
   color: #1d2746;
 }
@@ -8023,7 +8025,7 @@ ul.forum-titles .forum-freshness .freshness-box .freshness-btm .bbp-author-avata
   padding: 17px 21px;
   border: 0;
   border-radius: 0;
-  font-weight: 500;
+  font-weight: 600;
   color: #858997;
   font-size: 14px;
   position: relative;
@@ -8085,7 +8087,7 @@ ul.forum-titles .forum-freshness .freshness-box .freshness-btm .bbp-author-avata
 
 .b_title {
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 30px;
   transition: all 0.2s linear;
 }
@@ -8179,7 +8181,7 @@ blockquote .c_head {
   margin-bottom: 45px;
 }
 blockquote .author {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16px;
   color: #1d2746;
 }
@@ -8189,7 +8191,7 @@ blockquote .author {
 }
 .single_post_two h2 {
   font-size: 30px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 15px;
 }
 .single_post_two img {
@@ -8257,7 +8259,7 @@ blockquote .author {
   overflow: hidden;
 }
 .blog_post_author .media-body h5 {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 18px;
   margin-bottom: 20px;
 }
@@ -8285,7 +8287,7 @@ blockquote .author {
 }
 .comment_box .post_comment .comment_author .media-body .comment_info h3 {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 5px;
 }
 .comment_box .post_comment .comment_author .media-body .comment_info .comment_date {
@@ -8296,7 +8298,7 @@ blockquote .author {
 }
 .comment_box .post_comment .comment_author .media-body .comment_reply {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   color: #1d2746;
   transition: all 0.2s linear;
 }
@@ -8654,7 +8656,7 @@ blockquote .author {
 .recent_post_item .media-body h5 {
   font-size: 16px;
   line-height: 20px;
-  font-weight: 500;
+  font-weight: 600;
   transition: color 0.2s linear;
 }
 .recent_post_item .media-body h5:hover {
@@ -8696,7 +8698,7 @@ blockquote .author {
 }
 .comments_widget li h6 {
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   color: #1d2746;
   margin-bottom: 12px;
 }
@@ -8826,7 +8828,7 @@ blockquote .author {
 }
 .sign_inner p a {
   color: #1d2746;
-  font-weight: 500;
+  font-weight: 600;
 }
 .sign_inner .btn-google {
   box-shadow: 0 4px 10px 0 rgba(4, 73, 89, 0.06);
@@ -9616,7 +9618,7 @@ blockquote .author {
   margin-bottom: 0;
   font-size: 17px;
   color: #fff;
-  font-weight: 500;
+  font-weight: 600;
 }
 .simple_footer p a {
   color: #10b3d6;
@@ -9679,12 +9681,12 @@ blockquote .author {
     font-weight: 800 !important;
 }
 .nav-sidebar .nav-item.subfolder a {
-    font-weight: 500 !important;
+    font-weight: 600;
 }
 
 .ref-link {
   font-size: 16.2px;
-  font-weight: 500;
+  font-weight: 600;
   padding: 0 18px;
   display: inline-block;
   margin: 0 3px;
@@ -9697,7 +9699,7 @@ blockquote .author {
 
 #a-reference a {
   color: #1d2746;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 17px;
   line-height: 1.54;
   margin: 15px 0 !important
@@ -9739,7 +9741,7 @@ blockquote .author {
 }
 
 .note-details p {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .note-details p span {
@@ -9755,7 +9757,7 @@ blockquote .author {
 }
 
 .note-details .h_blue {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16px;
   padding: 3px 10px;
   margin-right: 10px;
@@ -9781,7 +9783,7 @@ ul.contains-task-list li.task-list-item input:checked {
 }
 
 .file-list a {
-  font-weight: 500;
+  font-weight: 600;
   color: #333;
 }
 
@@ -9798,7 +9800,7 @@ ul.contains-task-list li.task-list-item input:checked {
 }
 
 .meta li {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .short-by {
@@ -9873,7 +9875,7 @@ ul.contains-task-list li.task-list-item input:checked {
 }
 
 .breadcrumb-item.active a {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .bread-div {

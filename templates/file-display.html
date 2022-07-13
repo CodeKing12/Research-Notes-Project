@@ -30,6 +30,23 @@
 </section>
 {% endblock breadcrumb %}
 
+{% block breadlinks %}
+            <section class="page_breadcrumb">
+                <div class="container custom_container">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <nav aria-label="breadcrumb">
+                                    {% comment %} <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li> {% endcomment %}
+                                {{ file.get_breadcrumb_html | safe }}
+                            </nav>
+                        </div>
+                        <div class="col-sm-5">
+                            <a href="#" class="date"><i class="icon_clock_alt"></i>{{ file.date_modified }}</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endblock breadlinks %}
 
 {% block folder-tree %}
 
