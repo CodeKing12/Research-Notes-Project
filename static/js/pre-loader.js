@@ -3,8 +3,8 @@
 
     /*============= preloader js css =============*/
     var cites = [];
-    cites[0] = "We design KbDoc for the readers, optimizing not for page views or engagement";
-    cites[1] = "KbDoc turns out that context is a key part of learning.";
+    cites[0] = "We design King for the readers, optimizing not for page views or engagement";
+    cites[1] = "King turns out that context is a key part of learning.";
     cites[2] = "You can create any type of product documentation with KbDoc";
     cites[3] = "Advanced visual search system powered by Ajax";
     var cite = cites[Math.floor(Math.random() * cites.length)];
