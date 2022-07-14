@@ -141,15 +141,15 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 STATIC_ROOT  =   BASE_DIR / 'staticfiles'
-# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 APPEND_SLASH = True
-# SESSION_COOKIE_AGE = 3600
 SESSION_COOKIE_AGE = int(env("SESSION_COOKIE_AGE"))
+LOGIN_URL = "login"
+# SESSION_COOKIE_AGE = 3600
 # SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # CSRF_COOKIE_SECURE = True
-LOGIN_URL = "login"
 
 import dj_database_url
 prod_db  =  dj_database_url.config(conn_max_age=500)
