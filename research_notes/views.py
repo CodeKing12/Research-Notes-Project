@@ -320,12 +320,12 @@ def seed_the_database(request):
     print("Hook Received")
     # print(request)
     if request.method == "POST":
-        print(json.loads(request.POST))
-        # repo = request.POST["payload"][0]
+        repo = env("GITHUB_REPO_NAME")
         if "payload" in request.POST:
-            payload = request.POST["payload"]
-            output = payload
-            os.system("python research_notes/seed_database.py")
+            if repo in request.POST["payload"][0]:
+                payload = request.POST["payload"]
+                output = payload[0]
+                os.system("python research_notes/seed_database.py")
     else:
         output = "Delivered"
 

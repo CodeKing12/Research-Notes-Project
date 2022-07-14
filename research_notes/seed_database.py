@@ -410,9 +410,11 @@ for note in all_notes:
                 note_content += f"<li><h6 id='a-reference'><a id='reference-{count}' href='#ref-{count}'>{ref_obj.author} ({ref_obj.year}). {ref_obj.title}. {ref_obj.journal}, {ref_obj.volume}({ref_obj.number}), {ref_obj.pages}. <a href='https://doi.org/{ref_obj.doi}'>{ref_obj.doi}</a></a></h6></li>"
             else:
                 note_content = note_content.replace(item.group(), text)
-            note.save()
             # print("{{ tito {}".strip("{"))
         note_content += "</ul>"
+        note.main_content = note_content
+        note.save()
+        # print(note.main_content)
 
 print("--------------------------------------------------------------------")
 print("|                                                                  |")
