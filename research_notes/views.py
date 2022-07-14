@@ -213,7 +213,6 @@ def status(request, status_name):
     status_list = normalNotes.objects.filter(status=status_name)
     return render(request, "status.html", {"status": status_name, "status_list": status_list})
 
-@login_required
 def login_view(request):
     if request.method == 'POST':
         passkey = request.POST["pin"]
@@ -224,7 +223,10 @@ def login_view(request):
         if user is not None:
             log_user = login(request, user)
             settings.SESSION_COOKIE_AGE = int(time_to_logout)
-            return redirect("home")
+            if "next" in request.GET:
+                return redirect(request.GET["next"])
+            else:
+                return redirect("home")
         else:
             print("Error")
             pass
@@ -310,3 +312,7 @@ def seed_the_database(request):
         output = "Delivered"
 
     return JsonResponse(data={"Output": output})
+
+def logout_user(request):
+    logout(request)
+    return redirect("login")

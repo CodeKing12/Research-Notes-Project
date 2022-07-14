@@ -55,9 +55,11 @@
                             </div> {% endcomment %}
                             <div class="col-lg-12 form-group">
                                 <div class="small_text">Input Your Pin</div>
+                                {{ next }}
                                 <div class="confirm_password">
                                     <input id="login-time" name="login-time" value="14400" type="number" class="form-control" placeholder="Time before logout" autocomplete="on">
                                     <input id="confirm-password" name="pin" type="password" class="form-control" placeholder="6 Digits Pin" autocomplete="on">
+                                    <input name="next" type="hidden" value="{{ next }}" class="form-control">
                                     {% comment %} <a href="#" class="forget_btn">Forgotten password?</a> {% endcomment %}
                                 </div>
                             </div>
