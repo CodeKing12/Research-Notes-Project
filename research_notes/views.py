@@ -318,8 +318,8 @@ def search_results(request, sort="name", group="none", ascending=True):
 @csrf_exempt
 def seed_the_database(request):
     print("Hook Received")
-    # print(request)
     if request.method == "POST":
+        print(request.POST)
         if "payload" in request.POST:
             payload = request.POST["payload"]
             output = payload[0]

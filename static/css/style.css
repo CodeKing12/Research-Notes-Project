@@ -9838,7 +9838,7 @@ ul.contains-task-list li.task-list-item input:checked {
 }
 
 .simple_footer {
-  background-color: #0457b1;
+  background-color: var(--primary);
 }
 
 .scroll.mCustomScrollbar _mCS_2 {
