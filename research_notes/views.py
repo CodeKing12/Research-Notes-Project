@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 import subprocess, os
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from . import settings
 
 import environ
@@ -317,10 +318,10 @@ def search_results(request, sort="name", group="none", ascending=True):
         search = ""
     return render(request, "search-results.html", {"folder_results": folder_results, "file_results": file_results, "folders": all_folders, "all_types": all_types, "search_term": search, "sort_options": sort_options, "group_options": group_options, "order_options": order_options, "current_sorting": current_sorting, "current_grouping": current_grouping, "current_ordering": current_ordering, "group_list": group_list})
 
-
+@csrf_exempt
 def seed_the_database(request):
     print("Hook Received")
-    print(request.POST)
+    print(request)
     if request.method == "POST":
         if "payload" in request.POST:
             payload = request.POST["payload"]
