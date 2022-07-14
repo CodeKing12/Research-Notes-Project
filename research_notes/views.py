@@ -53,11 +53,7 @@ def resolveObject(request, path_to_file):
     slug = path_list[-1]
     parent_path = "/".join(path_list[:-1])
     if parent_path == "":
-        try:
-            model_parent = Folder.objects.get(name="All Notes")
-        except ObjectDoesNotExist:
-            os.system("python research_notes/seed_database.py")
-            model_parent = Folder.objects.get(name="All Notes")
+        model_parent = Folder.objects.get(name="All Notes")
     else:
         model_parent = Folder.objects.get(path=parent_path)
     try:
