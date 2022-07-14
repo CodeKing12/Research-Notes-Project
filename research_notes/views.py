@@ -222,14 +222,13 @@ def login_view(request):
         user = authenticate(username=username, email=email, password=passkey)
         if user is not None:
             log_user = login(request, user)
-            settings.SESSION_COOKIE_AGE = int(time_to_logout)
+            request.session.set_expiry(int(time_to_logout))
             if "next" in request.GET:
                 return redirect(request.GET["next"])
             else:
                 return redirect("home")
         else:
             print("Error")
-            pass
     return render(request, "login.html")
 
 @login_required
