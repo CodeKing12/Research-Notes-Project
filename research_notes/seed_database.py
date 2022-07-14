@@ -239,27 +239,6 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
                     .disable('image')
                 )
                 file_content = md.render(md_content)
-                bib_text = r"\\ref{\w*}"
-                bib_re = re.compile(bib_text)
-                count = 0
-                if bool(bib_re.findall(file_content)):
-                    file_content += "\n<h1 id='references'>References</h1><ul class='ordered-list reference-list'>"
-                    for item in bib_re.finditer(file_content):
-                        text = item.group().strip("\\ref{")
-                        text = text.strip("}")
-                        count += 1
-                        ref_obj = Citations.objects.get(name=text)
-                        author_list = ref_obj.author.split(", ")
-                        if len(author_list) > 3:
-                            authors = f"{author_list[0]} et all."
-                        else:
-                            authors = ref_obj.author
-                        ref_html = f"<a class='blue ref-link' id='ref-{count}' href='#reference-{count}'>{authors} ({ref_obj.year})</a>"
-                        file_content = file_content.replace(item.group(), ref_html)
-                        file_content += f"<li><h6 id='a-reference'><a id='reference-{count}' href='#ref-{count}'>{ref_obj.author} ({ref_obj.year}). {ref_obj.title}. {ref_obj.journal}, {ref_obj.volume}({ref_obj.number}), {ref_obj.pages}. <a href='https://doi.org/{ref_obj.doi}'>{ref_obj.doi}</a></a></h6></li>"
-                        # print("{{ tito {}".strip("{"))
-                    file_content += "</ul>"
-
                 file_content = file_content.replace('<table>', "<table class='table table-striped'>")
 
             # print(file_content)
@@ -404,6 +383,36 @@ def create_notes_models_from_github(the_dict, parent="", parent_model=""):
 create_notes_models_from_github(tree)
 create_notes_user()
 # print(tree)
+all_notes = normalNotes.objects.all()
+for note in all_notes:
+    note_content = note.main_content
+    bib_text = r"\\ref{\w*}"
+    bib_re = re.compile(bib_text)
+    count = 0
+    if bool(bib_re.findall(note_content)):
+        note_content += "\n<h1 id='references'>References</h1><ul class='ordered-list reference-list'>"
+        for item in bib_re.finditer(note_content):
+            text = item.group().strip("\\ref{")
+            text = text.strip("}")
+            count += 1
+            try:
+                ref_obj = Citations.objects.get(name=text)
+            except ObjectDoesNotExist:
+                ref_obj = None
+            if ref_obj != None:
+                author_list = ref_obj.author.split(", ")
+                if len(author_list) > 3:
+                    authors = f"{author_list[0]} et all."
+                else:
+                    authors = ref_obj.author
+                ref_html = f"<a class='blue ref-link' id='ref-{count}' href='#reference-{count}'>{authors} ({ref_obj.year})</a>"
+                note_content = note_content.replace(item.group(), ref_html)
+                note_content += f"<li><h6 id='a-reference'><a id='reference-{count}' href='#ref-{count}'>{ref_obj.author} ({ref_obj.year}). {ref_obj.title}. {ref_obj.journal}, {ref_obj.volume}({ref_obj.number}), {ref_obj.pages}. <a href='https://doi.org/{ref_obj.doi}'>{ref_obj.doi}</a></a></h6></li>"
+            else:
+                note_content = note_content.replace(item.group(), text)
+            note.save()
+            # print("{{ tito {}".strip("{"))
+        note_content += "</ul>"
 
 print("--------------------------------------------------------------------")
 print("|                                                                  |")

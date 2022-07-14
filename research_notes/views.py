@@ -1,3 +1,4 @@
+import json
 from django.http import Http404, HttpResponse, JsonResponse
 from os import path
 from django.shortcuts import render, get_object_or_404, redirect
@@ -319,7 +320,8 @@ def seed_the_database(request):
     print("Hook Received")
     # print(request)
     if request.method == "POST":
-        print(request.POST)
+        print(json.loads(request.POST))
+        # repo = request.POST["payload"][0]
         if "payload" in request.POST:
             payload = request.POST["payload"]
             output = payload
