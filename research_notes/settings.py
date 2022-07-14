@@ -142,7 +142,7 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT  =   BASE_DIR / 'staticfiles'
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 APPEND_SLASH = True
 # SESSION_COOKIE_AGE = 3600
