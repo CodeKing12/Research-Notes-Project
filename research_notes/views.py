@@ -35,9 +35,11 @@ def sortTagName(item):
 @login_required
 def homepage(request):
     all_tags = Tags.objects.all()
-    root_parent = get_object_or_404(Folder, name="All Notes")
-    full_path = root_parent.path
-    tree_dict = root_parent.folder_dict
+    try:
+        root_parent = Folder.objects.get(name="All Notes")
+    except ObjectDoesNotExist:
+        os.system("python research_notes/seed_database.py")
+        root_parent = Folder.objects.get(name="All Notes")
     nav_html = root_parent.get_folder_tree()
     all_types = Type.objects.all()
     return render(request, 'home.html', {"nav_html": nav_html, "all_tags": all_tags, "all_types": all_types})
@@ -50,7 +52,11 @@ def resolveObject(request, path_to_file):
     slug = path_list[-1]
     parent_path = "/".join(path_list[:-1])
     if parent_path == "":
-        model_parent = Folder.objects.get(name="All Notes")
+        try:
+            model_parent = Folder.objects.get(name="All Notes")
+        except ObjectDoesNotExist:
+            os.system("python research_notes/seed_database.py")
+            model_parent = Folder.objects.get(name="All Notes")
     else:
         model_parent = Folder.objects.get(path=parent_path)
     try:
