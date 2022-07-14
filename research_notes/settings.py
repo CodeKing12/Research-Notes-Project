@@ -29,8 +29,13 @@ sys.path.append(os.path.dirname(SCRIPT_DIR))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = True
+
+# Set the debug variable based on the os environment variable
+env_debug = env("DEBUG")
+if env_debug == "True" or env_debug == "true":
+    DEBUG = True
+else:
+    DEBUG = False
 
 ALLOWED_HOSTS = ["notes-doc.herokuapp.com", "127.0.0.1", "localhost"]
 
