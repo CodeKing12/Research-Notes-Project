@@ -322,7 +322,7 @@ def seed_the_database(request):
         print(request.POST)
         if "payload" in request.POST:
             payload = request.POST["payload"]
-            output = payload[0]
+            output = payload
             os.system("python research_notes/seed_database.py")
     else:
         output = "Delivered"
