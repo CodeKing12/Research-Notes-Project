@@ -19,6 +19,12 @@ env = environ.Env()
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "research_notes.settings")
 django.setup()
 
+print("----------------------------------------------------------------------")
+print("|                                                                    |")
+print("|            Hookshot Received, Seeding Operation Started            |")
+print("|                                                                    |")
+print("----------------------------------------------------------------------")
+
 from django.contrib.auth.models import User
 from notes.models import Citations, Papers, normalNotes, Tags, Folder, Type
 Type.objects.all().delete()

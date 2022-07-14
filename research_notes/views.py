@@ -302,6 +302,8 @@ def search_results(request, sort="name", group="none", ascending=True):
     return render(request, "search-results.html", {"folder_results": folder_results, "file_results": file_results, "folders": all_folders, "all_types": all_types, "search_term": search, "sort_options": sort_options, "group_options": group_options, "order_options": order_options, "current_sorting": current_sorting, "current_grouping": current_grouping, "current_ordering": current_ordering, "group_list": group_list})
 
 def seed_the_database(request):
+    print("Hook Received")
+    print(request.POST)
     if request.method == "POST":
         if "payload" in request.POST:
             payload = request.POST["payload"]
