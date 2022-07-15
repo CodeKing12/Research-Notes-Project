@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'notes.apps.NotesConfig',
 ]
@@ -141,8 +142,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 STATIC_ROOT  =   BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 APPEND_SLASH = True
 SESSION_COOKIE_AGE = int(env("SESSION_COOKIE_AGE"))
@@ -170,5 +171,8 @@ LOGGING = {
         },
     },
 }
+
+WHITENOISE_KEEP_ONLY_HASHED_FILES = True
+WHITENOISE_MANIFEST_STRICT = False
 
 # admin - Rathe10dev
