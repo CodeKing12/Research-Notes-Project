@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from research_notes import settings
+from django.templatetags.static import static
 
 # Create your models here.
 class Tags(models.Model):
@@ -125,6 +126,8 @@ class Folder(models.Model):
     def get_folder_tree(self):
         exclude_list = ["README.md", "citations.bib", "index.md"]
         def iterdict(model, level, html=""):
+            folder_icon_path = static("img/side-nav/folder.png")
+            file_icon_path = static("img/side-nav/file.png")
             all_items = model.get_all_subdirs()
             level += 1
             for item in all_items:
@@ -146,7 +149,7 @@ class Folder(models.Model):
                     html += f"""
                     {indent}<li class='nav-item subfolder'>
                         <a href='{url}' class='nav-link'>
-                            <img class=\"flat-icon\" src=\"{settings.STATIC_URL}img/side-nav/folder.png\" alt='folder'>
+                            <img class=\"flat-icon\" src=\"{folder_icon_path}\" alt='folder'>
                             {folder.presentable_name()}
                         </a>
                         <span class='icon'><i class='arrow_carrot-down'></i></span>
@@ -163,7 +166,7 @@ class Folder(models.Model):
                     html += f"""
                         {indent}<li class=\"file-link\">
                                 <a href="{url}">
-                                    <img class=\"file-icon\" src=\"{settings.STATIC_URL}img/side-nav/file.png\" alt='folder'>
+                                    <img class=\"file-icon\" src=\"{file_icon_path}\" alt='folder'>
                                     {title}
                                 </a>
                             </li>"""
