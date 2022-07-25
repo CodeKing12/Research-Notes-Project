@@ -9964,3 +9964,7 @@ div.code-toolbar > .toolbar {
 .navbar_fixed .sticky_logo h5 {
   color: var(--secondary) !important;
 }
+
+.mobile_main_menu.navbar_fixed .mobile_menu_right li a {
+  color: var(--primary) !important;
+}
