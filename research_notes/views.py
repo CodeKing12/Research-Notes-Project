@@ -17,10 +17,10 @@ from . import settings
 from django.contrib.auth.hashers import check_password
 
 import environ
-from dotenv import load_dotenv, dotenv_values
-# env = environ.Env()
-load_dotenv()
-env = os.getenv
+# from dotenv import load_dotenv, dotenv_values
+env = environ.Env()
+# load_dotenv()
+# env = os.getenv
 
 def sortDate(item):
     return item.date_modified
@@ -232,7 +232,6 @@ def status(request, status_name):
 
 def login_view(request):
     if request.method == 'POST':
-        print(dotenv_values(".env"))
         passkey = request.POST["pin"]
         time_to_logout = request.POST["login-time"]
         username = env("PROJECT_USERNAME")
