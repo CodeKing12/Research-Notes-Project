@@ -14,6 +14,7 @@ import subprocess, os
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from . import settings
+from django.contrib.auth.hashers import check_password
 
 import environ
 env = environ.Env()
@@ -232,7 +233,15 @@ def login_view(request):
         time_to_logout = request.POST["login-time"]
         username = env("PROJECT_USERNAME")
         email = env("PROJECT_EMAIL")
+        env_pass = env("PROJECT_PASSWORD")
+        project_user = User.objects.get(email=email, username=username)
+        user_pass = project_user.password
+        if (passkey == env_pass) and not check_password(env_pass, user_pass):
+            project_user.set_password(env_pass)
+            project_user.save()
+        
         user = authenticate(username=username, email=email, password=passkey)
+            
         if user is not None:
             log_user = login(request, user)
             request.session.set_expiry(int(time_to_logout))
@@ -243,6 +252,7 @@ def login_view(request):
         else:
             print("Error")
     return render(request, "login.html")
+    # 192816
 
 
 @login_required
