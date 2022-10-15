@@ -40,7 +40,7 @@ if env_debug == "True" or env_debug == "true":
 else:
     DEBUG = False
 # DEBUG = True
-ALLOWED_HOSTS = ["notes-doc.herokuapp.com", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["notes-doc.herokuapp.com", "127.0.0.1", "localhost", "personal-markdown-notes.herokuapp.com"]
 
 
 # Application definition
